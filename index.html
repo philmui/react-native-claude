@@ -1,0 +1,1441 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home · CS 147L Interview 2 Prep Kit</title><style>
+/* ===== CS 147L Interview 2 Prep Kit — shared styles (inline verbatim) ===== */
+:root{
+  --ink:#1b1f3b; --ink-2:#3c4270; --muted:#5f6690; --bg:#f6f7fc; --card:#ffffff; --line:#e3e6f3;
+  --coral:#ff6b6b; --teal:#00b894; --violet:#6c5ce7; --sky:#0984e3; --indigo:#3d5afe;
+  --amber:#f39c12; --pink:#e84393; --lime:#7cb342; --orange:#ff7f50;
+  --coral-bg:#fff0f0; --teal-bg:#e6faf4; --violet-bg:#f0eeff; --sky-bg:#e8f3fd; --indigo-bg:#eceffe;
+  --amber-bg:#fff6e6; --pink-bg:#fdeef6; --lime-bg:#f1f8e9; --orange-bg:#fff2ec;
+  --code-bg:#1e1f33; --code-ink:#e6e8ff;
+  --radius:16px; --shadow:0 6px 24px rgba(27,31,59,.08); --shadow-lg:0 14px 40px rgba(27,31,59,.14);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,"DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;font-family:var(--font);font-size:18px;line-height:1.65;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--sky);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--violet)}
+h1,h2,h3,h4{line-height:1.25;color:var(--ink);margin:1.4em 0 .5em}
+h1{font-size:2.4rem;letter-spacing:-.02em}
+h2{font-size:1.75rem;letter-spacing:-.01em}
+h3{font-size:1.3rem}
+h4{font-size:1.08rem}
+p{margin:.6em 0 1em}
+code{font-family:var(--mono);font-size:.88em;background:#eef0fa;color:#3a2fb5;padding:.12em .38em;border-radius:6px}
+kbd{font-family:var(--mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:.05em .4em;background:#fff}
+img,svg{max-width:100%}
+svg.fig{width:100%;height:auto;display:block}
+
+/* ---------- top nav ---------- */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.topnav .wrap{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);text-decoration:none;font-size:1.02rem;white-space:nowrap}
+.brand .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--violet),var(--pink));display:grid;place-items:center;color:#fff;font-size:.8rem;font-weight:900}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.navlinks a{color:var(--ink-2);text-decoration:none;font-weight:600;font-size:.95rem;padding:8px 12px;border-radius:10px;min-height:40px;display:inline-flex;align-items:center}
+.navlinks a:hover{background:var(--violet-bg);color:var(--violet)}
+.navlinks a.active{background:var(--violet);color:#fff}
+
+/* ---------- page layout ---------- */
+.page{max-width:1280px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:36px}
+.page.full{grid-template-columns:minmax(0,1fr)}
+.content{max-width:900px;min-width:0}
+.sidebar{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 92px);overflow:auto;padding:14px 6px 14px 0}
+.sidebar h4{margin:0 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:10px;text-decoration:none;color:var(--ink-2);font-size:.95rem;font-weight:550}
+.sidebar a:hover{background:#fff;box-shadow:var(--shadow)}
+.sidebar a.done::after{content:"✓";margin-left:auto;color:var(--teal);font-weight:900}
+.dot{width:11px;height:11px;border-radius:50%;flex:0 0 11px;display:inline-block}
+.sidebar-toggle{display:none}
+@media (max-width:980px){
+  .page{grid-template-columns:minmax(0,1fr);gap:8px}
+  .sidebar{position:relative;top:0;max-height:none;display:none;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}
+  .sidebar.open{display:block}
+  .sidebar-toggle{display:inline-flex}
+  h1{font-size:1.9rem}
+}
+
+/* ---------- hero ---------- */
+.hero{border-radius:24px;padding:34px 34px 30px;color:#fff;background:radial-gradient(1200px 400px at 10% -10%,#8e7dff 0,transparent 60%),linear-gradient(120deg,#5b4bdb,#e84393 70%,#ff7f50);box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero h1{color:#fff;margin:.1em 0 .25em}
+.hero p{font-size:1.12rem;max-width:720px;opacity:.96}
+.hero .eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;opacity:.9}
+
+/* ---------- cards & boxes ---------- */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:18px 0;border:1px solid var(--line)}
+.grid{display:grid;gap:18px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid.c4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.tile{background:#fff;border-radius:var(--radius);padding:18px 18px 16px;border:1px solid var(--line);box-shadow:var(--shadow);border-top:6px solid var(--violet);display:flex;flex-direction:column;gap:6px}
+.tile h3{margin:.1em 0 .2em;font-size:1.12rem}
+.tile p{margin:0 0 .5em;color:var(--ink-2);font-size:.95rem}
+.tile .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:999px;background:var(--violet-bg);color:var(--violet);text-decoration:none;min-height:32px}
+.chip:hover{filter:brightness(.95)}
+.oneliner{border-left:6px solid var(--violet);background:var(--violet-bg);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:1.06rem}
+.oneliner b:first-child{display:block;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);margin-bottom:2px}
+.trap{border-left:6px solid var(--coral);background:var(--coral-bg);border-radius:12px;padding:14px 18px;margin:14px 0}
+.trap > b:first-child{color:#c0392b}
+.tip{border-left:6px solid var(--teal);background:var(--teal-bg);border-radius:12px;padding:14px 18px;margin:14px 0}
+.tip > b:first-child{color:#00876c}
+.why{border-left:6px solid var(--sky);background:var(--sky-bg);border-radius:12px;padding:14px 18px;margin:14px 0}
+.badge{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--violet-bg);color:var(--violet);vertical-align:middle}
+section.topic{scroll-margin-top:84px;padding-top:6px;border-top:1px dashed var(--line);margin-top:42px}
+section.topic:first-of-type{border-top:none;margin-top:10px}
+.topic-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topic-head h2{margin:.6em 0 .3em}
+.cross{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+
+/* topic colors helpers */
+.t-arrows{--c:var(--coral);--cb:var(--coral-bg)} .t-map{--c:var(--teal);--cb:var(--teal-bg)} .t-state{--c:var(--violet);--cb:var(--violet-bg)}
+.t-callbacks{--c:var(--sky);--cb:var(--sky-bg)} .t-components{--c:var(--sky);--cb:var(--sky-bg)} .t-typescript{--c:var(--indigo);--cb:var(--indigo-bg)}
+.t-spread{--c:var(--amber);--cb:var(--amber-bg)} .t-inputs{--c:var(--pink);--cb:var(--pink-bg)} .t-layout{--c:var(--lime);--cb:var(--lime-bg)}
+.t-effects{--c:var(--orange);--cb:var(--orange-bg)} .t-conditional{--c:var(--violet);--cb:var(--violet-bg)} .t-mental-model{--c:var(--violet);--cb:var(--violet-bg)} .t-interview-craft{--c:var(--teal);--cb:var(--teal-bg)}
+[class*="t-"] .tile, .tile[class*="t-"]{border-top-color:var(--c)}
+[class*="t-"] .chip, .chip[class*="t-"]{background:var(--cb);color:var(--c)}
+[class*="t-"] .oneliner{border-left-color:var(--c);background:var(--cb)}
+[class*="t-"] .oneliner b:first-child{color:var(--c)}
+[class*="t-"] .badge{background:var(--cb);color:var(--c)}
+
+/* ---------- code ---------- */
+pre{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:18px 18px 16px;overflow:auto;font-family:var(--mono);font-size:15.5px;line-height:1.6;margin:14px 0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .copy{position:absolute;top:8px;right:8px;font:600 12px var(--font);background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:6px 10px;cursor:pointer;min-height:30px}
+pre .copy:hover{background:rgba(255,255,255,.22)}
+pre .label{position:absolute;top:8px;left:14px;font:700 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:#9aa0d6}
+pre.has-label{padding-top:34px}
+pre.good{box-shadow:inset 4px 0 0 var(--teal)} pre.bad{box-shadow:inset 4px 0 0 var(--coral)}
+/* simple syntax colors — wrap tokens with spans if desired */
+.k{color:#c792ea}.s{color:#c3e88d}.n{color:#f78c6c}.c{color:#7f86b8;font-style:italic}.f{color:#82aaff}.t{color:#ffcb6b}.j{color:#ff7eb6}
+
+/* ---------- buttons, reveal, quiz ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 .95rem var(--font);border:0;border-radius:12px;padding:10px 16px;min-height:42px;cursor:pointer;background:var(--violet);color:#fff;text-decoration:none;box-shadow:0 4px 14px rgba(108,92,231,.28)}
+.btn:hover{filter:brightness(1.06);color:#fff}
+.btn.ghost{background:#fff;color:var(--violet);border:2px solid var(--violet-bg);box-shadow:none}
+.btn.teal{background:var(--teal);box-shadow:0 4px 14px rgba(0,184,148,.28)}
+.btn.coral{background:var(--coral);box-shadow:0 4px 14px rgba(255,107,107,.28)}
+.btn.small{min-height:34px;padding:6px 12px;font-size:.85rem}
+.btn:focus-visible,.navlinks a:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+details.reveal{background:#fff;border:1px solid var(--line);border-radius:12px;margin:10px 0;box-shadow:var(--shadow)}
+details.reveal > summary{cursor:pointer;list-style:none;padding:12px 16px;font-weight:700;display:flex;align-items:center;gap:10px;min-height:44px}
+details.reveal > summary::-webkit-details-marker{display:none}
+details.reveal > summary::before{content:"▸";transition:transform .15s;color:var(--violet)}
+details.reveal[open] > summary::before{transform:rotate(90deg)}
+details.reveal > .body{padding:0 18px 14px}
+details.hint > summary{color:#b7791f} details.hint > summary::before{color:var(--amber)}
+details.solution > summary{color:#00876c} details.solution > summary::before{color:var(--teal)}
+.quiz{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.quiz .q{font-weight:700;margin-bottom:10px}
+.quiz .opts{display:grid;gap:8px}
+.quiz button.opt{text-align:left;font:500 1rem var(--font);background:#f7f8fe;border:2px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;min-height:44px;color:var(--ink)}
+.quiz button.opt:hover{border-color:var(--violet)}
+.quiz button.opt.right{border-color:var(--teal);background:var(--teal-bg)}
+.quiz button.opt.wrong{border-color:var(--coral);background:var(--coral-bg)}
+.quiz .fb{margin-top:10px;display:none;padding:10px 14px;border-radius:10px;background:var(--sky-bg)}
+.quiz .fb.show{display:block}
+.markdone{margin-top:14px}
+.markdone.is-done{background:var(--teal)}
+
+/* ---------- timer ---------- */
+.timer{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 16px;font:800 1.5rem var(--mono)}
+.timer.warn{background:#c0392b}
+
+/* ---------- tables ---------- */
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f0f2fb;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+.table-wrap{overflow-x:auto}
+
+/* ---------- footer ---------- */
+.footer{max-width:1280px;margin:0 auto;padding:24px 20px 50px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* ---------- print ---------- */
+@media print{
+  .topnav,.sidebar,.btn,.copy,.no-print{display:none!important}
+  body{background:#fff;font-size:11pt}
+  .page{display:block;padding:0}
+  .card,.tile,table,pre{box-shadow:none}
+  pre{background:#f4f5fb;color:#1b1f3b;border:1px solid #dfe2f0;white-space:pre-wrap}
+  .k,.s,.n,.c,.f,.t,.j{color:inherit}
+  details.reveal{border:none} details.reveal > .body{display:block}
+  a{color:inherit;text-decoration:none}
+  section.topic{break-inside:avoid-page}
+}
+
+
+/* ===== hub v2 styles ===== */
+.page.full .content{max-width:1180px;margin:0 auto;width:100%}
+.hub > section{scroll-margin-top:84px;margin:72px 0 0}
+.sechead{display:flex;flex-direction:column;gap:2px;margin-bottom:6px}
+.sechead h2{margin:0}
+.kicker{font-weight:800;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--violet)}
+.lede{font-size:1.1rem;color:var(--ink-2);max-width:780px;margin:.4em 0 1.1em}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:30px;align-items:center;padding:40px 40px 36px}
+.hero h1{font-size:2.75rem;margin:.15em 0 .3em}
+.hero p.big{font-size:1.18rem;line-height:1.6;max-width:640px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.hero .btn.light{background:#fff;color:var(--violet);box-shadow:0 6px 18px rgba(20,23,46,.25);font-size:1.02rem;min-height:48px;padding:12px 20px}
+.hero .btn.light:hover{color:var(--pink)}
+.hero .btn.outline{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.75);box-shadow:none;font-size:1.02rem;min-height:48px;padding:10px 18px}
+.hero kbd{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.promises{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.promises li{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);border-radius:18px;padding:14px 16px}
+.promises li b{display:block;font-size:1.04rem}
+.promises li span{font-size:.95rem;opacity:.95;line-height:1.5}
+.promises .pi{flex:0 0 40px;width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);padding:30px 22px}.hero h1{font-size:2.1rem}}
+
+/* big picture explorer */
+.bp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:24px;align-items:start}
+@media (max-width:1100px){.bp{grid-template-columns:minmax(0,1fr)}}
+.bpfig{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:14px 12px 10px}
+.bpfig svg{width:100%;height:auto;display:block}
+.bpfig .hs{cursor:pointer;outline:none}
+.bpfig .hs .ring{fill:none;stroke:transparent;stroke-width:4;transition:stroke .15s}
+.bpfig .hs:hover .ring,.bpfig .hs:focus-visible .ring{stroke:#f39c12}
+.bpfig .hs:focus-visible .ring{stroke-width:5}
+.bpfig.narrow svg{max-width:360px;margin:0 auto}
+.bpfig .hs.on .ring{stroke:#1b1f3b}
+.bpfig .chipbox{transition:filter .15s, opacity .15s}
+.bpfig.has-sel .codechip{opacity:.42}
+.bpfig.has-sel .codechip.on{opacity:1}
+.bpfig .codechip.on .chipbox{stroke-width:3.5}
+.bpfig .pulse{animation:pulse 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.bphint{font-size:.92rem;color:var(--muted);text-align:center;margin:6px 0 2px}
+.ideas{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.ideabtn{display:inline-flex;align-items:center;gap:8px;font:700 .95rem var(--font);background:#fff;border:2px solid var(--line);color:var(--ink);border-radius:999px;padding:7px 14px 7px 7px;min-height:42px;cursor:pointer}
+.ideabtn .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.85rem;font-weight:900;background:var(--c);background:color-mix(in srgb,var(--c) 80%,#000)}
+.ideabtn[aria-pressed="true"]{border-color:var(--c);background:var(--cb)}
+.ideabtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-lg);padding:24px 26px 20px;border-top:8px solid var(--c);position:sticky;top:84px}
+@media (max-width:1100px){.panel{position:relative;top:0}}
+.panel .ptop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.panel .pnum{width:40px;height:40px;border-radius:12px;background:var(--c);background:color-mix(in srgb,var(--c) 80%,#000);color:#fff;font-weight:900;display:grid;place-items:center;font-size:1.1rem}
+.panel h3{margin:0;font-size:1.45rem}
+.panel:focus{outline:none}.panel:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.panel .must{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--cb);color:var(--ink-2);color:color-mix(in srgb,var(--c) 60%,#000);margin-left:auto}
+.panel .one{font-size:1.12rem;font-weight:650;margin:14px 0 6px;line-height:1.5}
+.panel .whyp{color:var(--ink-2);margin:0 0 6px}
+.panel pre{font-size:14.5px}
+.panel .trap{font-size:.98rem}
+.panel .go{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+@media (max-width:560px){.panel .go{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gobtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;border-radius:14px;padding:10px 6px;min-height:68px;background:#f6f7fc;border:1.5px solid var(--line);color:var(--ink);font-weight:800;font-size:.9rem;text-align:center}
+.gobtn small{font-weight:600;color:var(--muted);font-size:.76rem}
+.gobtn:hover{border-color:var(--c);background:var(--cb);color:var(--ink)}
+.gobtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.gobtn svg{width:22px;height:22px}
+.pnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:16px;align-items:center}
+.hub .btn.small{min-height:42px;font-size:.92rem;padding:8px 14px}
+.hub .chip{min-height:40px;font-size:.88rem;padding:8px 12px}
+.pnav .count{font-weight:700;color:var(--muted);font-size:.92rem}
+.extras{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.95rem;color:var(--ink-2)}
+.extras .chip{border:1.5px solid var(--c);color:var(--ink)!important}
+
+/* study modes */
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px}
+.mode{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px 22px 18px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.mode::before{content:"";position:absolute;inset:0 0 auto 0;height:7px;background:var(--c)}
+.mode .micon{width:54px;height:54px;border-radius:16px;background:var(--cb);display:grid;place-items:center}
+.mode h3{margin:.35em 0 0;font-size:1.3rem}
+.mode .best{margin:0;color:var(--ink-2);font-size:.98rem}
+.mode ul{list-style:none;padding:0;margin:8px 0 12px;display:grid;gap:6px}
+.mode li a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:650;font-size:.97rem;padding:6px 8px;border-radius:10px}
+.mode li a::before{content:"→";color:var(--c);font-weight:900}
+.mode li a:hover{background:var(--cb)}
+.mode .btn{margin-top:auto;background:var(--c);background:color-mix(in srgb,var(--c) 72%,#000);box-shadow:none}
+
+/* mood picker */
+.mood{margin-top:26px;background:linear-gradient(135deg,#f0eeff,#fdeef6 60%,#fff6e6);border-radius:24px;padding:24px 24px 20px;border:1px solid #e4dcfb}
+.mood h3{margin:0 0 4px;font-size:1.35rem}
+.mood p.sub{margin:0 0 14px;color:var(--ink-2)}
+.moodbtns{display:flex;flex-wrap:wrap;gap:10px}
+.moodbtn{font:700 1rem var(--font);border:2px solid #d9d3f7;background:#fff;color:var(--ink);border-radius:14px;padding:10px 16px;min-height:48px;cursor:pointer;display:inline-flex;gap:10px;align-items:center}
+.moodbtn[aria-pressed="true"]{background:var(--violet);border-color:var(--violet);color:#fff}
+.moodbtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.recipe{display:none;margin-top:16px;background:#fff;border-radius:18px;padding:18px 20px;box-shadow:var(--shadow)}
+.recipe.show{display:block}
+.recipe h4{margin:0 0 8px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;align-items:start}
+.steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--violet-bg);color:var(--violet);font-weight:900;display:grid;place-items:center}
+.steps li span{padding-top:4px}
+
+/* topic explorer */
+.tx-top{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin:4px 0 16px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font:700 .95rem var(--font);border:2px solid var(--line);background:#fff;color:var(--ink-2);border-radius:999px;padding:8px 16px;min-height:42px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tab:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.tally{display:flex;gap:8px;flex-wrap:wrap}
+.tally span{font-weight:800;font-size:.88rem;padding:6px 12px;border-radius:999px}
+.tally .ts{background:#ffe3e3;color:#a8242a}.tally .tg{background:#fff1d6;color:#8a5a00}.tally .tk{background:#dcf7ee;color:#00745c}
+.focus{background:#fff;border:2px dashed #ffb3b3;border-radius:18px;padding:14px 18px;margin:0 0 18px;display:none}
+.focus.show{display:block}
+.focus b{color:#a8242a}
+.focus .chip{margin:4px 6px 0 0;background:var(--coral-bg);color:#a8242a}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:18px 18px 14px;border-left:8px solid var(--c);display:flex;flex-direction:column;gap:8px}
+.tcard.hide{display:none}
+.tcard h3{margin:0;font-size:1.15rem}
+.tcard h3 a{color:var(--ink);text-decoration:none}
+.tcard h3 a:hover{color:var(--c)}
+.tcard .desc{margin:0;color:var(--ink-2);font-size:.97rem;line-height:1.5}
+.tcard .grp{font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);color:color-mix(in srgb,var(--c) 60%,#000);background:var(--cb);padding:3px 9px;border-radius:999px;align-self:flex-start}
+.tlinks{display:flex;flex-wrap:wrap;gap:6px}
+.tlinks a{font-size:.84rem;font-weight:700;text-decoration:none;color:var(--ink);border:1.5px solid var(--c);border-radius:999px;padding:6px 12px;min-height:40px;display:inline-flex;align-items:center}
+.tlinks a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.tlinks a:hover{background:var(--cb)}
+.conf{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.conf .lbl{font-size:.82rem;color:var(--muted);font-weight:700;margin-right:2px}
+.cbtn{font:700 .82rem var(--font);border:1.5px solid var(--line);background:#f8f9fe;color:var(--ink-2);border-radius:10px;padding:8px 12px;min-height:40px;cursor:pointer}
+.cbtn[data-v="shaky"][aria-pressed="true"]{background:#ffe3e3;border-color:#ff9b9b;color:#a8242a}
+.cbtn[data-v="getting"][aria-pressed="true"]{background:#fff1d6;border-color:#ffc766;color:#8a5a00}
+.cbtn[data-v="solid"][aria-pressed="true"]{background:#dcf7ee;border-color:#6fd8b8;color:#00745c}
+.cbtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.next{display:none;font-size:.92rem;background:var(--cb);border-radius:12px;padding:8px 12px}
+.next.show{display:block}
+.next a{font-weight:800}
+
+/* golden tabs */
+.gtabs{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px;align-items:center}
+.gtab{font:700 .95rem var(--font);border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:8px 14px;min-height:44px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.gtab .n{width:24px;height:24px;border-radius:7px;background:var(--c);background:color-mix(in srgb,var(--c) 72%,#000);color:#fff;font-size:.8rem;display:grid;place-items:center;font-weight:900}
+.gtab[aria-pressed="true"]{border-color:var(--c);background:var(--cb)}
+.gtab:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.recall{margin-left:auto;display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:.95rem;color:var(--ink-2);cursor:pointer;background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 14px;min-height:44px}
+.recall input{width:20px;height:20px;accent-color:var(--violet)}
+.gold{display:none}
+.gold.on{display:block}
+.goldstage{max-width:900px}
+.gold{background:#fff;border-radius:22px;border:1px solid var(--line);border-left:8px solid var(--c);box-shadow:var(--shadow);padding:22px 24px 18px;min-width:0}
+.goldhead{display:flex;gap:14px;align-items:center}
+.goldhead h3{margin:.1em 0 0;font-size:1.35rem}
+.glyph{width:52px;height:52px;flex:0 0 52px;background:var(--cb);border-radius:14px;padding:6px}
+.tagline{font-weight:800;color:var(--ink);margin:.7em 0 .2em;font-size:1.08rem}
+.whytext{color:var(--ink-2)}
+.gold .chip{color:var(--ink)!important;border:1.5px solid var(--c)}
+.gold .badge{color:var(--ink)}
+.hidecode pre{position:relative}
+.hidecode pre code{filter:blur(7px);user-select:none;transition:filter .2s}
+.hidecode pre.peek code{filter:none;user-select:auto}
+.hidecode pre:not(.peek) .copy{visibility:hidden}
+.hidecode pre:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.hidecode pre::after{content:"Try it yourself first, then click or tap to reveal";position:absolute;inset:0;display:grid;place-items:center;font:800 1rem var(--font);color:#fff;background:rgba(30,31,51,.35);border-radius:14px;cursor:pointer}
+.hidecode pre.peek::after{display:none}
+.gnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:14px}
+.allfive{margin-top:18px}
+
+/* time-boxed menus */
+.tbox{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.tbox{grid-template-columns:minmax(0,1fr)}}
+.tpanel{display:none;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:20px 22px}
+.tpanel.on{display:block}
+.tpanel h3{margin:0 0 4px}
+.tpanel p.sub{margin:0 0 12px;color:var(--ink-2)}
+.tsteps{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.tsteps label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;background:#f8f9fe;border-radius:14px;padding:10px 12px;border:1.5px solid transparent}
+.tsteps label:hover{border-color:var(--line)}
+.tsteps input{width:20px;height:20px;margin-top:4px;flex:0 0 20px;accent-color:var(--teal)}
+.tsteps input:checked + span{color:var(--muted);text-decoration:line-through}
+.tsteps .meta{display:block;font-size:.85rem;color:var(--muted);text-decoration:none}
+.walkin{background:linear-gradient(135deg,#e6faf4,#e8f3fd);border-radius:22px;padding:20px 22px;border:1px solid #c5ece0}
+.walkin h3{margin:0 0 8px}
+.walkin ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.walkin li{display:flex;gap:10px;align-items:flex-start}
+.walkin li::before{content:"✓";flex:0 0 26px;height:26px;border-radius:50%;background:#00876c;color:#fff;font-weight:900;display:grid;place-items:center;font-size:.85rem;margin-top:2px}
+.resetnote{margin:10px 0 0;font-size:.88rem;color:var(--muted)}
+
+/* day of (accordion) */
+.acc{display:grid;gap:12px}
+.acc details.reveal > summary{font-size:1.08rem;min-height:56px;padding:14px 18px}
+.acc details.reveal > summary .sm{font-weight:600;color:var(--muted);font-size:.9rem;margin-left:auto}
+.acc ul{padding-left:1.2em;margin:.3em 0}
+.acc li{margin:.35em 0}
+.yes,.no{list-style:none;padding:0!important}
+.yes li,.no li{position:relative;padding-left:30px}
+.yes li::before,.no li::before{position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:.8rem;color:#fff}
+.yes li::before{content:"\2713";background:#00876c}
+.no li::before{content:"\2715";background:#c0392b}
+.script{margin:.3em 0 0;padding-left:1.3em}
+.script li{margin:.35em 0}
+.searches{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:6px}
+.sgood,.sbad{border-radius:18px;padding:16px 18px}
+.sgood{background:var(--teal-bg);border:2px solid #9be3cf}
+.sbad{background:var(--coral-bg);border:2px solid #ffc4c4}
+.sgood h4{color:#00876c;margin:0 0 .4em}.sbad h4{color:#b0262b;margin:0 0 .4em}
+.q{display:block;font-family:var(--mono);font-size:.92rem;background:#fff;border-radius:10px;padding:8px 12px;margin:6px 0 2px}
+.qnote{font-size:.88rem;color:var(--ink-2)}
+.strip.tall{display:none;max-width:380px;margin:0 auto}
+@media (max-width:700px){.strip.wide{display:none}.strip.tall{display:block}}
+
+/* downloads */
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.dlcard{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);min-height:84px}
+.dlcard:hover{color:var(--ink);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.dlcard:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.dlcard b{display:block}
+.dlcard small{color:var(--muted);font-size:.86rem}
+.ficon{width:46px;height:54px;flex:0 0 46px}
+.docs{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:10px 22px}
+.docs li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column}
+.docs a{font-weight:700}
+.docs span{font-size:.9rem;color:var(--ink-2)}
+@media print{.hero{color:#000;background:#fff;box-shadow:none}.hero h1{color:#000}.hero .cta,.promises{display:none}.tabs,.gtabs,.moodbtns,.mood,.ideas,.pnav,.bphint,.conf,.next,.focus,.tally,.resetnote,.gnav,.tsteps input{display:none!important}.gold,.tpanel{display:block;break-inside:avoid;margin-bottom:12px}.panel{position:static}.bpfig .codechip{opacity:1!important}.hidecode pre code{filter:none}.hidecode pre::after{display:none}.bp{grid-template-columns:1fr}.tcard,.mode{break-inside:avoid}}
+
+</style></head>
+<body>
+
+<nav class="topnav" aria-label="Main"><div class="wrap">
+  <a class="brand" href="index.html"><span class="logo">RN</span>CS 147L · Interview 2 Prep Kit</a>
+  <div class="navlinks">
+    <a href="index.html" class="active" aria-current="page">Home</a><a href="concepts.html">Concepts</a><a href="practice.html">Practice</a>
+    <a href="mock-interview.html">Mock Interview</a><a href="cheat-sheet.html">Cheat Sheet</a><a href="index.html#downloads">Downloads</a>
+  </div></div></nav>
+<div class="page full">
+<main class="content hub">
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">React Native + TypeScript · 25-minute interview</div>
+    <h1>Interview 2 is one small app. Learn its eight ideas.</h1>
+    <p class="big">Most Interview 2 problems share the same shape: a list of items kept in state, shown as cards, plus a small form that adds to the list. This kit helps you understand each piece well enough to rebuild it calmly, in whatever order suits you.</p>
+    <div class="cta">
+      <a class="btn light" href="#overview">See the big picture</a>
+      <a class="btn outline" href="#paths">Choose how to study</a>
+      <button class="btn outline" type="button" data-open-finder>Find anything <kbd>/</kbd></button>
+    </div>
+  </div>
+  <ul class="promises">
+    <li><span class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span><span><b>Start anywhere</b>Every topic links straight to its explanation, practice, mock questions and cheat-sheet card.</span></li>
+    <li><span class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e84393" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span><b>Hints before answers</b>Exercises show a small nudge first, then a stronger hint, and only then the solution.</span></li>
+    <li><span class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00b894" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span><b>Blank on something? Press /</b>Type &ldquo;TextInput&rdquo;, &ldquo;filter&rdquo; or &ldquo;never&rdquo; and jump right to it, from any page.</span></li>
+  </ul>
+</header>
+
+<section id="overview" aria-labelledby="bpH">
+  <div class="sechead"><span class="kicker">Start here · the big picture</span><h2 id="bpH">One app, eight ideas</h2></div>
+  <p class="lede">Here is a typical Interview 2 app, with the shape of its code beside it. Click a numbered dot or a line of code to see the idea in plain English, a short example, the trap to avoid, and where to go next. Ideas 2 through 7 matter most.</p>
+  <div class="ideas" role="group" aria-label="The eight ideas"><button type="button" class="ideabtn" data-i="1" aria-pressed="false" style="--c:#3d5afe;--cb:#eceffe" aria-controls="bp-panel"><span class="n">1</span>Type the data</button><button type="button" class="ideabtn" data-i="2" aria-pressed="false" style="--c:#6c5ce7;--cb:#f0eeff" aria-controls="bp-panel"><span class="n">2</span>State</button><button type="button" class="ideabtn" data-i="3" aria-pressed="false" style="--c:#00a383;--cb:#e6faf4" aria-controls="bp-panel"><span class="n">3</span>map &rarr; cards</button><button type="button" class="ideabtn" data-i="4" aria-pressed="false" style="--c:#0984e3;--cb:#e8f3fd" aria-controls="bp-panel"><span class="n">4</span>Card component</button><button type="button" class="ideabtn" data-i="5" aria-pressed="false" style="--c:#e84393;--cb:#fdeef6" aria-controls="bp-panel"><span class="n">5</span>Inputs</button><button type="button" class="ideabtn" data-i="6" aria-pressed="false" style="--c:#e05555;--cb:#fff0f0" aria-controls="bp-panel"><span class="n">6</span>Arrow in onPress</button><button type="button" class="ideabtn" data-i="7" aria-pressed="false" style="--c:#b9740a;--cb:#fff6e6" aria-controls="bp-panel"><span class="n">7</span>Callback up</button><button type="button" class="ideabtn" data-i="8" aria-pressed="false" style="--c:#5d8f32;--cb:#f1f8e9" aria-controls="bp-panel"><span class="n">8</span>Flexbox layout</button></div>
+  <div class="bp">
+    <div class="bpfig" id="bp-fig"><svg id="bp-svg" viewBox="0 0 800 540" role="group" aria-labelledby="bp-svgt"><title id="bp-svgt">A typical Interview 2 app: the phone screen on the left and the shape of its code on the right, with eight numbered ideas.</title>
+<defs><marker id="bp-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b9740a"/></marker><linearGradient id="bp-bez" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2f55"/><stop offset="1" stop-color="#14172e"/></linearGradient></defs>
+<rect x="24" y="14" width="268" height="512" rx="38" fill="url(#bp-bez)"/><rect x="36" y="28" width="244" height="484" rx="28" fill="#ffffff"/><rect x="128" y="38" width="60" height="8" rx="4" fill="#1b1f3b"/><text x="56" y="84" font-size="21" font-weight="800" fill="#1b1f3b">Café Menu</text><text x="56" y="106" font-size="13" fill="#5f6690">3 items · 2 popular</text>
+<rect x="52" y="120" width="212" height="46" rx="12" fill="#e6faf4" stroke="#00b894" stroke-width="1.6"/><text x="68" y="149" font-size="15" font-weight="650" fill="#1b1f3b">Matcha latte</text>
+<rect x="184" y="132" width="68" height="22" rx="11" fill="#f0f2fb" stroke="#8b91c0" stroke-width="1.2"/><text x="218" y="147.5" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3c4270">★ Popular</text>
+<rect x="52" y="176" width="212" height="46" rx="12" fill="#e6faf4" stroke="#00b894" stroke-width="1.6"/><text x="68" y="205" font-size="15" font-weight="650" fill="#1b1f3b">Bagel</text>
+<rect x="52" y="232" width="212" height="46" rx="12" fill="#e6faf4" stroke="#00b894" stroke-width="1.6"/><text x="68" y="261" font-size="15" font-weight="650" fill="#1b1f3b">Iced tea</text>
+<rect x="184" y="244" width="68" height="22" rx="11" fill="#f0f2fb" stroke="#8b91c0" stroke-width="1.2"/><text x="218" y="259.5" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3c4270">★ Popular</text>
+<line x1="52" y1="298" x2="264" y2="298" stroke="#e3e6f3" stroke-width="2"/><text x="56" y="322" font-size="13" font-weight="800" fill="#5f6690" letter-spacing=".5">ADD AN ITEM</text><rect x="52" y="332" width="212" height="40" rx="10" fill="#fff" stroke="#b9bfdc" stroke-width="1.6"/><text x="66" y="357" font-size="14" fill="#9aa0c4">Item name</text><text x="56" y="406" font-size="15" font-weight="650" fill="#1b1f3b">Popular?</text><rect x="214" y="388" width="48" height="26" rx="13" fill="#00b894"/><circle cx="249" cy="401" r="10" fill="#fff"/><rect x="52" y="428" width="212" height="46" rx="12" fill="#6c5ce7"/><text x="158" y="457" text-anchor="middle" font-size="15.5" font-weight="800" fill="#fff">Add item</text><rect x="118" y="494" width="80" height="5" rx="2.5" fill="#c9cde6"/>
+<path d="M264 451 C 316 451, 316 143, 268 143" fill="none" stroke="#b9740a" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#bp-ar)"/>
+<g class="hs pin" data-i="2" aria-hidden="true"><circle class="ring" cx="252" cy="82" r="19"/><circle cx="252" cy="82" r="14.5" fill="#6c5ce7" stroke="#fff" stroke-width="3"/><text x="252" y="87" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">2</text></g>
+<g class="hs pin" data-i="3" aria-hidden="true"><circle class="ring" cx="44" cy="199" r="19"/><circle cx="44" cy="199" r="14.5" fill="#00a383" stroke="#fff" stroke-width="3"/><text x="44" y="204" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">3</text></g>
+<g class="hs pin" data-i="4" aria-hidden="true"><circle class="ring" cx="264" cy="176" r="19"/><circle cx="264" cy="176" r="14.5" fill="#0984e3" stroke="#fff" stroke-width="3"/><text x="264" y="181" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">4</text></g>
+<g class="hs pin" data-i="8" aria-hidden="true"><circle class="ring" cx="264" cy="278" r="19"/><circle cx="264" cy="278" r="14.5" fill="#5d8f32" stroke="#fff" stroke-width="3"/><text x="264" y="283" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">8</text></g>
+<g class="hs pin" data-i="5" aria-hidden="true"><circle class="ring" cx="264" cy="332" r="19"/><circle cx="264" cy="332" r="14.5" fill="#e84393" stroke="#fff" stroke-width="3"/><text x="264" y="337" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">5</text></g>
+<g class="hs pin" data-i="6" aria-hidden="true"><circle class="ring" cx="52" cy="428" r="19"/><circle cx="52" cy="428" r="14.5" fill="#e05555" stroke="#fff" stroke-width="3"/><text x="52" y="433" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">6</text></g>
+<g class="hs pin" data-i="7" aria-hidden="true"><circle class="ring" cx="312" cy="300" r="19"/><circle cx="312" cy="300" r="14.5" fill="#b9740a" stroke="#fff" stroke-width="3"/><text x="312" y="305" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">7</text></g>
+<text x="330" y="30" font-size="14" font-weight="800" fill="#3c4270">App.tsx · the shape of most solutions</text>
+<g class="hs codechip" data-i="1" tabindex="0" role="button" aria-label="Idea 1: Describe the data with a type"><rect class="ring" x="326" y="40" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="44" width="458" height="44" rx="12" fill="#eceffe" stroke="#3d5afe" stroke-width="2"/><circle cx="356" cy="66" r="13.5" fill="#3d5afe"/><text x="356" y="71" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">1</text><text x="380" y="71" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">type MenuItem = { name: string; popular: boolean };</text></g>
+<g class="hs codechip" data-i="2" tabindex="0" role="button" aria-label="Idea 2: Keep the list in state"><rect class="ring" x="326" y="96" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="100" width="458" height="44" rx="12" fill="#f0eeff" stroke="#6c5ce7" stroke-width="2"/><circle cx="356" cy="122" r="13.5" fill="#6c5ce7"/><text x="356" y="127" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">2</text><text x="380" y="127" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">const [menu, setMenu] = useState(menuItems);</text></g>
+<g class="hs codechip" data-i="3" tabindex="0" role="button" aria-label="Idea 3: Turn data into cards with map"><rect class="ring" x="326" y="152" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="156" width="458" height="44" rx="12" fill="#e6faf4" stroke="#00a383" stroke-width="2"/><circle cx="356" cy="178" r="13.5" fill="#00a383"/><text x="356" y="183" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">3</text><text x="380" y="183" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">menu.map((m) =&gt; &lt;ItemCard key={m.name} item={m} /&gt;)</text></g>
+<g class="hs codechip" data-i="4" tabindex="0" role="button" aria-label="Idea 4: Make a card component with props"><rect class="ring" x="326" y="208" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="212" width="458" height="44" rx="12" fill="#e8f3fd" stroke="#0984e3" stroke-width="2"/><circle cx="356" cy="234" r="13.5" fill="#0984e3"/><text x="356" y="239" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">4</text><text x="380" y="239" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">const ItemCard = ({ item }: ItemCardProps) =&gt; (</text></g>
+<g class="hs codechip" data-i="5" tabindex="0" role="button" aria-label="Idea 5: Build the form with controlled inputs"><rect class="ring" x="326" y="264" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="268" width="458" height="44" rx="12" fill="#fdeef6" stroke="#e84393" stroke-width="2"/><circle cx="356" cy="290" r="13.5" fill="#e84393"/><text x="356" y="295" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">5</text><text x="380" y="295" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">&lt;TextInput value={name} onChangeText={setName} /&gt;</text></g>
+<g class="hs codechip" data-i="6" tabindex="0" role="button" aria-label="Idea 6: Hand onPress an arrow function"><rect class="ring" x="326" y="320" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="324" width="458" height="44" rx="12" fill="#fff0f0" stroke="#e05555" stroke-width="2"/><circle cx="356" cy="346" r="13.5" fill="#e05555"/><text x="356" y="351" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">6</text><text x="380" y="351" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">&lt;Pressable onPress={() =&gt; onAdd({ name, popular })}&gt;</text></g>
+<g class="hs codechip" data-i="7" tabindex="0" role="button" aria-label="Idea 7: Send the new item up with a callback"><rect class="ring" x="326" y="376" width="466" height="70" rx="15"/><rect class="chipbox" x="330" y="380" width="458" height="62" rx="12" fill="#fff6e6" stroke="#b9740a" stroke-width="2"/><circle cx="356" cy="402" r="13.5" fill="#b9740a"/><text x="356" y="407" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">7</text><text x="380" y="407" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">const addMenuItem = (item: MenuItem) =&gt;</text><text x="380" y="425" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">  setMenu([...menu, item]); // a new array</text></g>
+<g class="hs codechip" data-i="8" tabindex="0" role="button" aria-label="Idea 8: Lay it out with Flexbox"><rect class="ring" x="326" y="450" width="466" height="52" rx="15"/><rect class="chipbox" x="330" y="454" width="458" height="44" rx="12" fill="#f1f8e9" stroke="#5d8f32" stroke-width="2"/><circle cx="356" cy="476" r="13.5" fill="#5d8f32"/><text x="356" y="481" text-anchor="middle" font-size="13.5" font-weight="900" fill="#fff">8</text><text x="380" y="481" font-family="ui-monospace,Menlo,Consolas,DejaVu Sans Mono,monospace" font-size="12.5" fill="#1b1f3b" xml:space="preserve">card: { flexDirection: &quot;row&quot;, justifyContent: … }</text></g>
+<text x="559" y="524" text-anchor="middle" font-size="13" fill="#5f6690">The numbers match the dots on the phone.</text>
+</svg><p class="bphint">Tip: the numbered buttons above the picture do the same thing, and they work well with the keyboard.</p></div>
+    <article class="panel" id="bp-panel" tabindex="-1" aria-labelledby="bp-title">
+      <div class="ptop"><span class="pnum" id="bp-num">1</span><h3 id="bp-title" aria-live="polite"></h3><span class="must" id="bp-tag"></span></div>
+      <p class="one" id="bp-one"></p>
+      <p class="whyp"><b>Why it matters:</b> <span id="bp-why"></span></p>
+      <pre><code id="bp-code"></code></pre>
+      <div class="trap"><b>Watch out:</b> <span id="bp-trap-text"></span></div>
+      <div class="go" id="bp-go"></div>
+      <a class="chip" id="bp-extra" href="#" hidden style="margin-top:10px"></a>
+      <div class="pnav"><button class="btn ghost small" type="button" id="bp-prev">&larr; Previous</button><span class="count" id="bp-count"></span><button class="btn small" type="button" id="bp-next">Next idea &rarr;</button></div>
+    </article>
+  </div>
+  <div class="extras">Also in the kit, when you want them:
+    <a class="chip" style="--c:#6c5ce7;--cb:#f0eeff" href="concepts.html#conditional">Conditional rendering</a>
+    <a class="chip" style="--c:#f39c12;--cb:#fff6e6" href="concepts.html#spread">Remove &amp; toggle items</a>
+    <a class="chip" style="--c:#ff7f50;--cb:#fff2ec" href="concepts.html#effects">Effects &amp; timers</a>
+    <a class="chip" style="--c:#6c5ce7;--cb:#f0eeff" href="concepts.html#mental-model">Mental model</a>
+    <a class="chip" style="--c:#00b894;--cb:#e6faf4" href="concepts.html#interview-craft">Interview craft</a>
+  </div>
+</section>
+
+<section id="paths" aria-labelledby="pathH">
+  <div class="sechead"><span class="kicker">Your choice</span><h2 id="pathH">How do you want to study right now?</h2></div>
+  <p class="lede">There is no required order. Pick whatever matches your energy, and switch whenever you like. Every page links back to the others.</p>
+  <div class="modes">
+    <div class="mode" style="--c:#6c5ce7;--cb:#f0eeff">
+      <span class="micon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6M9 11h6"/></svg></span>
+      <h3>Learn the idea</h3><p class="best">Best when a topic feels fuzzy. Short explanations, diagrams and small simulators you can click through.</p>
+      <ul><li><a href="concepts.html#arrows">Arrow function shape-shifter</a></li><li><a href="concepts.html#map">map simulator</a></li><li><a href="concepts.html#state">State snapshot simulator</a></li><li><a href="concepts.html#callbacks">Follow the click: callbacks</a></li></ul>
+      <a class="btn" href="concepts.html">Open Concepts</a>
+    </div>
+    <div class="mode" style="--c:#00a383;--cb:#e6faf4">
+      <span class="micon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#00a383" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+      <h3>Get some reps</h3><p class="best">Best when you understand it but your fingers are still slow. Quick drills, then real exercises in Snack.</p>
+      <ul><li><a href="practice.html#drills-fix">Fix-the-bug drills</a></li><li><a href="practice.html#drills-fill">Fill-the-blank drills</a></li><li><a href="practice.html#build-a">Build A: Café Menu, step by step</a></li></ul>
+      <a class="btn" href="practice.html">Open Practice</a>
+    </div>
+    <div class="mode" style="--c:#e05555;--cb:#fff0f0">
+      <span class="micon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e05555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg></span>
+      <h3>Test yourself</h3><p class="best">Best when you want to feel the real thing: a handout, a 25-minute timer and tiered hints.</p>
+      <ul><li><a href="mock-interview.html#mock1">Mock 1: Café Menu</a></li><li><a href="mock-interview.html#quizmode">Quiz me: random questions</a></li><li><a href="mock-interview.html#how">How the interview works</a></li></ul>
+      <a class="btn" href="mock-interview.html">Open Mock Interview</a>
+    </div>
+    <div class="mode" style="--c:#b9740a;--cb:#fff6e6">
+      <span class="micon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b9740a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+      <h3>Take a quick look</h3><p class="best">Best for a last glance or when you blank on syntax. Everything on a few printable pages.</p>
+      <ul><li><a href="cheat-sheet.html#golden">The 5 Golden Patterns</a></li><li><a href="cheat-sheet.html#gotchas">Tricky stuff: wrong vs right</a></li><li><a href="cheat-sheet.html#errors">Error message decoder</a></li></ul>
+      <a class="btn" href="cheat-sheet.html">Open Cheat Sheet</a>
+    </div>
+  </div>
+
+  <div class="mood">
+    <h3>Not sure where to begin?</h3>
+    <p class="sub">Pick the one that sounds most like you right now, and you will get a short, suggested route.</p>
+    <div class="moodbtns" role="group" aria-label="How you feel right now">
+      <button type="button" class="moodbtn" data-r="r-fuzzy" aria-pressed="false">It still feels fuzzy</button>
+      <button type="button" class="moodbtn" data-r="r-slow" aria-pressed="false">I get it, but I'm slow</button>
+      <button type="button" class="moodbtn" data-r="r-test" aria-pressed="false">I want to test myself</button>
+      <button type="button" class="moodbtn" data-r="r-brief" aria-pressed="false">I only have a few minutes</button>
+    </div>
+    <div class="recipe" id="r-fuzzy"><h4>Rebuild the foundations</h4><ol class="steps">
+      <li><span>Click through all eight ideas in <a href="#overview">the big picture</a>. Read only the bold sentence for each.</span></li>
+      <li><span>Open <a href="concepts.html#arrows">Arrow functions</a>, then <a href="concepts.html#map">map</a>, then <a href="concepts.html#state">State</a>. Read the one-sentence box, then play with the simulator.</span></li>
+      <li><span>Try two <a href="practice.html#drills-fix">Fix-the-bug drills</a>. Seeing the mistake is often what makes the rule stick.</span></li>
+      <li><span>Finish with <a href="concepts.html#callbacks">Callbacks</a> and its &ldquo;Follow the click&rdquo; stepper.</span></li></ol></div>
+    <div class="recipe" id="r-slow"><h4>Build speed with reps</h4><ol class="steps">
+      <li><span>Do the <a href="practice.html#drills-fill">Fill-the-blank drills</a> without looking anything up.</span></li>
+      <li><span>Open a blank Snack and type the <a href="#golden">Golden Patterns</a> from memory, with &ldquo;Hide the code&rdquo; switched on.</span></li>
+      <li><span>Work through <a href="practice.html#build-a">Build A</a> one step at a time, running the app after each step.</span></li></ol></div>
+    <div class="recipe" id="r-test"><h4>Simulate the interview</h4><ol class="steps">
+      <li><span>Start <a href="mock-interview.html#mock1">Mock 1</a> with its 25-minute timer and talk aloud as you go.</span></li>
+      <li><span>Score yourself honestly with <a href="mock-interview.html#mock1-rubric">the rubric</a>.</span></li>
+      <li><span>Rebuild your weakest part from a blank file, then answer ten <a href="mock-interview.html#quizmode">Quiz me</a> questions.</span></li></ol></div>
+    <div class="recipe" id="r-brief"><h4>A short, high-value look</h4><ol class="steps">
+      <li><span>Turn on &ldquo;Hide the code&rdquo; in <a href="#golden">the Golden Patterns</a>, say each pattern aloud, then reveal it.</span></li>
+      <li><span>Skim <a href="cheat-sheet.html#gotchas">Tricky stuff: wrong vs right</a>.</span></li>
+      <li><span>Glance at <a href="#day-of">Interview-day essentials</a> so nothing surprises you.</span></li></ol></div>
+  </div>
+</section>
+
+<section id="topics" aria-labelledby="topH">
+  <div class="sechead"><span class="kicker">Explore freely</span><h2 id="topH">Topic explorer</h2></div>
+  <p class="lede">All thirteen topics in one place. If you like, tell a card how you feel about it and it will suggest one next step. Shaky topics point to the explanation, &ldquo;getting there&rdquo; points to practice, and solid ones point to mock questions.</p>
+  <div class="tx-top">
+    <div class="tabs" role="group" aria-label="Show topics">
+      <button type="button" class="tab" data-g="all" aria-pressed="true">All 13</button>
+      <button type="button" class="tab" data-g="must" aria-pressed="false">Must-know (7)</button>
+      <button type="button" class="tab" data-g="good" aria-pressed="false">Good to know (3)</button>
+      <button type="button" class="tab" data-g="refresh" aria-pressed="false">Quick refresh (3)</button>
+    </div>
+    <div class="tally" aria-live="polite" aria-label="Your ratings so far"><span class="ts" id="tl-s">0 shaky</span><span class="tg" id="tl-g">0 getting there</span><span class="tk" id="tl-k">0 solid</span></div>
+  </div>
+  <div class="focus" id="focus"><b>Your focus list:</b> start with these. <span id="focus-list"></span></div>
+  <div class="tgrid">
+<article class="tcard" data-id="arrows" data-g="must" data-name="Arrow functions" style="--c:#ff6b6b;--cb:#fff0f0">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#arrows">Arrow functions</a></h3>
+  <p class="desc">Functions as values: the two body styles, returning objects, and passing a function instead of calling it.</p>
+  <div class="tlinks"><a href="concepts.html#arrows">Learn</a><a href="practice.html#arrows">Practice</a><a href="mock-interview.html#arrows">Mock questions</a><a href="cheat-sheet.html#arrows">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Arrow functions?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="map" data-g="must" data-name="map &amp; lists" style="--c:#00b894;--cb:#e6faf4">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#map">map &amp; lists</a></h3>
+  <p class="desc">Turn an array of data into an array of cards, with a key on each one.</p>
+  <div class="tlinks"><a href="concepts.html#map">Learn</a><a href="practice.html#map">Practice</a><a href="mock-interview.html#map">Mock questions</a><a href="cheat-sheet.html#map">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with map &amp; lists?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="state" data-g="must" data-name="State (useState)" style="--c:#6c5ce7;--cb:#f0eeff">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#state">State (useState)</a></h3>
+  <p class="desc">What React remembers between renders, and the two ways to update it.</p>
+  <div class="tlinks"><a href="concepts.html#state">Learn</a><a href="practice.html#state">Practice</a><a href="mock-interview.html#state">Mock questions</a><a href="cheat-sheet.html#state">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with State (useState)?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="spread" data-g="must" data-name="Immutable updates" style="--c:#f39c12;--cb:#fff6e6">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#spread">Immutable updates</a></h3>
+  <p class="desc">Add, remove and toggle items by building new arrays and objects with spread, filter and map.</p>
+  <div class="tlinks"><a href="concepts.html#spread">Learn</a><a href="practice.html#spread">Practice</a><a href="mock-interview.html#spread">Mock questions</a><a href="cheat-sheet.html#spread">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Immutable updates?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="components" data-g="must" data-name="Components &amp; props" style="--c:#0984e3;--cb:#e8f3fd">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#components">Components &amp; props</a></h3>
+  <p class="desc">Custom components, the props object, destructuring and typing props.</p>
+  <div class="tlinks"><a href="concepts.html#components">Learn</a><a href="practice.html#components">Practice</a><a href="mock-interview.html#components">Mock questions</a><a href="cheat-sheet.html#components">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Components &amp; props?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="callbacks" data-g="must" data-name="Callbacks between components" style="--c:#0984e3;--cb:#e8f3fd">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#callbacks">Callbacks between components</a></h3>
+  <p class="desc">Data flows down through props; a function prop lets a child ask the parent for a change.</p>
+  <div class="tlinks"><a href="concepts.html#callbacks">Learn</a><a href="practice.html#callbacks">Practice</a><a href="mock-interview.html#callbacks">Mock questions</a><a href="cheat-sheet.html#callbacks">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Callbacks between components?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="inputs" data-g="must" data-name="Inputs" style="--c:#e84393;--cb:#fdeef6">
+  <span class="grp">Must-know</span>
+  <h3><a href="concepts.html#inputs">Inputs</a></h3>
+  <p class="desc">TextInput, Switch, Pressable and Button, and how to clear a form after adding.</p>
+  <div class="tlinks"><a href="concepts.html#inputs">Learn</a><a href="practice.html#inputs">Practice</a><a href="mock-interview.html#inputs">Mock questions</a><a href="cheat-sheet.html#inputs">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Inputs?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="typescript" data-g="good" data-name="TypeScript" style="--c:#3d5afe;--cb:#eceffe">
+  <span class="grp">Good to know</span>
+  <h3><a href="concepts.html#typescript">TypeScript</a></h3>
+  <p class="desc">Types for data, props and callbacks; when inference is enough and when to annotate.</p>
+  <div class="tlinks"><a href="concepts.html#typescript">Learn</a><a href="practice.html#typescript">Practice</a><a href="mock-interview.html#typescript">Mock questions</a><a href="cheat-sheet.html#typescript">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with TypeScript?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="layout" data-g="good" data-name="Layout &amp; Flexbox" style="--c:#7cb342;--cb:#f1f8e9">
+  <span class="grp">Good to know</span>
+  <h3><a href="concepts.html#layout">Layout &amp; Flexbox</a></h3>
+  <p class="desc">StyleSheet, the box model, row vs column, justifyContent vs alignItems.</p>
+  <div class="tlinks"><a href="concepts.html#layout">Learn</a><a href="practice.html#layout">Practice</a><a href="mock-interview.html#layout">Mock questions</a><a href="cheat-sheet.html#layout">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Layout &amp; Flexbox?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="conditional" data-g="good" data-name="Conditional rendering" style="--c:#6c5ce7;--cb:#f0eeff">
+  <span class="grp">Good to know</span>
+  <h3><a href="concepts.html#conditional">Conditional rendering</a></h3>
+  <p class="desc">Show different UI with if/else, a ternary or &amp;&amp;, plus empty-state messages.</p>
+  <div class="tlinks"><a href="concepts.html#conditional">Learn</a><a href="practice.html#conditional">Practice</a><a href="mock-interview.html#conditional">Mock questions</a><a href="cheat-sheet.html#conditional">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Conditional rendering?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="effects" data-g="refresh" data-name="Effects, timers &amp; Promises" style="--c:#ff7f50;--cb:#fff2ec">
+  <span class="grp">Quick refresh</span>
+  <h3><a href="concepts.html#effects">Effects, timers &amp; Promises</a></h3>
+  <p class="desc">useEffect and its dependency array, cleanup, setInterval, and .then.</p>
+  <div class="tlinks"><a href="concepts.html#effects">Learn</a><a href="practice.html#effects">Practice</a><a href="mock-interview.html#effects">Mock questions</a><a href="cheat-sheet.html#effects">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Effects, timers &amp; Promises?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="mental-model" data-g="refresh" data-name="The mental model" style="--c:#6c5ce7;--cb:#f0eeff">
+  <span class="grp">Quick refresh</span>
+  <h3><a href="concepts.html#mental-model">The mental model</a></h3>
+  <p class="desc">A component is a function React calls; changing state draws a new screen.</p>
+  <div class="tlinks"><a href="concepts.html#mental-model">Learn</a><a href="practice.html#mental-model">Practice</a><a href="mock-interview.html#mental-model">Mock questions</a><a href="cheat-sheet.html#mental-model">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with The mental model?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+<article class="tcard" data-id="interview-craft" data-g="refresh" data-name="Interview craft" style="--c:#00b894;--cb:#e6faf4">
+  <span class="grp">Quick refresh</span>
+  <h3><a href="concepts.html#interview-craft">Interview craft</a></h3>
+  <p class="desc">Reading the handout, thinking aloud, debugging calmly and searching well.</p>
+  <div class="tlinks"><a href="concepts.html#interview-craft">Learn</a><a href="practice.html#interview-craft">Practice</a><a href="mock-interview.html#interview-craft">Mock questions</a><a href="cheat-sheet.html#interview-craft">Cheat card</a></div>
+  <div class="conf" role="group" aria-label="How confident are you with Interview craft?"><span class="lbl">I feel:</span><button type="button" class="cbtn" data-v="shaky" aria-pressed="false">Shaky</button><button type="button" class="cbtn" data-v="getting" aria-pressed="false">Getting there</button><button type="button" class="cbtn" data-v="solid" aria-pressed="false">Solid</button></div>
+  <div class="next" aria-live="polite"></div>
+</article>
+  </div>
+  <p class="resetnote">Your ratings are kept only while this page is open. They reset if you reload.</p>
+</section>
+
+<section id="golden" aria-labelledby="goldH">
+  <div class="sechead"><span class="kicker">Worth knowing by heart</span><h2 id="goldH">The 5 Golden Patterns</h2></div>
+  <p class="lede">These five short patterns build almost every Interview 2 app. Look at one at a time. When you feel ready, switch on <b>Hide the code</b>, try writing the pattern yourself in Snack, and then click or tap the blurred code to compare.</p>
+  <div class="gtabs" role="group" aria-label="Pick a pattern"><button type="button" class="gtab" aria-pressed="false" aria-controls="goldstage" style="--c:#6c5ce7;--cb:#f0eeff"><span class="n">1</span>State from data</button><button type="button" class="gtab" aria-pressed="false" aria-controls="goldstage" style="--c:#00b894;--cb:#e6faf4"><span class="n">2</span>Map to components</button><button type="button" class="gtab" aria-pressed="false" aria-controls="goldstage" style="--c:#f39c12;--cb:#fff6e6"><span class="n">3</span>Add immutably</button><button type="button" class="gtab" aria-pressed="false" aria-controls="goldstage" style="--c:#0984e3;--cb:#e8f3fd"><span class="n">4</span>Callback down, call up</button><button type="button" class="gtab" aria-pressed="false" aria-controls="goldstage" style="--c:#e84393;--cb:#fdeef6"><span class="n">5</span>Controlled inputs</button>
+    <label class="recall"><input type="checkbox" id="recall"> Hide the code</label>
+  </div>
+  <div class="goldstage" id="goldstage">
+<article class="gold t-state">
+  <div class="goldhead"><svg class="glyph" viewBox="0 0 48 48" role="img" aria-label="State from data"><title>State from data</title><rect x="6" y="9" width="36" height="30" rx="9" fill="#f0eeff" stroke="#6c5ce7" stroke-width="3"/><path d="M16 26a8 8 0 1 0 3-8" fill="none" stroke="#6c5ce7" stroke-width="3" stroke-linecap="round"/><path d="M14 13v7h7" fill="none" stroke="#6c5ce7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><span class="badge">Pattern 1</span><h3>State from data</h3></div></div>
+  <p class="tagline">Let inference do the typing.</p>
+  <p class="whytext"><b>Why it works:</b> State is the memory your screen draws from. When you start <code>useState</code> with real data, TypeScript reads the value and works out the type for you, so <code>menu</code> becomes <code>MenuItem[]</code> with zero extra typing. Only an empty array needs a hint, because TypeScript cannot guess what will go into it. The list lives in <code>App</code>; the form&rsquo;s <code>name</code> and <code>popular</code> state lives in the form itself (Pattern 4).</p>
+  <pre><code>// in App
+const [menu, setMenu] = useState(menuItems);   // menu: MenuItem[]
+// empty array needs a type:  useState&lt;MenuItem[]&gt;([])</code></pre>
+  <div class="cross"><a class="chip" href="concepts.html#state">Concept</a><a class="chip" href="practice.html#state">Practice</a><a class="chip" href="cheat-sheet.html#state">Cheat sheet</a></div>
+</article>
+<article class="gold t-map">
+  <div class="goldhead"><svg class="glyph" viewBox="0 0 48 48" role="img" aria-label="Map data to components"><title>Map data to components</title><circle cx="9" cy="12" r="4" fill="#00b894"/><circle cx="9" cy="24" r="4" fill="#00b894"/><circle cx="9" cy="36" r="4" fill="#00b894"/><path d="M17 24h8" stroke="#00b894" stroke-width="3" stroke-linecap="round"/><path d="M22 19l5 5-5 5" fill="none" stroke="#00b894" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="31" y="8" width="13" height="8" rx="3" fill="#e6faf4" stroke="#00b894" stroke-width="2"/><rect x="31" y="20" width="13" height="8" rx="3" fill="#e6faf4" stroke="#00b894" stroke-width="2"/><rect x="31" y="32" width="13" height="8" rx="3" fill="#e6faf4" stroke="#00b894" stroke-width="2"/></svg><div><span class="badge">Pattern 2</span><h3>Map data to components</h3></div></div>
+  <p class="tagline">No <code>{</code> right after the arrow means the value is returned.</p>
+  <p class="whytext"><b>Why it works:</b> <code>map</code> calls your arrow function once per item and collects whatever it returns into a new array. When there is no <code>{</code> right after <code>=&gt;</code>, the expression is returned automatically; the <code>( )</code> around the JSX are just grouping so it can span several lines. A <code>{</code> right after <code>=&gt;</code> starts a function body, so you must write <code>return</code> yourself. The <code>key</code> lets React tell the cards apart: use a unique id if the data has one (<code>key={item.id}</code>); <code>key={item.name}</code> is fine only if names are unique.</p>
+  <pre><code>const cards = menu.map((item) =&gt; (
+  &lt;ItemCard key={item.name} item={item} /&gt;
+));
+// ...then inside JSX:  &lt;ScrollView&gt;{cards}&lt;/ScrollView&gt;
+
+// Same thing with a block body: braces need return
+const cards2 = menu.map((item) =&gt; {
+  return &lt;ItemCard key={item.name} item={item} /&gt;;
+});
+
+// The card itself: typed props, destructured
+const ItemCard = ({ item }: ItemCardProps) =&gt; (
+  &lt;View style={styles.card}&gt;
+    &lt;Text&gt;{item.name}&lt;/Text&gt;
+    {item.popular &amp;&amp; &lt;Text&gt;Popular&lt;/Text&gt;}
+  &lt;/View&gt;
+);
+// item.popular is a boolean, so &amp;&amp; is safe (numbers are the danger)</code></pre>
+  <div class="cross"><a class="chip" href="concepts.html#map">Concept</a><a class="chip" href="practice.html#map">Practice</a><a class="chip" href="cheat-sheet.html#map">Cheat sheet</a></div>
+</article>
+<article class="gold t-spread">
+  <div class="goldhead"><svg class="glyph" viewBox="0 0 48 48" role="img" aria-label="Add to an array immutably"><title>Add to an array immutably</title><path d="M10 8H5v32h5M38 8h5v32h-5" fill="none" stroke="#f39c12" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="24" r="2.6" fill="#f39c12"/><circle cx="20" cy="24" r="2.6" fill="#f39c12"/><circle cx="26" cy="24" r="2.6" fill="#f39c12"/><path d="M33 19v10M28 24h10" stroke="#b7791f" stroke-width="3" stroke-linecap="round"/></svg><div><span class="badge">Pattern 3</span><h3>Add to an array immutably</h3></div></div>
+  <p class="tagline">Make a new array; never push into the old one.</p>
+  <p class="whytext"><b>Why it works:</b> React re-renders when you hand the setter a <b>new</b> array. <code>[...menu, item]</code> copies every old item into a fresh array and puts the new one at the end. Because state here is an array, you use square brackets <code>[ ]</code>, not curly braces. The updater form is also valid and is safer when the next value depends on the previous one.</p>
+  <pre><code>const addMenuItem = (item: MenuItem) =&gt; {
+  setMenu([...menu, item]);
+  // also valid: setMenu((prev) =&gt; [...prev, item]);
+};</code></pre>
+  <div class="cross"><a class="chip" href="concepts.html#spread">Concept</a><a class="chip" href="practice.html#spread">Practice</a><a class="chip" href="cheat-sheet.html#spread">Cheat sheet</a></div>
+</article>
+<article class="gold t-callbacks">
+  <div class="goldhead"><svg class="glyph" viewBox="0 0 48 48" role="img" aria-label="Callback down, call it up"><title>Callback down, call it up</title><rect x="10" y="4" width="28" height="13" rx="5" fill="#e8f3fd" stroke="#0984e3" stroke-width="2.5"/><rect x="10" y="31" width="28" height="13" rx="5" fill="#e8f3fd" stroke="#0984e3" stroke-width="2.5"/><path d="M17 19v9M14 25l3 3 3-3" fill="none" stroke="#0984e3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 29v-9M28 23l3-3 3 3" fill="none" stroke="#e84393" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><span class="badge">Pattern 4</span><h3>Callback down, call it up</h3></div></div>
+  <p class="tagline">The parent owns state; the child just asks for changes.</p>
+  <p class="whytext"><b>Why it works:</b> Data flows one way: down through props. To change the parent’s state, the parent passes a function down as a prop, and the child calls it. The child calls it from a handler that runs on press (not during render) and builds the exact object the type expects. Writing <code>onPress={onAdd(item)}</code> would call it during render instead, which can cause &ldquo;Too many re-renders&rdquo;.</p>
+  <pre class="has-label"><span class="label">Parent</span><code>// Parent (App): owns the list
+const addMenuItem = (item: MenuItem) =&gt; {
+  setMenu([...menu, item]);
+};
+&lt;AddItemForm onAdd={addMenuItem} /&gt;</code></pre>
+  <pre class="has-label"><span class="label">Child</span><code>// Child: owns the text field and switch
+const AddItemForm = ({ onAdd }: AddItemFormProps) =&gt; {
+  const [name, setName] = useState("");
+  const [popular, setPopular] = useState(false);
+  const handleAdd = () =&gt; {
+    if (name.trim() === "") return;
+    onAdd({ name, popular });
+    setName("");
+    setPopular(false);
+  };
+  return (
+    &lt;View&gt;
+      &lt;TextInput value={name} onChangeText={setName} placeholder="Item name" /&gt;
+      &lt;Switch value={popular} onValueChange={setPopular} /&gt;
+      &lt;Pressable onPress={handleAdd}&gt;&lt;Text&gt;Add&lt;/Text&gt;&lt;/Pressable&gt;
+    &lt;/View&gt;
+  );
+};</code></pre>
+  <div class="cross"><a class="chip" href="concepts.html#callbacks">Concept</a><a class="chip" href="practice.html#callbacks">Practice</a><a class="chip" href="cheat-sheet.html#callbacks">Cheat sheet</a></div>
+</article>
+<article class="gold t-inputs">
+  <div class="goldhead"><svg class="glyph" viewBox="0 0 48 48" role="img" aria-label="Controlled inputs"><title>Controlled inputs</title><rect x="4" y="8" width="40" height="14" rx="5" fill="#fdeef6" stroke="#e84393" stroke-width="2.5"/><path d="M12 11v8" stroke="#e84393" stroke-width="2.5" stroke-linecap="round"/><rect x="18" y="28" width="24" height="13" rx="6.5" fill="#e84393"/><circle cx="35.5" cy="34.5" r="4.5" fill="#fff"/></svg><div><span class="badge">Pattern 5</span><h3>Controlled inputs</h3></div></div>
+  <p class="tagline">The input shows state; typing updates state.</p>
+  <p class="whytext"><b>Why it works:</b> A controlled input reads its <code>value</code> from state and reports every change through a callback. <code>onChangeText</code> hands you the new string, so passing <code>setName</code> directly works, and so does the arrow version. <code>Switch</code> works the same way with a boolean.</p>
+  <pre><code>&lt;TextInput value={name} onChangeText={setName} placeholder="Item name" /&gt;
+// equivalent: onChangeText={(text) =&gt; setName(text)}
+
+&lt;Switch value={popular} onValueChange={setPopular} /&gt;</code></pre>
+  <div class="cross"><a class="chip" href="concepts.html#inputs">Concept</a><a class="chip" href="practice.html#inputs">Practice</a><a class="chip" href="cheat-sheet.html#inputs">Cheat sheet</a></div>
+</article>
+  </div>
+  <div class="gnav"><button class="btn ghost small" type="button" id="g-prev">&larr; Previous pattern</button><button class="btn small" type="button" id="g-next">Next pattern &rarr;</button></div>
+  <details class="reveal allfive"><summary>All five patterns in one block (copy this onto your mental whiteboard)</summary><div class="body">
+<pre class="has-label"><span class="label">golden-patterns.tsx</span><code>// 1. State from data (inference does the typing), in App
+const [menu, setMenu] = useState(menuItems);            // menu: MenuItem[]
+// empty array needs a type:  useState&lt;MenuItem[]&gt;([])
+// (name and popular state live in the form, pattern 4)
+
+// 2. Map data -&gt; components (no { after =&gt;, so the JSX is returned)
+const cards = menu.map((item) =&gt; (
+  &lt;ItemCard key={item.name} item={item} /&gt;
+));
+// ...then inside JSX:  &lt;ScrollView&gt;{cards}&lt;/ScrollView&gt;
+
+// The card: typed props + destructuring
+const ItemCard = ({ item }: ItemCardProps) =&gt; (
+  &lt;View style={styles.card}&gt;
+    &lt;Text&gt;{item.name}&lt;/Text&gt;
+    {item.popular &amp;&amp; &lt;Text&gt;Popular&lt;/Text&gt;}
+  &lt;/View&gt;
+);
+
+// 3 + 4a. Parent (App): owns the list, adds immutably, passes the callback down
+const addMenuItem = (item: MenuItem) =&gt; {
+  setMenu([...menu, item]);
+};
+&lt;AddItemForm onAdd={addMenuItem} /&gt;
+
+// 4b + 5. Child: owns the text field and switch (controlled inputs), calls onAdd up
+const AddItemForm = ({ onAdd }: AddItemFormProps) =&gt; {
+  const [name, setName] = useState("");
+  const [popular, setPopular] = useState(false);
+  const handleAdd = () =&gt; {
+    if (name.trim() === "") return;
+    onAdd({ name, popular });
+    setName("");
+    setPopular(false);
+  };
+  return (
+    &lt;View&gt;
+      &lt;TextInput value={name} onChangeText={setName} placeholder="Item name" /&gt;
+      &lt;Switch value={popular} onValueChange={setPopular} /&gt;
+      &lt;Pressable onPress={handleAdd}&gt;&lt;Text&gt;Add&lt;/Text&gt;&lt;/Pressable&gt;
+    &lt;/View&gt;
+  );
+};
+// onChangeText={setName} is the same as onChangeText={(text) =&gt; setName(text)}</code></pre></div></details>
+  
+  <div class="trap"><b>Common trap:</b> <code>setMenu((menu) =&gt; {...menu, item})</code> looks close but has two problems. Braces right after <code>=&gt;</code> start a function body, not an object, and the state is an array, so you need <code>[...menu, item]</code>. Also, call the setter you actually declared (<code>setMenu</code>), not a generic name.</div>
+
+</section>
+
+<section id="plan" aria-labelledby="planH">
+  <div class="sechead"><span class="kicker">Fits between classes</span><h2 id="planH">Got a few minutes?</h2></div>
+  <p class="lede">Pick a menu that fits the time you have. Each one is a short list you can tick off, in any order, as often as you like.</p>
+  <div class="tabs" role="group" aria-label="How much time do you have?" style="margin-bottom:14px">
+    <button type="button" class="tab" data-t="tp10" aria-controls="tp10" aria-pressed="true">About 10 minutes</button>
+    <button type="button" class="tab" data-t="tp25" aria-controls="tp25" aria-pressed="false">About 25 minutes</button>
+    <button type="button" class="tab" data-t="tp45" aria-controls="tp45" aria-pressed="false">45 minutes or more</button>
+  </div>
+  <div class="tbox">
+    <div>
+      <div class="tpanel on" id="tp10"><h3>A quick, high-value refresh</h3><p class="sub">Good for a short break.</p><ul class="tsteps">
+        <li><label><input type="checkbox"><span><a href="#golden">Golden Patterns with Hide the code on</a><span class="meta">Say each pattern aloud, then reveal it to check.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="cheat-sheet.html#gotchas">Tricky stuff: wrong vs right</a><span class="meta">Skim the table; slow down on any row that surprises you.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="practice.html#drills-fix">Two Fix-the-bug drills</a><span class="meta">Spot the mistake before you open the answer.</span></span></label></li>
+      </ul></div>
+      <div class="tpanel" id="tp25"><h3>Strengthen one weak spot</h3><p class="sub">Good when one topic keeps bugging you.</p><ul class="tsteps">
+        <li><label><input type="checkbox"><span><a href="#overview">Pick your shakiest idea in the big picture</a><span class="meta">Read its card, then follow the Learn button.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="practice.html">Do one exercise for that topic</a><span class="meta">Use the topic filter at the top of the Practice page.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="mock-interview.html#quizmode">Five rapid-fire questions</a><span class="meta">Answer aloud before revealing the model answer.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="#golden">Type Golden Pattern 4 from a blank Snack</a><span class="meta">Parent and child: the callback that connects the form to the list.</span></span></label></li>
+      </ul></div>
+      <div class="tpanel" id="tp45"><h3>A full practice run</h3><p class="sub">Good for a longer block. This is the closest thing to the real interview.</p><ul class="tsteps">
+        <li><label><input type="checkbox"><span><a href="mock-interview.html#mock1">Mock 1 with the 25-minute timer</a><span class="meta">Talk aloud the whole time; use hints in order.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="mock-interview.html#mock1-rubric">Score yourself with the rubric</a><span class="meta">Be honest. It is only for you.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="practice.html">Rebuild your weakest part from a blank file</a><span class="meta">This is where most of the learning happens.</span></span></label></li>
+        <li><label><input type="checkbox"><span><a href="cheat-sheet.html#handwritten">Draft your one handwritten page</a><span class="meta">Generic syntax shapes and error fixes, not app code.</span></span></label></li>
+      </ul></div>
+      <p class="resetnote">Ticks are kept only while this page is open.</p>
+    </div>
+    <aside class="walkin">
+      <h3>Right before you walk in</h3>
+      <ul>
+        <li>Laptop charged, and Expo Snack open and working in a browser tab.</li>
+        <li>Wi-Fi connected. Arrive about five minutes early.</li>
+        <li>Your handwritten page, if you made one (optional, one sheet, front and back).</li>
+        <li>Your plan: read the handout, sketch the screen, write JavaScript first, run often, and talk aloud.</li>
+        <li>Remember: they grade your process, not whether you finish. A calm, clear partial solution is a good outcome.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section id="day-of" aria-labelledby="doH">
+  <div class="sechead"><span class="kicker">Interview day</span><h2 id="doH">Interview-day essentials</h2></div>
+  <div class="oneliner"><b>In one sentence</b>They are watching how you think and debug, not whether you finish, so talk aloud, read the errors, and search for knowledge rather than answers.</div>
+  <p class="lede" style="font-size:1rem">Open whichever part you need.</p>
+  <div class="acc">
+<details class="reveal"><summary>The format</summary><div class="body"><ul>
+        <li><b>25 minutes</b> on one programming problem, in <b>Expo Snack</b> on your laptop.</li>
+        <li>You get a <b>handout</b> with a reference screenshot and a step-by-step breakdown.</li>
+        <li>You can <b>ask clarifying questions</b> at any point. The TA may also ask you to move on to another part.</li>
+        <li>The focus is your <b>process, not the final code</b>. You are <b>not expected to finish</b> the whole problem.</li>
+        <li>Pencil and paper are provided if you want to sketch the layout first.</li>
+      </ul></div></details>
+<details class="reveal"><summary>Allowed resources</summary><div class="body"><ul class="yes">
+        <li>The open internet, including the Google Search AI overview.</li>
+        <li>One page of handwritten notes in English, front and back, pen and paper only. You turn it in at the end. (You do not need notes to do well.)</li>
+      </ul>
+      <h4 style="margin:.8em 0 .2em">Not allowed</h4>
+      <ul class="no">
+        <li>Any other AI tools, such as chatbots or code assistants.</li>
+        <li>Homework solutions, including solution-like code written by hand on your notes page.</li>
+      </ul></div></details>
+<details class="reveal"><summary>Before and during</summary><div class="body"><ul>
+        <li><b>Arrive 5 minutes early</b> with a <b>charged laptop</b>. Delays come out of your 25 minutes.</li>
+        <li><b>Think aloud.</b> Saying &ldquo;I expect this to show three cards&rdquo; helps the TA see where you are and point things out.</li>
+        <li><b>Read error messages</b> slowly. They often name the exact problem, like <code>Text strings must be rendered within a &lt;Text&gt; component</code>.</li>
+        <li><b>Write it in JavaScript first</b>, run it often, and add TypeScript types once it works.</li>
+        <li><b>If the interviewer says move on</b>, stub the unfinished part with hard-coded values (for example, a fixed array instead of state) and come back to it later.</li>
+      </ul></div></details>
+<details class="reveal"><summary>A 60-second talk-aloud script</summary><div class="body"><ol class="script">
+        <li>&ldquo;Let me read the whole handout first and sketch the screen.&rdquo;</li>
+        <li>&ldquo;The data is a list of items, so I&rsquo;ll write a type with <code>name</code> and <code>popular</code>.&rdquo;</li>
+        <li>&ldquo;The list lives in <code>App</code>, because the form needs to add to it and the cards need to show it.&rdquo;</li>
+        <li>&ldquo;I&rsquo;ll get static cards on screen first, then <code>map</code> over state, then the form and the callback.&rdquo;</li>
+        <li>&ldquo;I&rsquo;ll run it after each step. I expect three cards now&hellip; I see three, good.&rdquo;</li>
+      </ol></div></details>
+<details class="reveal"><summary>Snack tips</summary><div class="body"><ul>
+        <li><b>Red squiggles usually do not stop the app.</b> TypeScript errors are warnings in Snack, which is why &ldquo;JavaScript first, types second&rdquo; works.</li>
+        <li><b>The web preview is not a phone.</b> Text outside <code>&lt;Text&gt;</code> or a stray <code>0</code> may only crash on iOS or Android.</li>
+        <li><b>On the red error screen</b>, read the message and the line number before changing anything.</li>
+        <li><code>onChangeText={setName}</code> is fine because it passes a string. <code>onPress={setX}</code> is not the same: it passes an event object, so write <code>onPress={() =&gt; setX(true)}</code>.</li>
+      </ul></div></details>
+<details class="reveal"><summary>Good searches vs. searches to avoid</summary><div class="body"><div class="searches">
+    <div class="sgood">
+      <h4>Good searches: general knowledge</h4>
+      <span class="q">what values work for justifyContent?</span><span class="qnote">Looking up documentation.</span>
+      <span class="q">what is the syntax for a self-closing tag in React Native?</span><span class="qnote">Debugging syntax.</span>
+      <span class="q">what&rsquo;s the difference between justifyContent and alignItems</span><span class="qnote">Reviewing a concept.</span>
+    </div>
+    <div class="sbad">
+      <h4>Searches to avoid: asking for the answer</h4>
+      <span class="q">how do I center the links in a navbar?</span><span class="qnote">Asking for the solution directly.</span>
+      <span class="q">&ldquo;this looks like a snippet on my notes, I&rsquo;ll copy it and tweak it&rdquo;</span><span class="qnote">Pattern matching instead of reasoning.</span>
+    </div>
+  </div>
+  <p class="qnote" style="margin-top:8px">Search examples from Lecture 4a, slide 11.</p></div></details>
+<details class="reveal"><summary>If you get stuck: four calm steps</summary><div class="body"><svg class="fig strip wide" viewBox="0 0 1000 136" role="img" aria-labelledby="stkh stkhd"><title id="stkh">If you get stuck: a 4-step flow</title><desc id="stkhd">Four calm steps when you get stuck: read the error, say what you expect, use console.log and check types, then search the docs rather than solutions.</desc>
+<defs><marker id="stkh-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8b91c0"/></marker></defs>
+<rect x="12" y="12" width="220" height="112" rx="20" fill="#fdeef6" stroke="#e84393" stroke-width="2.5"/>
+<circle cx="42" cy="44" r="15" fill="#e84393"/><text x="42" y="49.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">1</text>
+<text x="62" y="49" font-size="16" font-weight="800" fill="#1b1f3b">Read the error</text>
+<text x="30" y="82" font-size="14" fill="#3c4270">Which line? What exactly</text>
+<text x="30" y="102" font-size="14" fill="#3c4270">does the message say?</text>
+<line x1="236" y1="68.0" x2="258" y2="68.0" stroke="#8b91c0" stroke-width="3" marker-end="url(#stkh-ar)"/>
+<rect x="264" y="12" width="220" height="112" rx="20" fill="#f0eeff" stroke="#6c5ce7" stroke-width="2.5"/>
+<circle cx="294" cy="44" r="15" fill="#6c5ce7"/><text x="294" y="49.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">2</text>
+<text x="314" y="49" font-size="16" font-weight="800" fill="#1b1f3b">Say what you expect</text>
+<text x="282" y="82" font-size="14" fill="#3c4270">Out loud: what should</text>
+<text x="282" y="102" font-size="14" fill="#3c4270">happen, and what did?</text>
+<line x1="488" y1="68.0" x2="510" y2="68.0" stroke="#8b91c0" stroke-width="3" marker-end="url(#stkh-ar)"/>
+<rect x="516" y="12" width="220" height="112" rx="20" fill="#e8f3fd" stroke="#0984e3" stroke-width="2.5"/>
+<circle cx="546" cy="44" r="15" fill="#0984e3"/><text x="546" y="49.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">3</text>
+<text x="566" y="49" font-size="16" font-weight="800" fill="#1b1f3b">console.log / types</text>
+<text x="534" y="82" font-size="14" fill="#3c4270">Log the value; hover to</text>
+<text x="534" y="102" font-size="14" fill="#3c4270">check its TypeScript type</text>
+<line x1="740" y1="68.0" x2="762" y2="68.0" stroke="#8b91c0" stroke-width="3" marker-end="url(#stkh-ar)"/>
+<rect x="768" y="12" width="220" height="112" rx="20" fill="#e6faf4" stroke="#00b894" stroke-width="2.5"/>
+<circle cx="798" cy="44" r="15" fill="#00b894"/><text x="798" y="49.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">4</text>
+<text x="818" y="49" font-size="16" font-weight="800" fill="#1b1f3b">Search docs</text>
+<text x="786" y="82" font-size="14" fill="#3c4270">Look up how a prop or</text>
+<text x="786" y="102" font-size="14" fill="#3c4270">syntax works, not answers</text>
+</svg><svg class="fig strip tall" viewBox="0 0 360 526" role="img" aria-labelledby="stkv stkvd"><title id="stkv">If you get stuck: a 4-step flow</title><desc id="stkvd">Four calm steps when you get stuck: read the error, say what you expect, use console.log and check types, then search the docs rather than solutions.</desc>
+<defs><marker id="stkv-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8b91c0"/></marker></defs>
+<rect x="12" y="10" width="336" height="104" rx="18" fill="#fdeef6" stroke="#e84393" stroke-width="2.5"/>
+<circle cx="42" cy="40" r="15" fill="#e84393"/><text x="42" y="45.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">1</text>
+<text x="66" y="46" font-size="17" font-weight="800" fill="#1b1f3b">Read the error</text>
+<text x="66" y="72" font-size="14" fill="#3c4270">Which line? What exactly</text>
+<text x="66" y="92" font-size="14" fill="#3c4270">does the message say?</text>
+<line x1="180.0" y1="117" x2="180.0" y2="138" stroke="#8b91c0" stroke-width="3" marker-end="url(#stkv-ar)"/>
+<rect x="12" y="144" width="336" height="104" rx="18" fill="#f0eeff" stroke="#6c5ce7" stroke-width="2.5"/>
+<circle cx="42" cy="174" r="15" fill="#6c5ce7"/><text x="42" y="179.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">2</text>
+<text x="66" y="180" font-size="17" font-weight="800" fill="#1b1f3b">Say what you expect</text>
+<text x="66" y="206" font-size="14" fill="#3c4270">Out loud: what should</text>
+<text x="66" y="226" font-size="14" fill="#3c4270">happen, and what did?</text>
+<line x1="180.0" y1="251" x2="180.0" y2="272" stroke="#8b91c0" stroke-width="3" marker-end="url(#stkv-ar)"/>
+<rect x="12" y="278" width="336" height="104" rx="18" fill="#e8f3fd" stroke="#0984e3" stroke-width="2.5"/>
+<circle cx="42" cy="308" r="15" fill="#0984e3"/><text x="42" y="313.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">3</text>
+<text x="66" y="314" font-size="17" font-weight="800" fill="#1b1f3b">console.log / types</text>
+<text x="66" y="340" font-size="14" fill="#3c4270">Log the value; hover to</text>
+<text x="66" y="360" font-size="14" fill="#3c4270">check its TypeScript type</text>
+<line x1="180.0" y1="385" x2="180.0" y2="406" stroke="#8b91c0" stroke-width="3" marker-end="url(#stkv-ar)"/>
+<rect x="12" y="412" width="336" height="104" rx="18" fill="#e6faf4" stroke="#00b894" stroke-width="2.5"/>
+<circle cx="42" cy="442" r="15" fill="#00b894"/><text x="42" y="447.5" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">4</text>
+<text x="66" y="448" font-size="17" font-weight="800" fill="#1b1f3b">Search docs</text>
+<text x="66" y="474" font-size="14" fill="#3c4270">Look up how a prop or</text>
+<text x="66" y="494" font-size="14" fill="#3c4270">syntax works, not answers</text>
+</svg><p style="margin:.8em 0 0">Getting stuck is a normal part of the interview, and handling it calmly is exactly the process they want to see. More in <a href="concepts.html#interview-craft">Interview craft</a>.</p></div></details>
+  </div>
+</section>
+
+<section id="downloads" aria-labelledby="dlH">
+  <div class="sechead"><span class="kicker">Take it with you</span><h2 id="dlH">Downloads and links</h2></div>
+  <h3>Files</h3>
+  <div class="dl">
+    <a class="dlcard" href="downloads/CS147L-Interview2-Prep-Guide.pdf"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="PDF file"><title>PDF file</title><path d="M4 4h26l12 12v34H4z" fill="#fff" stroke="#c0392b" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 4v12h12" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linejoin="round"/><rect x="2" y="28" width="34" height="16" rx="4" fill="#c0392b"/><text x="19" y="40.5" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">PDF</text></svg><span><b>Prep Guide (PDF)</b><small>The whole kit as one readable document.</small></span></a>
+    <a class="dlcard" href="downloads/CS147L-Interview2-Prep-Guide.docx"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="DOCX file"><title>DOCX file</title><path d="M4 4h26l12 12v34H4z" fill="#fff" stroke="#0873c4" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 4v12h12" fill="none" stroke="#0873c4" stroke-width="2.5" stroke-linejoin="round"/><rect x="2" y="28" width="34" height="16" rx="4" fill="#0873c4"/><text x="19" y="40.5" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">DOCX</text></svg><span><b>Prep Guide (Word)</b><small>Editable version for your own notes.</small></span></a>
+    <a class="dlcard" href="downloads/CS147L-Interview2-Cheat-Sheet.pdf"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="PDF file"><title>PDF file</title><path d="M4 4h26l12 12v34H4z" fill="#fff" stroke="#b7791f" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 4v12h12" fill="none" stroke="#b7791f" stroke-width="2.5" stroke-linejoin="round"/><rect x="2" y="28" width="34" height="16" rx="4" fill="#b7791f"/><text x="19" y="40.5" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">PDF</text></svg><span><b>Cheat Sheet (PDF)</b><small>Dense, printable, color coded.</small></span></a>
+  </div>
+  <h3>Pages in this kit</h3>
+  <div class="dl">
+    <a class="dlcard" href="concepts.html"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="Concepts page"><title>Concepts page</title><rect x="3" y="3" width="40" height="48" rx="9" fill="#6c5ce7"/><rect x="10" y="12" width="26" height="4" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="21" width="20" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="30" width="24" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="39" width="14" height="4" rx="2" fill="#fff" opacity=".7"/></svg><span><b>Concepts</b><small>All 13 topics explained with visuals.</small></span></a>
+    <a class="dlcard" href="practice.html"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="Practice page"><title>Practice page</title><rect x="3" y="3" width="40" height="48" rx="9" fill="#00b894"/><rect x="10" y="12" width="26" height="4" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="21" width="20" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="30" width="24" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="39" width="14" height="4" rx="2" fill="#fff" opacity=".7"/></svg><span><b>Practice</b><small>Drills, tiered exercises, and full builds.</small></span></a>
+    <a class="dlcard" href="mock-interview.html"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="Mock Interview page"><title>Mock Interview page</title><rect x="3" y="3" width="40" height="48" rx="9" fill="#e84393"/><rect x="10" y="12" width="26" height="4" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="21" width="20" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="30" width="24" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="39" width="14" height="4" rx="2" fill="#fff" opacity=".7"/></svg><span><b>Mock Interview</b><small>Three timed mocks plus rapid-fire questions.</small></span></a>
+    <a class="dlcard" href="cheat-sheet.html"><svg class="ficon" viewBox="0 0 46 54" role="img" aria-label="Cheat Sheet page"><title>Cheat Sheet page</title><rect x="3" y="3" width="40" height="48" rx="9" fill="#f39c12"/><rect x="10" y="12" width="26" height="4" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="21" width="20" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="30" width="24" height="4" rx="2" fill="#fff" opacity=".7"/><rect x="10" y="39" width="14" height="4" rx="2" fill="#fff" opacity=".7"/></svg><span><b>Cheat Sheet</b><small>The printable one-glance summary.</small></span></a>
+  </div>
+  <h3>Official docs worth bookmarking</h3>
+  <p class="lede" style="font-size:1rem">These are exactly the kind of pages a &ldquo;good search&rdquo; lands on.</p>
+  <ul class="docs"><li><a href="https://react.dev/learn/updating-arrays-in-state" target="_blank" rel="noopener">React: Updating Arrays in State</a><span>Add, remove, and replace items without mutation.</span></li><li><a href="https://react.dev/learn/sharing-state-between-components" target="_blank" rel="noopener">React: Sharing State Between Components</a><span>Lifting state up and passing callbacks.</span></li><li><a href="https://react.dev/learn/rendering-lists" target="_blank" rel="noopener">React: Rendering Lists</a><span><code>map</code>, <code>filter</code>, and why keys matter.</span></li><li><a href="https://reactnative.dev/docs/textinput" target="_blank" rel="noopener">React Native: TextInput</a><span><code>value</code>, <code>onChangeText</code>, <code>placeholder</code>.</span></li><li><a href="https://reactnative.dev/docs/pressable" target="_blank" rel="noopener">React Native: Pressable</a><span><code>onPress</code> and pressable children.</span></li><li><a href="https://reactnative.dev/docs/switch" target="_blank" rel="noopener">React Native: Switch</a><span><code>value</code> and <code>onValueChange</code>.</span></li><li><a href="https://reactnative.dev/docs/flexbox" target="_blank" rel="noopener">React Native: Flexbox</a><span>Column-first layout, <code>justifyContent</code>, <code>alignItems</code>.</span></li><li><a href="https://snack.expo.dev" target="_blank" rel="noopener">Expo Snack</a><span>The in-browser editor used in the interview.</span></li><li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html" target="_blank" rel="noopener">TypeScript Handbook: Everyday Types</a><span>Primitives, arrays, type aliases, and unions.</span></li></ul>
+</section>
+
+</main>
+</div>
+<footer class="footer">CS 147L Coding Interview 2 Prep Kit · Built from course lectures 1a–5b and official React, React Native, TypeScript, and MDN docs.</footer>
+
+<!-- KIT-FINDER START -->
+<style>
+.kf-open{display:inline-flex;align-items:center;gap:8px;font:700 .95rem var(--font);background:var(--ink);color:#fff;border:0;border-radius:10px;padding:8px 12px;min-height:40px;cursor:pointer;margin-left:6px}
+.kf-open:hover{background:var(--violet)}
+.kf-open:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.kf-open kbd{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35);color:#fff;font-size:.78rem;padding:0 .35em}
+.kf-back{position:fixed;inset:0;z-index:200;background:rgba(27,31,59,.45);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:9vh 16px 16px}
+.kf-back.show{display:flex}
+.kf-box{width:min(680px,100%);background:#fff;border-radius:20px;box-shadow:0 24px 60px rgba(27,31,59,.35);overflow:hidden;display:flex;flex-direction:column;max-height:78vh}
+.kf-in{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.kf-in svg{width:22px;height:22px;flex:0 0 22px;color:var(--violet)}
+.kf-in input{flex:1;border:0;outline:0;font:500 1.15rem var(--font);color:var(--ink);background:transparent;min-height:40px}
+.kf-in .kf-x{font:700 .85rem var(--font);border:1px solid var(--line);background:#f6f7fc;border-radius:8px;padding:6px 12px;min-height:40px;min-width:48px;cursor:pointer;color:var(--ink-2)}
+.kf-in .kf-x:focus-visible,.kf-list li a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.kf-list{list-style:none;margin:0;padding:8px;overflow:auto}
+.kf-list li a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--ink)}
+.kf-list li a .kf-t{font-weight:700;font-size:1rem}
+.kf-list li a .kf-s{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+.kf-list li a .kf-k{margin-left:auto;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#eef0fa;color:var(--ink-2);white-space:nowrap}
+.kf-list li a .kf-d{width:12px;height:12px;border-radius:50%;flex:0 0 12px}
+.kf-list li.sel a,.kf-list li a:hover{background:var(--violet-bg)}
+.kf-empty{padding:18px;color:var(--muted)}
+.kf-foot{padding:10px 18px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+@media (max-width:640px){.kf-open .kf-lbl{display:none}}
+@media print{.kf-open,.kf-back{display:none!important}}
+</style>
+<div class="kf-back" id="kf-back" aria-hidden="true">
+  <div class="kf-box" role="dialog" aria-modal="true" aria-label="Find anything in the kit">
+    <div class="kf-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="kf-q" type="search" placeholder="Try: map, TextInput, spread, never, mock" autocomplete="off" spellcheck="false" aria-label="Search the kit" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="kf-list">
+      <button class="kf-x" type="button" id="kf-close" aria-label="Close search">Esc</button>
+    </div>
+    <ul class="kf-list" id="kf-list" role="listbox" aria-label="Results"></ul>
+    <div class="kf-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>/</kbd> or <kbd>Ctrl</kbd>+<kbd>K</kbd> opens this anywhere</span></div>
+  </div>
+</div>
+<script>
+(function () {
+  var C = { "mental-model": "#6c5ce7", arrows: "#ff6b6b", map: "#00b894", spread: "#f39c12", state: "#6c5ce7", components: "#0984e3", callbacks: "#0984e3",
+    inputs: "#e84393", conditional: "#6c5ce7", typescript: "#3d5afe", layout: "#7cb342", effects: "#ff7f50", "interview-craft": "#00b894" };
+  var TOP = [
+    ["arrows", "Arrow functions", "anonymous function => return implicit body object parentheses pass vs call onPress"],
+    ["map", "map & lists", "map list key array cards scrollview flatlist filter find one-liner block return"],
+    ["state", "State (useState)", "usestate setter snapshot updater prev re-render setstate"],
+    ["spread", "Spread & immutable updates", "spread ... copy add remove filter toggle update push mutate immutable destructuring"],
+    ["components", "Components & props", "component props destructure export import default named itemcard"],
+    ["callbacks", "Props & callbacks", "callback lift state parent child onadd data down events up"],
+    ["inputs", "Inputs", "textinput onchangetext switch onvaluechange pressable button form clear"],
+    ["conditional", "Conditional rendering", "if else ternary && empty state disabled sold out conditional style"],
+    ["typescript", "TypeScript", "types type interface optional union never annotation generic props error"],
+    ["layout", "Layout & Flexbox", "flexbox flexdirection justifycontent alignitems flex gap wrap stylesheet box model margin padding"],
+    ["effects", "Effects, timers & Promises", "useeffect dependency array cleanup setinterval settimeout promise then fetch async"],
+    ["mental-model", "Mental model", "render re-render function ui = f(state) local variable"],
+    ["interview-craft", "Interview craft", "think aloud search handout sketch debug stuck handwritten"]
+  ];
+  var PAGES = [["concepts.html", "Concept", "Learn"], ["practice.html", "Practice", "Practice"], ["mock-interview.html", "Mock questions", "Test"], ["cheat-sheet.html", "Cheat card", "Glance"]];
+  var E = [];
+  TOP.forEach(function (t) { PAGES.forEach(function (p) { E.push({ t: t[1], s: p[1], k: p[2], h: p[0] + "#" + t[0], w: t[2], c: C[t[0]] }); }); });
+  [
+    ["The big picture: one app, eight ideas", "Home", "index.html#overview", "overview start diagram app anatomy"],
+    ["Choose how to study", "Home", "index.html#paths", "path mode where start"],
+    ["Topic explorer and confidence check", "Home", "index.html#topics", "topics confidence focus shaky"],
+    ["The 5 Golden Patterns", "Home", "index.html#golden", "golden patterns memorize recall"],
+    ["Got a few minutes? Short study menus", "Home", "index.html#plan", "time 10 25 45 minutes plan"],
+    ["Interview-day essentials", "Home", "index.html#day-of", "day rules allowed resources format arrive"],
+    ["Downloads: PDF and Word guide", "Home", "index.html#downloads", "download pdf word docx print"],
+    ["Mock 1: Café Menu", "Mock interview", "mock-interview.html#mock1", "mock cafe menu menuitem itemcard additemform timer"],
+    ["Mock 2: Habit Tracker", "Mock interview", "mock-interview.html#mock2", "mock habit toggle remove filter count"],
+    ["Mock 3: Study Timer & Tasks", "Mock interview", "mock-interview.html#mock3", "mock timer useeffect setinterval promise tasks"],
+    ["Quiz me: one random question at a time", "Mock interview", "mock-interview.html#quizmode", "quiz random rapid fire"],
+    ["All rapid-fire questions", "Mock interview", "mock-interview.html#rapid-fire", "rapid fire questions verbal"],
+    ["How the interview works", "Mock interview", "mock-interview.html#how", "format 25 minutes rubric talk aloud game plan"],
+    ["Predict the output drills", "Practice", "practice.html#drills-predict", "predict output drill"],
+    ["Fix the bug drills", "Practice", "practice.html#drills-fix", "fix bug drill debug"],
+    ["Fill the blank drills", "Practice", "practice.html#drills-fill", "fill blank drill"],
+    ["Build A: Café Menu Builder", "Practice", "practice.html#build-a", "build guided cafe menu"],
+    ["Build B: Playlist Maker", "Practice", "practice.html#build-b", "build guided playlist song liked"],
+    ["How to practice", "Practice", "practice.html#how", "how snack layers hints"],
+    ["Tricky stuff: wrong vs right", "Cheat sheet", "cheat-sheet.html#gotchas", "gotchas tricky wrong right mistakes"],
+    ["Error decoder", "Cheat sheet", "cheat-sheet.html#errors", "error message decoder fix"],
+    ["App skeleton to type from memory", "Cheat sheet", "cheat-sheet.html#app-skeleton", "skeleton scaffold template app.tsx"],
+    ["Your one handwritten page", "Cheat sheet", "cheat-sheet.html#handwritten", "handwritten notes page paper allowed"],
+    ["Golden Patterns (cheat card)", "Cheat sheet", "cheat-sheet.html#golden", "golden patterns"],
+    ["Error: Text strings must be rendered within a <Text> component", "Cheat sheet", "cheat-sheet.html#errors", "text strings rendered 0 && error"],
+    ["Error: Each child in a list should have a unique \"key\" prop", "Cheat sheet", "cheat-sheet.html#errors", "key prop warning list"],
+    ["Error: Too many re-renders", "Cheat sheet", "cheat-sheet.html#errors", "too many re-renders infinite loop onpress call"],
+    ["Error: not assignable to type 'never'", "Cheat sheet", "cheat-sheet.html#errors", "never usestate empty array type"],
+    ["TextInput: value + onChangeText", "Concept", "concepts.html#inputs", "textinput onchangetext placeholder"],
+    ["Switch: value + onValueChange", "Concept", "concepts.html#inputs", "switch onvaluechange boolean popular"],
+    ["Pressable and Button", "Concept", "concepts.html#inputs", "pressable button onpress title pressed style"],
+    ["FlatList vs ScrollView", "Concept", "concepts.html#layout", "flatlist scrollview renderitem keyextractor data"],
+    ["Remove an item with filter", "Concept", "concepts.html#spread", "remove delete filter"],
+    ["Toggle a field with map + spread", "Concept", "concepts.html#spread", "toggle update map spread popular done liked"],
+    ["useEffect dependency array & cleanup", "Concept", "concepts.html#effects", "useeffect deps cleanup interval"]
+  ].forEach(function (x) {
+    var k = { "Home": "Home", "Mock interview": "Test", "Practice": "Practice", "Cheat sheet": "Glance", "Concept": "Learn" }[x[1]] || x[1];
+    E.push({ t: x[0], s: x[1], k: k, h: x[2], w: x[3], c: "#8b91c0" });
+  });
+
+  var back = document.getElementById("kf-back"), q = document.getElementById("kf-q"), list = document.getElementById("kf-list");
+  var sel = 0, shown = [], lastFocus = null;
+  function esc(s) { return s.replace(/[&<>"]/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]; }); }
+  function render() {
+    var terms = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (!terms.length) {
+      shown = E.filter(function (e) { return e.s === "Concept" && e.c !== "#8b91c0"; }).concat(E.filter(function (e) { return /Mock [123]|Fix the bug|Golden Patterns \(|Error decoder/.test(e.t); }));
+    } else {
+      shown = E.map(function (e) {
+        var hay = (e.t + " " + e.s + " " + e.w).toLowerCase(), title = e.t.toLowerCase(), score = 0;
+        for (var i = 0; i < terms.length; i++) { if (hay.indexOf(terms[i]) < 0) return null; if (title.indexOf(terms[i]) >= 0) score += 2; else score += 1; }
+        return { e: e, score: score };
+      }).filter(Boolean).sort(function (a, b) { return b.score - a.score; }).map(function (x) { return x.e; }).slice(0, 40);
+    }
+    sel = 0;
+    if (shown.length) q.setAttribute("aria-activedescendant", "kf-o0"); else q.removeAttribute("aria-activedescendant");
+    list.innerHTML = shown.length ? shown.map(function (e, i) {
+      return '<li role="option" id="kf-o' + i + '"' + (i === 0 ? ' class="sel" aria-selected="true"' : ' aria-selected="false"') + '><a href="' + e.h + '"><span class="kf-d" style="background:' + e.c + '"></span><span><span class="kf-t">' + esc(e.t) + '</span><span class="kf-s">' + esc(e.s) + '</span></span><span class="kf-k">' + esc(e.k) + "</span></a></li>";
+    }).join("") : '<li class="kf-empty">No matches. Try a shorter word, like "map" or "input".</li>';
+  }
+  function move(d) {
+    var items = list.querySelectorAll("li[role=option]"); if (!items.length) return;
+    items[sel].classList.remove("sel"); items[sel].setAttribute("aria-selected", "false");
+    sel = (sel + d + items.length) % items.length;
+    items[sel].classList.add("sel"); items[sel].setAttribute("aria-selected", "true");
+    items[sel].scrollIntoView({ block: "nearest" });
+    q.setAttribute("aria-activedescendant", items[sel].id);
+  }
+  function open() { lastFocus = document.activeElement; back.classList.add("show"); back.setAttribute("aria-hidden", "false"); q.value = ""; render(); setTimeout(function () { q.focus(); }, 10); }
+  function close() { back.classList.remove("show"); back.setAttribute("aria-hidden", "true"); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  window.kitFinder = { open: open, close: close };
+  q.addEventListener("input", render);
+  q.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+    else if (e.key === "Enter") { var a = list.querySelector("li.sel a"); if (a) { e.preventDefault(); close(); location.href = a.getAttribute("href"); } }
+    else if (e.key === "Escape") { close(); }
+  });
+  // Keep Tab inside the dialog while it is open.
+  back.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab") return;
+    var f = Array.prototype.slice.call(back.querySelectorAll("input, button, a[href]"));
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  list.addEventListener("click", function (e) { if (e.target.closest("a")) close(); });
+  document.getElementById("kf-close").addEventListener("click", close);
+  back.addEventListener("click", function (e) { if (e.target === back) close(); });
+  document.addEventListener("keydown", function (e) {
+    var tag = (document.activeElement && document.activeElement.tagName) || "";
+    var ae = document.activeElement, itype = ae && ae.type ? String(ae.type).toLowerCase() : "";
+    var typing = /^(TEXTAREA|SELECT)$/.test(tag) || (tag === "INPUT" && !/^(checkbox|radio|button|submit|reset|range|color|file)$/.test(itype)) || (ae && ae.isContentEditable);
+    if ((e.key === "k" || e.key === "K") && (e.ctrlKey || e.metaKey)) { e.preventDefault(); back.classList.contains("show") ? close() : open(); }
+    else if (e.key === "/" && !typing && !back.classList.contains("show")) { e.preventDefault(); open(); }
+    else if (e.key === "Escape" && back.classList.contains("show")) { close(); }
+  });
+  var nav = document.querySelector(".navlinks");
+  if (nav && !nav.querySelector(".kf-open")) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "kf-open"; b.setAttribute("aria-label", "Find anything (press slash)");
+    b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="kf-lbl">Find</span><kbd>/</kbd>';
+    b.addEventListener("click", open); nav.appendChild(b);
+  }
+})();
+</script>
+<!-- KIT-FINDER END -->
+
+<script>
+// ===== CS 147L Interview 2 Prep Kit — shared helpers (inline verbatim, at end of <body>) =====
+// No localStorage/sessionStorage: in-memory only.
+(function () {
+  // 1) Copy buttons on every <pre>
+  document.querySelectorAll("pre").forEach(function (pre) {
+    if (pre.querySelector(".copy")) return;
+    var b = document.createElement("button");
+    b.className = "copy"; b.type = "button"; b.textContent = "Copy";
+    b.addEventListener("click", function () {
+      var code = pre.querySelector("code") || pre;
+      var txt = code.innerText;
+      var done = function () { b.textContent = "Copied!"; setTimeout(function () { b.textContent = "Copy"; }, 1400); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(done, function () { fallback(txt); done(); });
+      } else { fallback(txt); done(); }
+    });
+    pre.appendChild(b);
+  });
+  function fallback(t) { var ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} ta.remove(); }
+
+  // 2) Multiple-choice quizzes: <div class="quiz"><div class="q">..</div><div class="opts">
+  //    <button class="opt" data-correct="true">..</button> ...</div><div class="fb">explanation</div></div>
+  document.querySelectorAll(".quiz").forEach(function (qz) {
+    qz.querySelectorAll("button.opt").forEach(function (btn) {
+      btn.type = "button";
+      btn.addEventListener("click", function () {
+        var ok = btn.dataset.correct === "true";
+        btn.classList.add(ok ? "right" : "wrong");
+        if (ok) qz.querySelectorAll("button.opt").forEach(function (o) { o.disabled = true; });
+        var fb = qz.querySelector(".fb"); if (fb) fb.classList.add("show");
+      });
+    });
+  });
+
+  // 3) "Mark as done" buttons: <button class="btn ghost markdone" data-topic="map">Mark section done</button>
+  //    Adds .done to sidebar links with href="#map". In-memory only.
+  document.querySelectorAll(".markdone").forEach(function (b) {
+    b.type = "button";
+    b.addEventListener("click", function () {
+      var on = !b.classList.contains("is-done");
+      b.classList.toggle("is-done", on);
+      b.textContent = on ? "✓ Done — nice work" : "Mark section done";
+      document.querySelectorAll('.sidebar a[href="#' + b.dataset.topic + '"]').forEach(function (a) { a.classList.toggle("done", on); });
+    });
+  });
+
+  // 4) Sidebar toggle on small screens: <button class="btn ghost small sidebar-toggle" data-target="toc">Contents</button>
+  document.querySelectorAll(".sidebar-toggle").forEach(function (b) {
+    b.addEventListener("click", function () { var s = document.getElementById(b.dataset.target); if (s) s.classList.toggle("open"); });
+  });
+
+  // 5) Countdown timers: <div class="timer" data-seconds="1500"><span class="t">25:00</span></div>
+  //    plus buttons with data-timer-action="start|pause|reset" and data-timer-for="<timer id>"
+  document.querySelectorAll(".timer[data-seconds]").forEach(function (tm) {
+    var total = parseInt(tm.dataset.seconds, 10), left = total, id = null, out = tm.querySelector(".t");
+    function draw() { var m = Math.floor(left / 60), s = left % 60; out.textContent = String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0"); tm.classList.toggle("warn", left <= 300); }
+    function tick() { if (left > 0) { left--; draw(); } else { clearInterval(id); id = null; out.textContent = "Time!"; } }
+    tm._api = {
+      start: function () { if (!id) id = setInterval(tick, 1000); },
+      pause: function () { clearInterval(id); id = null; },
+      reset: function () { clearInterval(id); id = null; left = total; draw(); }
+    };
+    draw();
+  });
+  document.querySelectorAll("[data-timer-action]").forEach(function (b) {
+    b.addEventListener("click", function () { var tm = document.getElementById(b.dataset.timerFor); if (tm && tm._api) tm._api[b.dataset.timerAction](); });
+  });
+
+  // 6) Highlight current section in sidebar while scrolling
+  var links = Array.prototype.slice.call(document.querySelectorAll(".sidebar a[href^='#']"));
+  if ("IntersectionObserver" in window && links.length) {
+    var map = {}; links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting && map[e.target.id]) { links.forEach(function (a) { a.style.background = ""; }); map[e.target.id].style.background = "#fff"; } });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    Object.keys(map).forEach(function (k) { var el = document.getElementById(k); if (el) io.observe(el); });
+  }
+})();
+
+</script>
+<script>
+
+// ===== hub v2 page logic (in-memory only) =====
+(function () {
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  // ---------- 1. Big picture explorer ----------
+  var IDEAS = [
+    { t: "Describe the data with a type", topic: "typescript", c: "#3d5afe", cb: "#eceffe", tag: "Good to know",
+      one: "A type describes the shape of one item, so TypeScript can check every place you use it.",
+      why: "The handout usually gives you sample data. Writing the type first tells you what each card needs and what the form must build. You can also write the app in plain JavaScript first and add types once it runs.",
+      code: 'type MenuItem = {\n  name: string;\n  popular: boolean;\n};\n\nconst menuItems: MenuItem[] = [\n  { name: "Matcha latte", popular: true },\n  { name: "Bagel", popular: false },\n];',
+      trap: "An empty starting list needs a hint: useState<MenuItem[]>([]). Without it, TypeScript decides the array can never hold anything (never[]).",
+      links: ["concepts.html#typescript", "practice.html#typescript", "mock-interview.html#typescript", "cheat-sheet.html#typescript"] },
+    { t: "Keep the list in state", topic: "state", c: "#6c5ce7", cb: "#f0eeff", tag: "Must-know",
+      one: "useState gives you a value React remembers between renders, plus a setter that asks React to re-render with a new value.",
+      why: "The list on screen is state. If it were a plain variable, the screen would never change, because React would not know to draw it again.",
+      code: 'const [menu, setMenu] = useState(menuItems); // menu: MenuItem[]\n\n// Two valid ways to update it:\nsetMenu(newArray);                   // pass the new value\nsetMenu((prev) => [...prev, item]);  // or a function of the old value',
+      trap: "The variable does not change right away. After setMenu(...), menu still holds the old value until the next render. Also, call the setter you declared (setMenu), not a generic setState.",
+      links: ["concepts.html#state", "practice.html#state", "mock-interview.html#state", "cheat-sheet.html#state"] },
+    { t: "Turn data into cards with map", topic: "map", c: "#00a383", cb: "#e6faf4", tag: "Must-know",
+      one: "map calls your function once per item and collects what it returns into a new array, here an array of cards.",
+      why: "This is how the list of cards appears. There are two ways to write it, and mixing them up is the most common syntax stumble.",
+      code: '// No { right after => : the JSX is returned automatically\nconst cards = menu.map((item) => (\n  <ItemCard key={item.name} item={item} />\n));\n\n// { right after => starts a body, so you must write return\nconst cards2 = menu.map((item) => {\n  return <ItemCard key={item.name} item={item} />;\n});\n\n<ScrollView>{cards}</ScrollView>',
+      trap: "Braces with no return give you an array of undefined. Nothing shows up and the app does not crash, so the mistake is easy to miss.",
+      links: ["concepts.html#map", "practice.html#map", "mock-interview.html#map", "cheat-sheet.html#map"] },
+    { t: "Make a card component with props", topic: "components", c: "#0984e3", cb: "#e8f3fd", tag: "Must-know",
+      one: "A component is a function that receives one props object and returns JSX.",
+      why: "Pulling the card into its own component keeps App short, and it is usually one of the handout's steps.",
+      code: 'type ItemCardProps = { item: MenuItem };\n\nconst ItemCard = ({ item }: ItemCardProps) => (\n  <View style={styles.card}>\n    <Text>{item.name}</Text>\n    {item.popular && <Text style={styles.badge}>Popular</Text>}\n  </View>\n);',
+      trap: "Props arrive as one object. ({ item }) unpacks the item prop. Writing (item) instead gives you the whole props object under the name item, so item.name is undefined.",
+      links: ["concepts.html#components", "practice.html#components", "mock-interview.html#components", "cheat-sheet.html#components"] },
+    { t: "Build the form with controlled inputs", topic: "inputs", c: "#e84393", cb: "#fdeef6", tag: "Must-know",
+      one: "A controlled input shows a value from state and reports every change through a callback.",
+      why: "Every form in this interview works this way. The form component keeps its own name and popular state.",
+      code: 'const [name, setName] = useState("");\nconst [popular, setPopular] = useState(false);\n\n<TextInput value={name} onChangeText={setName} placeholder="Item name" />\n<Switch value={popular} onValueChange={setPopular} />',
+      trap: "Use onChangeText, which gives you the new string, not onChange, which gives you an event. Give the TextInput a border so you can actually see it.",
+      links: ["concepts.html#inputs", "practice.html#inputs", "mock-interview.html#inputs", "cheat-sheet.html#inputs"] },
+    { t: "Hand onPress an arrow function", topic: "arrows", c: "#e05555", cb: "#fff0f0", tag: "Must-know",
+      one: "An arrow function is a value. You hand it to onPress, and React calls it later, when the press actually happens.",
+      why: "onPress, onChangeText and map all take functions. Once the shapes feel familiar, most syntax errors disappear.",
+      code: '// Pass a function: it runs on press\n<Pressable onPress={() => onAdd({ name, popular })}>\n  <Text>Add item</Text>\n</Pressable>\n\n// Not this: it calls onAdd right away, during render\n// <Pressable onPress={onAdd({ name, popular })}>',
+      trap: "To return an object from a one-line arrow, wrap it in parentheses: () => ({ name, popular }). Without them, the braces are read as a function body.",
+      links: ["concepts.html#arrows", "practice.html#arrows", "mock-interview.html#arrows", "cheat-sheet.html#arrows"] },
+    { t: "Send the new item up with a callback", topic: "callbacks", c: "#b9740a", cb: "#fff6e6", tag: "Must-know",
+      one: "The parent owns the list and passes a function down as a prop. The child calls that function to ask for a change.",
+      why: "Data flows down through props, and requests flow up through callbacks. This is the step that connects the form to the list.",
+      code: '// Parent (App): owns the list\nconst addMenuItem = (item: MenuItem) => {\n  setMenu([...menu, item]); // a NEW array: old items + the new one\n};\n<AddItemForm onAdd={addMenuItem} />\n\n// Child: the prop\'s type\ntype AddItemFormProps = { onAdd: (item: MenuItem) => void };',
+      trap: "State here is an array, so build the new value with [ ], not { }. Never push into the old array: React only re-renders when it receives a new array.",
+      links: ["concepts.html#callbacks", "practice.html#callbacks", "mock-interview.html#callbacks", "cheat-sheet.html#callbacks"],
+      extra: ["concepts.html#spread", "Immutable updates (spread)"] },
+    { t: "Lay it out with Flexbox", topic: "layout", c: "#5d8f32", cb: "#f1f8e9", tag: "Good to know",
+      one: "In React Native, children stack in a column by default. Switch a container to a row when things should sit side by side.",
+      why: "The handout shows a screenshot to match, and cards with a name on the left and a badge on the right are typical.",
+      code: 'const styles = StyleSheet.create({\n  card: {\n    flexDirection: "row",            // name and badge side by side\n    justifyContent: "space-between", // along the row (main axis)\n    alignItems: "center",            // across the row (cross axis)\n    padding: 12,\n    borderRadius: 12,\n    backgroundColor: "#fff",\n  },\n});',
+      trap: "justifyContent works along flexDirection, and alignItems works across it. The web defaults to row, but React Native defaults to column.",
+      links: ["concepts.html#layout", "practice.html#layout", "mock-interview.html#layout", "cheat-sheet.html#layout"] }
+  ];
+  var LABELS = [["Learn", "Concept"], ["Practice", "Exercises"], ["Test", "Mock questions"], ["Glance", "Cheat card"]];
+  var ICONS = [
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M9 2h6"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>'
+  ];
+  var panel = $("#bp-panel"), fig = $("#bp-fig"), cur = 0;
+  function show(i, focusPanel) {
+    cur = (i + IDEAS.length) % IDEAS.length;
+    var d = IDEAS[cur];
+    panel.style.setProperty("--c", d.c); panel.style.setProperty("--cb", d.cb);
+    $("#bp-num").textContent = String(cur + 1);
+    $("#bp-title").textContent = d.t;
+    $("#bp-tag").textContent = d.tag;
+    $("#bp-one").textContent = d.one;
+    $("#bp-why").textContent = d.why;
+    $("#bp-code").textContent = d.code;
+    $("#bp-trap-text").textContent = d.trap;
+    var go = $("#bp-go"); go.innerHTML = "";
+    d.links.forEach(function (href, k) {
+      var a = document.createElement("a"); a.className = "gobtn"; a.href = href;
+      a.innerHTML = ICONS[k] + "<span>" + LABELS[k][0] + "</span><small>" + LABELS[k][1] + "</small>";
+      go.appendChild(a);
+    });
+    var ex = $("#bp-extra");
+    if (d.extra) { ex.hidden = false; ex.href = d.extra[0]; ex.textContent = "Also see: " + d.extra[1]; } else { ex.hidden = true; }
+    $("#bp-count").textContent = "Idea " + (cur + 1) + " of " + IDEAS.length;
+    fig.classList.add("has-sel");
+    $$(".hs", fig).forEach(function (g) { g.classList.toggle("on", +g.dataset.i === cur + 1); g.classList.remove("pulse"); });
+    $$(".ideabtn").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.i === cur + 1)); });
+    if (focusPanel) panel.focus({ preventScroll: false });
+  }
+  $$(".hs", fig).forEach(function (g) {
+    g.addEventListener("click", function () { show(+g.dataset.i - 1, window.innerWidth < 980); });
+    g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(+g.dataset.i - 1, window.innerWidth < 980); } });
+  });
+  $$(".ideabtn").forEach(function (b) { b.addEventListener("click", function () { show(+b.dataset.i - 1); }); });
+
+  // On narrow screens the code column is too small to read, so show only the phone.
+  // The numbered buttons and the panel carry the code instead.
+  var svgEl = $("#bp-svg");
+  var narrow = window.matchMedia ? window.matchMedia("(max-width: 640px)") : null;
+  function fitFig() {
+    var n = !!(narrow && narrow.matches);
+    svgEl.setAttribute("viewBox", n ? "8 0 330 540" : "0 0 800 540");
+    $$(".codechip", fig).forEach(function (g) { g.setAttribute("tabindex", n ? "-1" : "0"); if (n) g.setAttribute("aria-hidden", "true"); else g.removeAttribute("aria-hidden"); });
+    fig.classList.toggle("narrow", n);
+  }
+  fitFig();
+  if (narrow) { if (narrow.addEventListener) narrow.addEventListener("change", fitFig); else if (narrow.addListener) narrow.addListener(fitFig); }
+  $("#bp-prev").addEventListener("click", function () { show(cur - 1); });
+  $("#bp-next").addEventListener("click", function () { show(cur + 1); });
+  show(0);
+  fig.classList.remove("has-sel");
+  $$(".hs", fig).forEach(function (g) { g.classList.remove("on"); });
+  $$(".pin", fig).forEach(function (g) { g.classList.add("pulse"); });
+  $$(".ideabtn").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.i === "1" ? "true" : "false"); });
+
+  // ---------- 2. Mood picker ----------
+  $$(".moodbtn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      $$(".moodbtn").forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
+      $$(".recipe").forEach(function (r) { r.classList.toggle("show", r.id === b.dataset.r); });
+    });
+  });
+
+  // ---------- 3. Topic explorer ----------
+  var conf = {};
+  function retally() {
+    var n = { shaky: 0, getting: 0, solid: 0 }, shaky = [];
+    Object.keys(conf).forEach(function (k) { n[conf[k]]++; if (conf[k] === "shaky") shaky.push(k); });
+    $("#tl-s").textContent = n.shaky + " shaky"; $("#tl-g").textContent = n.getting + " getting there"; $("#tl-k").textContent = n.solid + " solid";
+    var f = $("#focus"), list = $("#focus-list"); list.innerHTML = "";
+    shaky.forEach(function (k) {
+      var card = $('.tcard[data-id="' + k + '"]');
+      var a = document.createElement("a"); a.className = "chip"; a.href = "concepts.html#" + k;
+      a.textContent = card ? card.dataset.name : k; list.appendChild(a);
+    });
+    f.classList.toggle("show", shaky.length > 0);
+  }
+  $$(".tcard").forEach(function (card) {
+    var id = card.dataset.id, nx = $(".next", card);
+    $$(".cbtn", card).forEach(function (b) {
+      b.addEventListener("click", function () {
+        var on = b.getAttribute("aria-pressed") !== "true";
+        $$(".cbtn", card).forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
+        if (on) { b.setAttribute("aria-pressed", "true"); conf[id] = b.dataset.v; } else { delete conf[id]; }
+        var v = conf[id];
+        if (!v) { nx.classList.remove("show"); }
+        else {
+          var map = {
+            shaky: ["Good to know. A next step: ", "concepts.html#" + id, "read the explanation"],
+            getting: ["Nice. A next step: ", "practice.html#" + id, "try an exercise"],
+            solid: ["Great. A next step: ", "mock-interview.html#" + id, "try some mock questions"]
+          }[v];
+          nx.innerHTML = map[0] + '<a href="' + map[1] + '">' + map[2] + " &rarr;</a>";
+          nx.classList.add("show");
+        }
+        retally();
+      });
+    });
+  });
+  $$(".tab[data-g]").forEach(function (t) {
+    t.addEventListener("click", function () {
+      $$(".tab[data-g]").forEach(function (o) { o.setAttribute("aria-pressed", String(o === t)); });
+      var g = t.dataset.g;
+      $$(".tcard").forEach(function (c) { c.classList.toggle("hide", g !== "all" && c.dataset.g !== g); });
+    });
+  });
+
+  // ---------- 4. Golden patterns tabs + recall mode ----------
+  var golds = $$(".gold"), gi = 0;
+  function gshow(i) {
+    gi = (i + golds.length) % golds.length;
+    golds.forEach(function (g, k) { g.classList.toggle("on", k === gi); });
+    $$(".gtab").forEach(function (t, k) { t.setAttribute("aria-pressed", String(k === gi)); });
+    $$(".gold pre").forEach(function (p) { p.classList.remove("peek"); });
+    syncPeekKeys();
+  }
+  $$(".gtab").forEach(function (t, k) { t.addEventListener("click", function () { gshow(k); }); });
+  $("#g-prev").addEventListener("click", function () { gshow(gi - 1); });
+  $("#g-next").addEventListener("click", function () { gshow(gi + 1); });
+  var stage = $("#goldstage");
+  // While the code is hidden, each blurred block is also a keyboard button ("Enter" reveals it).
+  function syncPeekKeys() {
+    var hidden = stage.classList.contains("hidecode");
+    $$("#goldstage .gold pre").forEach(function (p) {
+      if (hidden && !p.classList.contains("peek")) { p.setAttribute("tabindex", "0"); p.setAttribute("role", "button"); p.setAttribute("aria-label", "Hidden code. Press Enter to reveal it."); }
+      else { p.removeAttribute("tabindex"); p.removeAttribute("role"); p.removeAttribute("aria-label"); }
+    });
+  }
+  function peek(p) { p.classList.add("peek"); syncPeekKeys(); }
+  $("#recall").addEventListener("change", function (e) { stage.classList.toggle("hidecode", e.target.checked); $$(".gold pre").forEach(function (p) { p.classList.remove("peek"); }); syncPeekKeys(); });
+  $$("#goldstage .gold pre").forEach(function (p) {
+    p.addEventListener("click", function (e) {
+      if (!stage.classList.contains("hidecode") || p.classList.contains("peek")) return;
+      if (e.target.classList && e.target.classList.contains("copy")) return;
+      peek(p);
+    });
+    p.addEventListener("keydown", function (e) {
+      if (!stage.classList.contains("hidecode") || p.classList.contains("peek") || e.target !== p) return;
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); peek(p); }
+    });
+  });
+  gshow(0);
+
+  // ---------- 5. Time-boxed menus ----------
+  $$(".tab[data-t]").forEach(function (t) {
+    t.addEventListener("click", function () {
+      $$(".tab[data-t]").forEach(function (o) { o.setAttribute("aria-pressed", String(o === t)); });
+      $$(".tpanel").forEach(function (p) { p.classList.toggle("on", p.id === t.dataset.t); });
+    });
+  });
+
+  // ---------- 6. "Find anything" button in hero ----------
+  $$("[data-open-finder]").forEach(function (b) { b.addEventListener("click", function () { if (window.kitFinder) window.kitFinder.open(); }); });
+})();
+
+</script>
+</body></html>

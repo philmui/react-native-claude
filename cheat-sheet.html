@@ -1,0 +1,1257 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cheat Sheet · CS 147L Interview 2 Prep Kit</title><style>/* ===== CS 147L Interview 2 Prep Kit — shared styles (inline verbatim) ===== */
+:root{
+  --ink:#1b1f3b; --ink-2:#3c4270; --muted:#5f6690; --bg:#f6f7fc; --card:#ffffff; --line:#e3e6f3;
+  --coral:#ff6b6b; --teal:#00b894; --violet:#6c5ce7; --sky:#0984e3; --indigo:#3d5afe;
+  --amber:#f39c12; --pink:#e84393; --lime:#7cb342; --orange:#ff7f50;
+  --coral-bg:#fff0f0; --teal-bg:#e6faf4; --violet-bg:#f0eeff; --sky-bg:#e8f3fd; --indigo-bg:#eceffe;
+  --amber-bg:#fff6e6; --pink-bg:#fdeef6; --lime-bg:#f1f8e9; --orange-bg:#fff2ec;
+  --code-bg:#1e1f33; --code-ink:#e6e8ff;
+  --radius:16px; --shadow:0 6px 24px rgba(27,31,59,.08); --shadow-lg:0 14px 40px rgba(27,31,59,.14);
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,"DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;font-family:var(--font);font-size:18px;line-height:1.65;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--sky);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--violet)}
+h1,h2,h3,h4{line-height:1.25;color:var(--ink);margin:1.4em 0 .5em}
+h1{font-size:2.4rem;letter-spacing:-.02em}
+h2{font-size:1.75rem;letter-spacing:-.01em}
+h3{font-size:1.3rem}
+h4{font-size:1.08rem}
+p{margin:.6em 0 1em}
+code{font-family:var(--mono);font-size:.88em;background:#eef0fa;color:#3a2fb5;padding:.12em .38em;border-radius:6px}
+kbd{font-family:var(--mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:.05em .4em;background:#fff}
+img,svg{max-width:100%}
+svg.fig{width:100%;height:auto;display:block}
+
+/* ---------- top nav ---------- */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.topnav .wrap{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);text-decoration:none;font-size:1.02rem;white-space:nowrap}
+.brand .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--violet),var(--pink));display:grid;place-items:center;color:#fff;font-size:.8rem;font-weight:900}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.navlinks a{color:var(--ink-2);text-decoration:none;font-weight:600;font-size:.95rem;padding:8px 12px;border-radius:10px;min-height:40px;display:inline-flex;align-items:center}
+.navlinks a:hover{background:var(--violet-bg);color:var(--violet)}
+.navlinks a.active{background:var(--violet);color:#fff}
+
+/* ---------- page layout ---------- */
+.page{max-width:1280px;margin:0 auto;padding:24px 20px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:36px}
+.page.full{grid-template-columns:minmax(0,1fr)}
+.content{max-width:900px;min-width:0}
+.sidebar{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 92px);overflow:auto;padding:14px 6px 14px 0}
+.sidebar h4{margin:0 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:10px;text-decoration:none;color:var(--ink-2);font-size:.95rem;font-weight:550}
+.sidebar a:hover{background:#fff;box-shadow:var(--shadow)}
+.sidebar a.done::after{content:"✓";margin-left:auto;color:var(--teal);font-weight:900}
+.dot{width:11px;height:11px;border-radius:50%;flex:0 0 11px;display:inline-block}
+.sidebar-toggle{display:none}
+@media (max-width:980px){
+  .page{grid-template-columns:minmax(0,1fr);gap:8px}
+  .sidebar{position:relative;top:0;max-height:none;display:none;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}
+  .sidebar.open{display:block}
+  .sidebar-toggle{display:inline-flex}
+  h1{font-size:1.9rem}
+}
+
+/* ---------- hero ---------- */
+.hero{border-radius:24px;padding:34px 34px 30px;color:#fff;background:radial-gradient(1200px 400px at 10% -10%,#8e7dff 0,transparent 60%),linear-gradient(120deg,#5b4bdb,#e84393 70%,#ff7f50);box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hero h1{color:#fff;margin:.1em 0 .25em}
+.hero p{font-size:1.12rem;max-width:720px;opacity:.96}
+.hero .eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;opacity:.9}
+
+/* ---------- cards & boxes ---------- */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin:18px 0;border:1px solid var(--line)}
+.grid{display:grid;gap:18px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid.c4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.tile{background:#fff;border-radius:var(--radius);padding:18px 18px 16px;border:1px solid var(--line);box-shadow:var(--shadow);border-top:6px solid var(--violet);display:flex;flex-direction:column;gap:6px}
+.tile h3{margin:.1em 0 .2em;font-size:1.12rem}
+.tile p{margin:0 0 .5em;color:var(--ink-2);font-size:.95rem}
+.tile .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:999px;background:var(--violet-bg);color:var(--violet);text-decoration:none;min-height:32px}
+.chip:hover{filter:brightness(.95)}
+.oneliner{border-left:6px solid var(--violet);background:var(--violet-bg);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:1.06rem}
+.oneliner b:first-child{display:block;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);margin-bottom:2px}
+.trap{border-left:6px solid var(--coral);background:var(--coral-bg);border-radius:12px;padding:14px 18px;margin:14px 0}
+.trap > b:first-child{color:#c0392b}
+.tip{border-left:6px solid var(--teal);background:var(--teal-bg);border-radius:12px;padding:14px 18px;margin:14px 0}
+.tip > b:first-child{color:#00876c}
+.why{border-left:6px solid var(--sky);background:var(--sky-bg);border-radius:12px;padding:14px 18px;margin:14px 0}
+.badge{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--violet-bg);color:var(--violet);vertical-align:middle}
+section.topic{scroll-margin-top:84px;padding-top:6px;border-top:1px dashed var(--line);margin-top:42px}
+section.topic:first-of-type{border-top:none;margin-top:10px}
+.topic-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topic-head h2{margin:.6em 0 .3em}
+.cross{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+
+/* topic colors helpers */
+.t-arrows{--c:var(--coral);--cb:var(--coral-bg)} .t-map{--c:var(--teal);--cb:var(--teal-bg)} .t-state{--c:var(--violet);--cb:var(--violet-bg)}
+.t-callbacks{--c:var(--sky);--cb:var(--sky-bg)} .t-components{--c:var(--sky);--cb:var(--sky-bg)} .t-typescript{--c:var(--indigo);--cb:var(--indigo-bg)}
+.t-spread{--c:var(--amber);--cb:var(--amber-bg)} .t-inputs{--c:var(--pink);--cb:var(--pink-bg)} .t-layout{--c:var(--lime);--cb:var(--lime-bg)}
+.t-effects{--c:var(--orange);--cb:var(--orange-bg)} .t-conditional{--c:var(--violet);--cb:var(--violet-bg)} .t-mental-model{--c:var(--violet);--cb:var(--violet-bg)} .t-interview-craft{--c:var(--teal);--cb:var(--teal-bg)}
+[class*="t-"] .tile, .tile[class*="t-"]{border-top-color:var(--c)}
+[class*="t-"] .chip, .chip[class*="t-"]{background:var(--cb);color:var(--c)}
+[class*="t-"] .oneliner{border-left-color:var(--c);background:var(--cb)}
+[class*="t-"] .oneliner b:first-child{color:var(--c)}
+[class*="t-"] .badge{background:var(--cb);color:var(--c)}
+
+/* ---------- code ---------- */
+pre{position:relative;background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:18px 18px 16px;overflow:auto;font-family:var(--mono);font-size:15.5px;line-height:1.6;margin:14px 0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .copy{position:absolute;top:8px;right:8px;font:600 12px var(--font);background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:6px 10px;cursor:pointer;min-height:30px}
+pre .copy:hover{background:rgba(255,255,255,.22)}
+pre .label{position:absolute;top:8px;left:14px;font:700 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:#9aa0d6}
+pre.has-label{padding-top:34px}
+pre.good{box-shadow:inset 4px 0 0 var(--teal)} pre.bad{box-shadow:inset 4px 0 0 var(--coral)}
+/* simple syntax colors — wrap tokens with spans if desired */
+.k{color:#c792ea}.s{color:#c3e88d}.n{color:#f78c6c}.c{color:#7f86b8;font-style:italic}.f{color:#82aaff}.t{color:#ffcb6b}.j{color:#ff7eb6}
+
+/* ---------- buttons, reveal, quiz ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 .95rem var(--font);border:0;border-radius:12px;padding:10px 16px;min-height:42px;cursor:pointer;background:var(--violet);color:#fff;text-decoration:none;box-shadow:0 4px 14px rgba(108,92,231,.28)}
+.btn:hover{filter:brightness(1.06);color:#fff}
+.btn.ghost{background:#fff;color:var(--violet);border:2px solid var(--violet-bg);box-shadow:none}
+.btn.teal{background:var(--teal);box-shadow:0 4px 14px rgba(0,184,148,.28)}
+.btn.coral{background:var(--coral);box-shadow:0 4px 14px rgba(255,107,107,.28)}
+.btn.small{min-height:34px;padding:6px 12px;font-size:.85rem}
+.btn:focus-visible,.navlinks a:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+details.reveal{background:#fff;border:1px solid var(--line);border-radius:12px;margin:10px 0;box-shadow:var(--shadow)}
+details.reveal > summary{cursor:pointer;list-style:none;padding:12px 16px;font-weight:700;display:flex;align-items:center;gap:10px;min-height:44px}
+details.reveal > summary::-webkit-details-marker{display:none}
+details.reveal > summary::before{content:"▸";transition:transform .15s;color:var(--violet)}
+details.reveal[open] > summary::before{transform:rotate(90deg)}
+details.reveal > .body{padding:0 18px 14px}
+details.hint > summary{color:#b7791f} details.hint > summary::before{color:var(--amber)}
+details.solution > summary{color:#00876c} details.solution > summary::before{color:var(--teal)}
+.quiz{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.quiz .q{font-weight:700;margin-bottom:10px}
+.quiz .opts{display:grid;gap:8px}
+.quiz button.opt{text-align:left;font:500 1rem var(--font);background:#f7f8fe;border:2px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;min-height:44px;color:var(--ink)}
+.quiz button.opt:hover{border-color:var(--violet)}
+.quiz button.opt.right{border-color:var(--teal);background:var(--teal-bg)}
+.quiz button.opt.wrong{border-color:var(--coral);background:var(--coral-bg)}
+.quiz .fb{margin-top:10px;display:none;padding:10px 14px;border-radius:10px;background:var(--sky-bg)}
+.quiz .fb.show{display:block}
+.markdone{margin-top:14px}
+.markdone.is-done{background:var(--teal)}
+
+/* ---------- timer ---------- */
+.timer{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 16px;font:800 1.5rem var(--mono)}
+.timer.warn{background:#c0392b}
+
+/* ---------- tables ---------- */
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.95rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f0f2fb;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+.table-wrap{overflow-x:auto}
+
+/* ---------- footer ---------- */
+.footer{max-width:1280px;margin:0 auto;padding:24px 20px 50px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* ---------- print ---------- */
+@media print{
+  .topnav,.sidebar,.btn,.copy,.no-print{display:none!important}
+  body{background:#fff;font-size:11pt}
+  .page{display:block;padding:0}
+  .card,.tile,table,pre{box-shadow:none}
+  pre{background:#f4f5fb;color:#1b1f3b;border:1px solid #dfe2f0;white-space:pre-wrap}
+  .k,.s,.n,.c,.f,.t,.j{color:inherit}
+  details.reveal{border:none} details.reveal > .body{display:block}
+  a{color:inherit;text-decoration:none}
+  section.topic{break-inside:avoid-page}
+}
+
+/* ===== cheat-sheet page ===== */
+body{font-size:17px}
+.page.full{max-width:1480px;display:block}
+.content.cs{max-width:none}
+.cs-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 20px;margin:6px 0 10px}
+.cs-top h1{margin:.1em 0 .1em;font-size:2.1rem}
+.cs-top .eyebrow{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.74rem;color:var(--violet)}
+.cs-top p{margin:.2em 0 0;color:var(--ink-2);max-width:760px}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 18px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.jump .lbl{font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);align-self:center;margin-right:4px}
+.t-golden{--c:#6c5ce7;--cb:#f0eeff} .t-gotchas{--c:#d63031;--cb:#fff0f0} .t-errors{--c:#c0392b;--cb:#fdecea}
+.t-app-skeleton{--c:#00876c;--cb:#e6faf4} .t-handwritten{--c:#b7791f;--cb:#fff6e6}
+.t-effects .chip,.chip.t-effects{color:#b8561b} .t-amber-text{color:#b7791f}
+.chip.t-spread{color:#a8650a} .chip.t-layout{color:#4e7a22} .chip.t-handwritten{color:#8a5a12}
+.cols{column-count:3;column-gap:18px}
+.cols.two{column-count:2}
+@media (max-width:1180px){.cols{column-count:2}}
+@media (max-width:760px){.cols,.cols.two{column-count:1}}
+.cs-card{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;display:inline-block;width:100%;background:#fff;border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:14px 16px 12px;margin:0 0 18px;box-shadow:var(--shadow);scroll-margin-top:84px;vertical-align:top}
+.cs-card.wide{display:block;margin:0 0 20px}
+.cs-card:target{outline:3px solid var(--c);outline-offset:3px}
+.cs-h{display:flex;align-items:center;gap:10px;margin:0 0 6px}
+.cs-h h2{margin:0;font-size:1.16rem;letter-spacing:0}
+.cs-h .ic{width:32px;height:32px;flex:0 0 32px;border-radius:10px;background:var(--cb);color:var(--c);display:grid;place-items:center}
+.cs-h .ic svg{width:20px;height:20px}
+.cs-h .badge{margin-left:auto}
+.cs-card .one{background:var(--cb);border-left:4px solid var(--c);border-radius:8px;padding:6px 10px;margin:4px 0 8px;font-size:.93rem}
+.cs-card ul{margin:4px 0 6px;padding-left:1.15em}
+.cs-card li{margin:.18em 0;font-size:.93rem;line-height:1.5}
+.cs-card p{margin:.3em 0 .5em;font-size:.93rem;line-height:1.5}
+.cs-card h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--c);margin:10px 0 2px}
+.t-effects h3{color:#b8561b} .t-spread h3{color:#a8650a} .t-layout h3{color:#4e7a22} .t-handwritten h3{color:#8a5a12}
+.cs-card pre{font-size:14px;line-height:1.45;padding:10px 12px;margin:6px 0 8px;border-radius:10px}
+.cs-card pre .copy{padding:3px 8px;min-height:24px;font-size:11px;top:5px;right:5px}
+.cs-card code{font-size:.86em}
+.mini{font-size:.86rem;margin:6px 0 8px;box-shadow:none;border:1px solid var(--line)}
+.mini th,.mini td{padding:5px 8px;line-height:1.4}
+.mini th{font-size:.7rem}
+.mini code{white-space:nowrap}
+.mini td code.wrap,.mini code.wrap{white-space:normal}
+.big th,.big td{padding:7px 10px}
+.big td:first-child{width:30%}
+.big code{white-space:normal}
+.err{color:#9b2c2c;background:#fdecea}
+.ok{color:#00684f;background:#e6faf4}
+.bad{color:#9b2c2c;background:#fff0f0}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:6px 0 8px;font-size:.85rem;font-weight:700}
+.flow span{background:var(--cb);color:var(--ink);border-radius:8px;padding:3px 8px}
+.flow i{font-style:normal;color:var(--c)}
+.golden-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 16px}
+.golden-grid > div h3{margin:4px 0 0}
+.cardlinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;font-size:.8rem}
+.cardlinks a{font-weight:700;text-decoration:none;padding:2px 8px;border-radius:999px;background:var(--cb);color:var(--ink-2)}
+.cardlinks a:hover{color:var(--violet)}
+svg.fig{margin:6px 0 8px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--ink-2);margin-top:6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+@media print{
+  @page{size:letter;margin:.45in}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff}
+  body{font-size:8.4pt;line-height:1.32}
+  .page.full{max-width:none;padding:0}
+  .jump,.cardlinks,.footer,.no-print,.legend{display:none!important}
+  .cs-top{margin:0 0 4px}
+  .cs-top h1{font-size:14pt;margin:0}
+  .cs-top p{font-size:8pt}
+  .cols,.cols.two{column-count:2;column-gap:10px}
+  .cs-card{display:block;box-shadow:none;padding:5px 8px 4px;margin:0 0 7px;border-top-width:4px;border-radius:8px}
+  /* the skeleton is taller than one printed column, so let it continue into the next column */
+  #app-skeleton{break-inside:auto;page-break-inside:auto;-webkit-column-break-inside:auto}
+  .cs-card pre,.cs-card table{break-inside:avoid}
+  #app-skeleton pre{break-inside:auto}
+  .cs-card.wide{margin:0 0 7px}
+  .cs-h{gap:6px;margin:0 0 2px}
+  .cs-h h2{font-size:10pt}
+  .cs-h .ic{width:18px;height:18px;flex-basis:18px;border-radius:5px}
+  .cs-h .ic svg{width:12px;height:12px}
+  .cs-h .badge{font-size:6.5pt;padding:1px 6px}
+  .cs-card .one{font-size:8pt;padding:2px 7px;margin:2px 0 4px}
+  .cs-card li,.cs-card p{font-size:8pt;line-height:1.3;margin:.08em 0}
+  .cs-card ul{margin:2px 0 3px}
+  .cs-card h3{font-size:6.8pt;margin:4px 0 1px}
+  .cs-card pre{font-size:7.3pt;line-height:1.28;padding:4px 6px;margin:3px 0 4px;border-radius:5px;background:#f5f6fc!important;color:#1b1f3b!important}
+  .cs-card pre .c{color:#6a6f9a!important;font-style:italic}
+  .mini{font-size:7.4pt;margin:3px 0 4px}
+  .mini th,.mini td{padding:2px 5px;line-height:1.25}
+  .mini th{font-size:6.4pt}
+  .golden-grid{grid-template-columns:repeat(2,1fr);gap:2px 10px}
+  .table-wrap{overflow:visible}
+  .mini code{white-space:normal}
+  svg.fig{margin:2px 0 3px}
+  svg.fig.sm-print{max-width:72%;margin-left:auto;margin-right:auto}
+  code{font-size:.9em;padding:0 .2em}
+}
+</style></head>
+<body>
+<nav class="topnav" aria-label="Main"><div class="wrap">
+  <a class="brand" href="index.html"><span class="logo">RN</span>CS 147L · Interview 2 Prep Kit</a>
+  <div class="navlinks">
+    <a href="index.html">Home</a><a href="concepts.html">Concepts</a><a href="practice.html">Practice</a>
+    <a href="mock-interview.html">Mock Interview</a><a href="cheat-sheet.html" class="active" aria-current="page">Cheat Sheet</a><a href="index.html#downloads">Downloads</a>
+  </div></div></nav>
+<div class="page full">
+<main class="content cs">
+
+<header class="cs-top">
+  <div>
+    <div class="eyebrow">CS 147L · Coding Interview 2 Prep Kit</div>
+    <h1>Cheat Sheet</h1>
+    <p>Every pattern for the 25-minute interview on a few printable pages. Each card is color-coded by topic and links to the matching Concepts, Practice, and Mock sections.</p>
+    <div class="legend" aria-hidden="true">
+      <span><i class="dot" style="background:var(--coral)"></i>functions</span><span><i class="dot" style="background:var(--teal)"></i>map &amp; lists</span><span><i class="dot" style="background:var(--violet)"></i>state</span><span><i class="dot" style="background:var(--sky)"></i>props &amp; callbacks</span><span><i class="dot" style="background:var(--amber)"></i>spread</span><span><i class="dot" style="background:var(--pink)"></i>inputs</span><span><i class="dot" style="background:var(--indigo)"></i>TypeScript</span><span><i class="dot" style="background:var(--lime)"></i>layout</span><span><i class="dot" style="background:var(--orange)"></i>effects</span>
+    </div>
+  </div>
+  <button class="btn" type="button" id="printBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg>Print / Save as PDF</button>
+</header>
+
+<nav class="jump" aria-label="Jump to a card">
+  <span class="lbl">Jump to</span>
+  <a class="chip t-golden" href="#golden">5 Golden Patterns</a>
+  <a class="chip t-mental-model" href="#mental-model">Mental model</a>
+  <a class="chip t-arrows" href="#arrows">Arrows</a>
+  <a class="chip t-map" href="#map">map</a>
+  <a class="chip t-spread" href="#spread">Spread</a>
+  <a class="chip t-state" href="#state">State</a>
+  <a class="chip t-components" href="#components">Components</a>
+  <a class="chip t-callbacks" href="#callbacks">Callbacks</a>
+  <a class="chip t-inputs" href="#inputs">Inputs</a>
+  <a class="chip t-conditional" href="#conditional">Conditional</a>
+  <a class="chip t-typescript" href="#typescript">TypeScript</a>
+  <a class="chip t-layout" href="#layout">Layout</a>
+  <a class="chip t-effects" href="#effects">Effects</a>
+  <a class="chip t-gotchas" href="#gotchas">Tricky stuff</a>
+  <a class="chip t-errors" href="#errors">Error decoder</a>
+  <a class="chip t-app-skeleton" href="#app-skeleton">App skeleton</a>
+  <a class="chip t-interview-craft" href="#interview-craft">Interview craft</a>
+  <a class="chip t-handwritten" href="#handwritten">Handwritten page</a>
+</nav>
+
+<!-- ================= GOLDEN ================= -->
+<article class="cs-card wide t-golden" id="golden">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg></span><h2>The 5 Golden Patterns</h2><span class="badge">memorize these</span></div>
+  <div class="one">If you can type these five from memory, you can build almost any Interview 2 app: <b>state from data, map to components, add immutably, callback down and up, controlled input.</b></div>
+  <div class="golden-grid">
+    <div><h3>1 · State from data</h3>
+<pre><code><span class="c">// in App: inference gives menu: MenuItem[]</span>
+const [menu, setMenu] = useState(menuItems);
+<span class="c">// an empty array needs a type:</span>
+const [list, setList] = useState&lt;MenuItem[]&gt;([]);
+<span class="c">// name + popular state lives in the form (pattern 4)</span></code></pre></div>
+    <div><h3>2 · Map data to components</h3>
+<pre><code><span class="c">// no { after =&gt;, so the JSX is returned</span>
+const cards = menu.map((item) =&gt; (
+  &lt;ItemCard key={item.name} item={item} /&gt;
+));
+<span class="c">// then inside JSX:</span>
+&lt;ScrollView&gt;{cards}&lt;/ScrollView&gt;</code></pre></div>
+    <div><h3>2b · The card: typed, destructured props</h3>
+<pre><code>const ItemCard = ({ item }: ItemCardProps) =&gt; (
+  &lt;View style={styles.card}&gt;
+    &lt;Text&gt;{item.name}&lt;/Text&gt;
+    {item.popular &amp;&amp; &lt;Text&gt;Popular&lt;/Text&gt;}
+  &lt;/View&gt;
+);
+<span class="c">// item.popular is a boolean, so &amp;&amp; is safe</span></code></pre></div>
+    <div><h3>3 · Add to an array immutably</h3>
+<pre><code>const addMenuItem = (item: MenuItem) =&gt; {
+  setMenu([...menu, item]); <span class="c">// new array!</span>
+  <span class="c">// also valid: setMenu((prev) =&gt; [...prev, item]);</span>
+};</code></pre></div>
+    <div><h3>4a · Parent (App): owns the list</h3>
+<pre><code>const addMenuItem = (item: MenuItem) =&gt; {
+  setMenu([...menu, item]);
+};
+<span class="c">// pass the function down, no ()</span>
+&lt;AddItemForm onAdd={addMenuItem} /&gt;</code></pre></div>
+    <div><h3>4b · Child: owns the text field and switch</h3>
+<pre><code>const AddItemForm = ({ onAdd }: AddItemFormProps) =&gt; {
+  const [name, setName] = useState("");
+  const [popular, setPopular] = useState(false);
+  const handleAdd = () =&gt; {
+    if (name.trim() === "") return;
+    onAdd({ name, popular }); <span class="c">// call it UP</span>
+    setName("");
+    setPopular(false);
+  };
+  return (
+    &lt;View&gt;
+      &lt;TextInput value={name} onChangeText={setName} placeholder="Item name" /&gt;
+      &lt;Switch value={popular} onValueChange={setPopular} /&gt;
+      &lt;Pressable onPress={handleAdd}&gt;&lt;Text&gt;Add&lt;/Text&gt;&lt;/Pressable&gt;
+    &lt;/View&gt;
+  );
+};</code></pre></div>
+    <div><h3>5 · Controlled inputs</h3>
+<pre><code><span class="c">// value comes from state; the handler calls the setter</span>
+&lt;TextInput value={name} onChangeText={setName} /&gt;
+<span class="c">// same thing: onChangeText={(text) =&gt; setName(text)}</span>
+&lt;Switch value={popular} onValueChange={setPopular} /&gt;</code></pre></div>
+  </div>
+</article>
+
+<!-- ================= TOPIC CARDS ================= -->
+<div class="cols">
+
+<article class="cs-card t-mental-model" id="mental-model">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></span><h2>Mental model</h2><span class="badge">big picture</span></div>
+  <div class="one">A component is a function that returns JSX, and the screen is a function of state: <b>UI = f(state)</b>.</div>
+  <div class="flow"><span>render</span><i>→</i><span>user taps / types</span><i>→</i><span>setX(new value)</span><i>→</i><span>React re-renders</span><i>↺</i></div>
+  <ul>
+    <li>Every render runs the whole component function from the top with a fresh <b>snapshot</b> of state.</li>
+    <li>A plain <code>let count = 0</code> resets on each render and changing it never re-renders. Use <code>useState</code> for anything the screen shows that can change.</li>
+    <li>You never edit the screen directly. You change state, and React redraws.</li>
+    <li>Data flows one way: parent to child through props. Children report events up through callback props.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#mental-model">Concept</a><a href="practice.html#mental-model">Practice</a><a href="mock-interview.html#mental-model">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-arrows" id="arrows">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h11M3 15h11"/><path d="M15 6l6 6-6 6"/></svg></span><h2>Arrow functions</h2><span class="badge">functions</span></div>
+  <div class="one">An arrow function is a <b>value</b> you can store, pass as a prop, or hand to <code>map</code>: <code>(params) =&gt; result</code>.</div>
+  <h3>Four equivalent forms</h3>
+<pre><code>function double(x: number) { return x * 2; }
+const double2 = (x: number) =&gt; { return x * 2; };
+const double3 = (x: number) =&gt; x * 2;
+const double4 = (x: number) =&gt; (x * 2);</code></pre>
+  <ul>
+    <li><b>No <code>{</code> right after <code>=&gt;</code></b> means an expression body: the value is returned automatically. Parens around multi-line JSX are only grouping.</li>
+    <li><b>A <code>{</code> right after <code>=&gt;</code></b> starts a block body (a function body): you must write <code>return</code>.</li>
+  </ul>
+  <h3>Returning an object: parens are required</h3>
+<pre><code>const makeItem = (name: string) =&gt; ({
+  name,
+  popular: false,
+});</code></pre>
+  <h3>Pass vs call</h3>
+  <table class="mini"><thead><tr><th>You write</th><th>What happens</th></tr></thead><tbody>
+    <tr><td><code>onPress={save}</code></td><td>Passes the function. React calls it on press.</td></tr>
+    <tr><td><code class="bad">onPress={save()}</code></td><td>Calls it <b>now</b>, during render, and passes the result. If it sets state, you get "Too many re-renders".</td></tr>
+    <tr><td><code>onPress={() =&gt; save(item)}</code></td><td>Passes a new function that calls <code>save(item)</code> later. Use this when you need arguments.</td></tr>
+  </tbody></table>
+  <div class="cardlinks"><a href="concepts.html#arrows">Concept</a><a href="practice.html#arrows">Practice</a><a href="mock-interview.html#arrows">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-map" id="map">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r="1.4" fill="currentColor"/><circle cx="4" cy="12" r="1.4" fill="currentColor"/><circle cx="4" cy="18" r="1.4" fill="currentColor"/></svg></span><h2>map &amp; lists</h2><span class="badge">lists</span></div>
+  <div class="one"><code>map</code> turns an array of data into an array of JSX. Store it in a variable, then render it with <code>{cards}</code>.</div>
+  <h3>One-liner (no { after =&gt;, so it returns)</h3>
+<pre><code>const cards = menu.map((item) =&gt; (
+  &lt;ItemCard key={item.name} item={item} /&gt;
+));</code></pre>
+  <h3>Block body (braces need return)</h3>
+<pre><code>const rows = menu.map((item, index) =&gt; {
+  const label = `${index + 1}. ${item.name}`;
+  return &lt;Text key={item.name}&gt;{label}&lt;/Text&gt;;
+});</code></pre>
+  <ul>
+    <li><b>Render it:</b> <code>&lt;ScrollView&gt;{cards}&lt;/ScrollView&gt;</code>, or inline <code>{menu.map(...)}</code> inside JSX.</li>
+    <li><b><code>key</code></b> goes on the outermost element that <code>map</code> returns. Use a unique id if the data has one (<code>key={item.id}</code>). <code>key={item.name}</code> is fine only if names are unique. Avoid the index as your default.</li>
+    <li>The second parameter is the index: <code>(item, index) =&gt; ...</code>.</li>
+  </ul>
+  <h3>Cousins</h3>
+<pre><code>const hot = menu.filter((m) =&gt; m.popular);   <span class="c">// new array</span>
+const tea = menu.find((m) =&gt; m.name === "Tea"); <span class="c">// item | undefined</span>
+const has = menu.some((m) =&gt; m.popular);    <span class="c">// boolean</span></code></pre>
+  <div class="cardlinks"><a href="concepts.html#map">Concept</a><a href="practice.html#map">Practice</a><a href="mock-interview.html#map">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-spread" id="spread">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2.4"/><circle cx="12" cy="12" r="2.4"/><circle cx="19" cy="12" r="2.4"/></svg></span><h2>Spread &amp; immutable updates</h2><span class="badge">spread</span></div>
+  <div class="one">Never change state in place. <b>Build a new array or object</b> and pass it to the setter.</div>
+  <table class="mini"><thead><tr><th>Goal</th><th>Recipe</th></tr></thead><tbody>
+    <tr><td>Add to end</td><td><code>setMenu([...menu, item])</code></td></tr>
+    <tr><td>Add to start</td><td><code>setMenu([item, ...menu])</code></td></tr>
+    <tr><td>Remove</td><td><code class="wrap">setMenu(menu.filter((m) =&gt; m.name !== target))</code></td></tr>
+    <tr><td>Update / toggle one</td><td><code>map</code> + <code>{ ...m, popular: !m.popular }</code> (below)</td></tr>
+    <tr><td>Change an object field</td><td><code>setUser({ ...user, name: "Ada" })</code></td></tr>
+    <tr><td>Count (no extra state)</td><td><code class="wrap">const popularCount = menu.filter((m) =&gt; m.popular).length;</code></td></tr>
+  </tbody></table>
+<pre><code>const toggle = (target: string) =&gt; {
+  setMenu(
+    menu.map((m) =&gt;
+      m.name === target
+        ? { ...m, popular: !m.popular }
+        : m
+    )
+  );
+};</code></pre>
+  <ul>
+    <li><b>Never on state:</b> <code>push</code>, <code>splice</code>, <code>pop</code>, <code>sort</code>, or <code>item.popular = true</code>. They change the existing array, React sees the same array, and nothing re-renders. Also, <code>push</code> returns the new length, not the array.</li>
+    <li><code>[...]</code> makes an array, <code>{...}</code> makes an object. Match the shape of your state.</li>
+    <li>Destructuring: <code>const { name, popular } = item;</code></li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#spread">Concept</a><a href="practice.html#spread">Practice</a><a href="mock-interview.html#spread">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-state" id="state">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 12h4M14 9v6" stroke-linecap="round"/></svg></span><h2>useState</h2><span class="badge">state</span></div>
+  <div class="one">State is memory that survives renders. <b>Calling its setter is the only way to change it</b>, and that triggers a re-render.</div>
+<pre><code>const [menu, setMenu] = useState(menuItems);
+<span class="c">//     value  setter           initial value</span></code></pre>
+  <h3>Direct vs updater (both valid)</h3>
+<pre><code>setCount(count + 1);          <span class="c">// direct: simplest default</span>
+setCount((prev) =&gt; prev + 1); <span class="c">// updater: uses latest value</span></code></pre>
+  <ul>
+    <li><b>Direct form</b> is the easy default for event handlers.</li>
+    <li><b>Updater form</b> is safer when the new value depends on the old one inside timers, or when you update several times in a row.</li>
+    <li><b>Snapshot rule:</b> after <code>setCount(5)</code>, the variable <code>count</code> keeps its old value until the next render.</li>
+  </ul>
+  <h3>Inference does the typing</h3>
+  <table class="mini"><tbody>
+    <tr><td><code>useState("")</code></td><td><code>string</code></td></tr>
+    <tr><td><code>useState(false)</code></td><td><code>boolean</code></td></tr>
+    <tr><td><code>useState(menuItems)</code></td><td><code>MenuItem[]</code></td></tr>
+    <tr><td><code>useState&lt;MenuItem[]&gt;([])</code></td><td>empty array <b>needs</b> the type</td></tr>
+  </tbody></table>
+  <ul>
+    <li>Call the setter you declared (<code>setMenu</code>), not a generic <code>setState</code>.</li>
+    <li>Hooks go at the top level of a component: not inside <code>if</code>, loops, or handlers.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#state">Concept</a><a href="practice.html#state">Practice</a><a href="mock-interview.html#state">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-components" id="components">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/></svg></span><h2>Components &amp; props</h2><span class="badge">props</span></div>
+  <div class="one">A custom component is a <b>Capitalized function</b> that receives one <code>props</code> object and returns JSX.</div>
+<pre><code>type ItemCardProps = { item: MenuItem };
+
+const ItemCard = ({ item }: ItemCardProps) =&gt; {
+  return (
+    &lt;View style={styles.card}&gt;
+      &lt;Text&gt;{item.name}&lt;/Text&gt;
+    &lt;/View&gt;
+  );
+};
+
+<span class="c">// use it: props look like attributes</span>
+&lt;ItemCard item={menu[0]} /&gt;</code></pre>
+  <ul>
+    <li><b>Destructure</b> in the parameter: <code>({ item, onAdd }: Props)</code>.</li>
+    <li>The prop names you pass must match the names in the props type.</li>
+    <li>Props are read-only. To change data, call a callback that the parent passed in.</li>
+    <li><code>export default function App()</code> pairs with <code>import App from "./App"</code>. A named export (<code>export const X</code>) pairs with <code>import { X } from "./X"</code>.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#components">Concept</a><a href="practice.html#components">Practice</a><a href="mock-interview.html#components">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-callbacks" id="callbacks">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v16M4 15l4 4 4-4"/><path d="M16 21V5M12 9l4-4 4 4"/></svg></span><h2>Callbacks: data down, events up</h2><span class="badge">data flow</span></div>
+  <div class="one">Define the handler in the <b>parent where state lives</b>, pass it as a prop, and let the child call it inside an arrow function.</div>
+  <svg class="fig sm-print" viewBox="0 0 400 200" role="img" aria-labelledby="cbT"><title id="cbT">Data flows down from App to AddItemForm as the onAdd prop; the child sends an item back up by calling onAdd with name and popular</title>
+    <defs>
+      <marker id="cbDown" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0984e3"/></marker>
+      <marker id="cbUp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e84393"/></marker>
+      <linearGradient id="cbG1" x1="0" x2="1"><stop offset="0" stop-color="#e8f3fd"/><stop offset="1" stop-color="#f0eeff"/></linearGradient>
+      <linearGradient id="cbG2" x1="0" x2="1"><stop offset="0" stop-color="#fdeef6"/><stop offset="1" stop-color="#fff6e6"/></linearGradient>
+    </defs>
+    <rect x="20" y="8" width="360" height="52" rx="12" fill="url(#cbG1)" stroke="#0984e3" stroke-width="2"/>
+    <text x="200" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="#1b1f3b">App (parent)</text>
+    <text x="200" y="49" text-anchor="middle" font-size="13" fill="#3c4270">owns menu state + addMenuItem</text>
+    <rect x="20" y="140" width="360" height="52" rx="12" fill="url(#cbG2)" stroke="#e84393" stroke-width="2"/>
+    <text x="200" y="162" text-anchor="middle" font-size="15" font-weight="800" fill="#1b1f3b">AddItemForm (child)</text>
+    <text x="200" y="181" text-anchor="middle" font-size="13" fill="#3c4270">owns name + popular inputs</text>
+    <line x1="48" y1="62" x2="48" y2="136" stroke="#0984e3" stroke-width="3" marker-end="url(#cbDown)"/>
+    <line x1="356" y1="138" x2="356" y2="64" stroke="#e84393" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#cbUp)"/>
+    <text x="62" y="90" font-size="13" fill="#0a5ea8"><tspan font-weight="800">data down: </tspan><tspan font-family="ui-monospace,Menlo,Consolas,monospace">onAdd={addMenuItem}</tspan></text>
+    <text x="62" y="120" font-size="13" fill="#b0246f"><tspan font-weight="800">events up: </tspan><tspan font-family="ui-monospace,Menlo,Consolas,monospace">onAdd({ name, popular })</tspan></text>
+  </svg>
+<pre><code><span class="c">// parent: handler lives with the state</span>
+const addMenuItem = (item: MenuItem) =&gt; {
+  setMenu([...menu, item]);
+};
+&lt;AddItemForm onAdd={addMenuItem} /&gt;
+
+<span class="c">// child: build the object the type expects</span>
+type AddItemFormProps = {
+  onAdd: (item: MenuItem) =&gt; void;
+};
+const AddItemForm = ({ onAdd }: AddItemFormProps) =&gt; {
+  const [name, setName] = useState("");
+  const [popular, setPopular] = useState(false);
+  return (
+    &lt;Pressable onPress={() =&gt; onAdd({ name, popular })}&gt;
+      &lt;Text&gt;Add&lt;/Text&gt;
+    &lt;/Pressable&gt;
+  );
+};</code></pre>
+  <ul>
+    <li>Pass the function <b>without</b> <code>()</code>: <code>onAdd={addMenuItem}</code>.</li>
+    <li><code>{ name, popular }</code> is shorthand for <code>{ name: name, popular: popular }</code>.</li>
+    <li>Lift state up: put it in the closest parent that every user of it shares.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#callbacks">Concept</a><a href="practice.html#callbacks">Practice</a><a href="mock-interview.html#callbacks">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-inputs" id="inputs">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="16" cy="12" r="3" fill="currentColor"/></svg></span><h2>Inputs</h2><span class="badge">TextInput · Switch · Pressable</span></div>
+  <div class="one">Inputs are <b>controlled</b>: <code>value</code> comes from state, and the change handler calls the setter.</div>
+  <table class="mini"><thead><tr><th>Component</th><th>Key props</th><th>Handler receives</th></tr></thead><tbody>
+    <tr><td><code>TextInput</code></td><td><code>value</code>, <code>onChangeText</code>, <code>placeholder</code></td><td>the new <code>string</code></td></tr>
+    <tr><td><code>Switch</code></td><td><code>value</code>, <code>onValueChange</code></td><td>the new <code>boolean</code></td></tr>
+    <tr><td><code>Pressable</code></td><td><code>onPress</code>, <code>style</code>, children such as <code>&lt;Text&gt;</code></td><td>a press event</td></tr>
+    <tr><td><code>Button</code></td><td><code>title</code> and <code>onPress</code> (the docs mark both as required). No <code>style</code> prop.</td><td>a press event</td></tr>
+  </tbody></table>
+<pre><code>&lt;View style={styles.form}&gt;
+  &lt;TextInput
+    style={styles.input}
+    value={name}
+    onChangeText={setName}
+    placeholder="Item name"
+  /&gt;
+  &lt;Switch value={popular} onValueChange={setPopular} /&gt;
+  &lt;Button title="Add" onPress={handleAdd} /&gt;
+&lt;/View&gt;</code></pre>
+  <h3>Add, then clear the input</h3>
+<pre><code>const handleAdd = () =&gt; {
+  if (name.trim() === "") return; <span class="c">// skip empty names</span>
+  onAdd({ name, popular });
+  setName("");
+  setPopular(false);
+};</code></pre>
+  <h3>Pressable that dims while pressed</h3>
+<pre><code>&lt;Pressable
+  onPress={handleAdd}
+  style={({ pressed }) =&gt; [styles.btn, pressed &amp;&amp; { opacity: 0.6 }]}
+&gt;
+  &lt;Text&gt;Add&lt;/Text&gt;
+&lt;/Pressable&gt;</code></pre>
+  <ul>
+    <li><code>onChangeText={setName}</code> and <code>onChangeText={(text) =&gt; setName(text)}</code> do the same thing.</li>
+    <li>Use <code>onChangeText</code>, not <code>onChange</code>. <code>onChange</code> hands you an event object instead of the string.</li>
+    <li><code>onPress={setPopular}</code> is <b>not</b> like <code>onChangeText={setName}</code>: <code>onPress</code> passes a press event object, not a value. Write <code>onPress={() =&gt; setPopular(true)}</code>.</li>
+    <li>Give TextInput a <code>borderWidth</code> and <code>padding</code> so you can see it.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#inputs">Concept</a><a href="practice.html#inputs">Practice</a><a href="mock-interview.html#inputs">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-conditional" id="conditional">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-8M12 13L6 6M12 13l6-7"/><path d="M3 6h5M16 6h5"/></svg></span><h2>Conditional rendering</h2><span class="badge">if / ? / &amp;&amp;</span></div>
+  <div class="one">Use plain JavaScript to choose what to show: an <b>if/else variable</b>, a <b>ternary</b>, or <b><code>&amp;&amp;</code> with a true boolean</b>.</div>
+<pre><code><span class="c">// 1. if/else into a variable (empty state)</span>
+let content = &lt;Text&gt;No items yet&lt;/Text&gt;;
+if (menu.length &gt; 0) {
+  content = &lt;ScrollView&gt;{cards}&lt;/ScrollView&gt;;
+}
+
+<span class="c">// 2. ternary: this OR that (inside JSX)</span>
+{menu.length === 0 ? &lt;Text&gt;No items yet&lt;/Text&gt; : cards}
+
+<span class="c">// 3. &amp;&amp;: this OR nothing (left side boolean!)</span>
+{menu.length &gt; 0 &amp;&amp; &lt;Text&gt;{menu.length} items&lt;/Text&gt;}</code></pre>
+  <ul>
+    <li><b>Never put a number on the left of <code>&amp;&amp;</code>.</b> If <code>menu.length</code> is <code>0</code>, React renders the <code>0</code>, and React Native complains that text must be inside <code>&lt;Text&gt;</code>. Write <code>&gt; 0</code>.</li>
+    <li><code>false</code>, <code>null</code>, and <code>undefined</code> render nothing.</li>
+    <li>Conditional style: <code>style={[styles.card, item.popular &amp;&amp; styles.popularCard]}</code>. A <code>false</code> entry in a style array is skipped.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#conditional">Concept</a><a href="practice.html#conditional">Practice</a><a href="mock-interview.html#conditional">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-typescript" id="typescript">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="system-ui,sans-serif">TS</text></svg></span><h2>TypeScript</h2><span class="badge">types</span></div>
+  <div class="one">Write it in JavaScript first and let inference work. <b>Add types where TypeScript cannot guess</b>: props, function parameters, and empty arrays.</div>
+<pre><code>type MenuItem = {
+  name: string;
+  popular: boolean;
+  price?: number;               <span class="c">// optional</span>
+};
+interface Song { title: string; liked: boolean }
+type Size = "small" | "medium" | "large"; <span class="c">// union</span>
+type AddFn = (item: MenuItem) =&gt; void;     <span class="c">// function type</span>
+type AddItemFormProps = { onAdd: AddFn };</code></pre>
+  <table class="mini"><thead><tr><th>Thing</th><th>Annotation</th></tr></thead><tbody>
+    <tr><td>Primitives</td><td><code>string</code>, <code>number</code>, <code>boolean</code></td></tr>
+    <tr><td>Array</td><td><code>MenuItem[]</code> (same as <code>Array&lt;MenuItem&gt;</code>)</td></tr>
+    <tr><td>Empty state</td><td><code>useState&lt;MenuItem[]&gt;([])</code></td></tr>
+    <tr><td>Maybe missing</td><td><code>useState&lt;MenuItem | null&gt;(null)</code></td></tr>
+    <tr><td>Function parameter</td><td><code>(item: MenuItem) =&gt; { ... }</code></td></tr>
+    <tr><td>Callback prop</td><td><code>onAdd: (item: MenuItem) =&gt; void</code></td></tr>
+    <tr><td>Props</td><td><code>({ item }: ItemCardProps)</code></td></tr>
+    <tr><td>Text handler</td><td><code>(text: string) =&gt; void</code></td></tr>
+  </tbody></table>
+  <ul>
+    <li><b><code>type</code> vs <code>interface</code>:</b> both describe object shapes. Only <code>type</code> can name unions. Pick one and stay consistent.</li>
+    <li><code>void</code> means the function returns nothing useful. <code>?</code> means the field may be missing.</li>
+    <li>Read red squiggles left to right: "Type <b>A</b> is not assignable to type <b>B</b>" means you gave A where B was expected. Avoid <code>any</code>.</li>
+  </ul>
+  <div class="cardlinks"><a href="concepts.html#typescript">Concept</a><a href="practice.html#typescript">Practice</a><a href="mock-interview.html#typescript">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-layout" id="layout">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 10h18M10 10v11"/></svg></span><h2>Layout: Flexbox &amp; StyleSheet</h2><span class="badge">layout</span></div>
+  <div class="one">In React Native, <b><code>flexDirection</code> defaults to <code>"column"</code></b>. <code>justifyContent</code> works along the main axis and <code>alignItems</code> works across it.</div>
+  <svg class="fig sm-print" viewBox="0 0 420 200" role="img" aria-labelledby="flexT"><title id="flexT">In a column container the main axis runs top to bottom and the cross axis left to right; in a row container the main axis runs left to right and the cross axis top to bottom</title>
+    <defs>
+      <marker id="fxMain" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4e7a22"/></marker>
+      <marker id="fxCross" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3d5afe"/></marker>
+    </defs>
+    <text x="80" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#1b1f3b">column (default)</text>
+    <rect x="20" y="24" width="120" height="104" rx="10" fill="#f1f8e9" stroke="#7cb342" stroke-width="2"/>
+    <rect x="32" y="34" width="56" height="22" rx="6" fill="#7cb342"/>
+    <rect x="32" y="62" width="56" height="22" rx="6" fill="#9ccc65"/>
+    <rect x="32" y="90" width="56" height="22" rx="6" fill="#aed581"/>
+    <line x1="154" y1="28" x2="154" y2="124" stroke="#4e7a22" stroke-width="3" marker-end="url(#fxMain)"/>
+    <text x="162" y="80" font-size="13" font-weight="700" fill="#4e7a22">main</text>
+    <line x1="24" y1="142" x2="136" y2="142" stroke="#3d5afe" stroke-width="3" marker-end="url(#fxCross)"/>
+    <text x="80" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#3d5afe">cross</text>
+    <text x="290" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#1b1f3b">row</text>
+    <rect x="226" y="24" width="128" height="104" rx="10" fill="#f1f8e9" stroke="#7cb342" stroke-width="2"/>
+    <rect x="236" y="34" width="34" height="40" rx="6" fill="#7cb342"/>
+    <rect x="276" y="34" width="34" height="40" rx="6" fill="#9ccc65"/>
+    <rect x="316" y="34" width="34" height="40" rx="6" fill="#aed581"/>
+    <line x1="230" y1="142" x2="350" y2="142" stroke="#4e7a22" stroke-width="3" marker-end="url(#fxMain)"/>
+    <text x="290" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#4e7a22">main</text>
+    <line x1="368" y1="28" x2="368" y2="124" stroke="#3d5afe" stroke-width="3" marker-end="url(#fxCross)"/>
+    <text x="376" y="80" font-size="13" font-weight="700" fill="#3d5afe">cross</text>
+    <text x="210" y="190" text-anchor="middle" font-size="13" fill="#3c4270"><tspan font-weight="800" fill="#4e7a22">justifyContent</tspan> = main axis · <tspan font-weight="800" fill="#3d5afe">alignItems</tspan> = cross axis</text>
+  </svg>
+  <ul>
+    <li><b><code>flex: 1</code></b> fills the available space along the main axis. Its parent needs a size too, or it collapses to 0.</li>
+    <li><code>alignItems</code> defaults to <code>"stretch"</code>. <code>flexWrap: "wrap"</code> on the container lets children flow onto new lines.</li>
+    <li><code>gap</code>, <code>rowGap</code>, <code>columnGap</code> space the children. Sizes are unitless numbers, never <code>"px"</code>. Names are camelCase.</li>
+  </ul>
+  <svg class="fig sm-print" viewBox="0 0 360 132" role="img" aria-labelledby="boxT"><title id="boxT">Box model: margin outside the border, padding inside the border, content in the middle</title>
+    <rect x="4" y="4" width="352" height="124" rx="10" fill="#fff6e6" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="14" y="22" font-size="13" font-weight="700" fill="#a8650a">margin (outside)</text>
+    <rect x="40" y="30" width="280" height="88" rx="8" fill="#f1f8e9" stroke="#4e7a22" stroke-width="5"/>
+    <text x="304" y="22" text-anchor="end" font-size="13" font-weight="700" fill="#4e7a22">borderWidth</text>
+    <text x="54" y="52" font-size="13" font-weight="700" fill="#4e7a22">padding (inside)</text>
+    <rect x="104" y="62" width="152" height="40" rx="6" fill="#ffffff" stroke="#7cb342" stroke-width="1.5"/>
+    <text x="180" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="#1b1f3b">content</text>
+  </svg>
+<pre><code>const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16, gap: 12 },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  grid: { flexDirection: "row", flexWrap: "wrap" },
+  hot: { backgroundColor: "#fff6e6" },
+});
+<span class="c">// style array: later entries win, false is skipped</span>
+&lt;View style={[styles.row, isHot &amp;&amp; styles.hot]} /&gt;</code></pre>
+  <h3>ScrollView vs FlatList</h3>
+  <table class="mini"><thead><tr><th>ScrollView</th><th>FlatList</th></tr></thead><tbody>
+    <tr><td>Renders all children at once. Great for short lists: <code>{cards}</code>.</td><td>Renders lazily. Better for long lists.</td></tr>
+    <tr><td>Padding and alignment go in <code>contentContainerStyle</code>.</td><td>Props: <code>data</code>, <code>renderItem</code>, <code>keyExtractor</code>.</td></tr>
+  </tbody></table>
+<pre><code>&lt;FlatList
+  data={menu}
+  keyExtractor={(m) =&gt; m.name}
+  renderItem={({ item }) =&gt; &lt;ItemCard item={item} /&gt;}
+/&gt;</code></pre>
+  <ul><li>Do not put a FlatList inside a ScrollView that scrolls the same direction.</li></ul>
+  <div class="cardlinks"><a href="concepts.html#layout">Concept</a><a href="practice.html#layout">Practice</a><a href="mock-interview.html#layout">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-effects" id="effects">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></span><h2>useEffect, timers, Promises</h2><span class="badge">effects</span></div>
+  <div class="one">An effect runs <b>after</b> render to sync with something outside React, such as a timer or a data request. The dependency array controls when.</div>
+  <table class="mini"><thead><tr><th>You write</th><th>The effect runs</th></tr></thead><tbody>
+    <tr><td><code>useEffect(fn)</code></td><td>after every render</td></tr>
+    <tr><td><code>useEffect(fn, [])</code></td><td>once, after the first render</td></tr>
+    <tr><td><code>useEffect(fn, [a, b])</code></td><td>after the first render and whenever <code>a</code> or <code>b</code> changes</td></tr>
+  </tbody></table>
+  <ul><li><b>Cleanup:</b> the function you return runs right before the effect runs next time, and when the component unmounts.</li></ul>
+<pre><code>useEffect(() =&gt; {
+  const id = setInterval(() =&gt; {
+    setSeconds((prev) =&gt; prev + 1); <span class="c">// updater!</span>
+  }, 1000);
+  return () =&gt; clearInterval(id);   <span class="c">// cleanup</span>
+}, []);</code></pre>
+  <ul>
+    <li><b>Why the updater here:</b> with <code>[]</code>, the interval callback remembers the <code>seconds</code> from the first render (a stale closure). <code>setSeconds(seconds + 1)</code> would get stuck at 1.</li>
+    <li>Rules of hooks: call <code>useEffect</code> and <code>useState</code> at the top level, never inside <code>if</code>, loops, or handlers, and never after an early <code>return</code>.</li>
+  </ul>
+  <h3>Promises: attach callbacks with .then</h3>
+<pre><code><span class="c">// fetchData() returns a Promise</span>
+fetchData()
+  .then((data) =&gt; setItems(data))
+  .catch((err) =&gt; console.log(err));</code></pre>
+  <div class="cardlinks"><a href="concepts.html#effects">Concept</a><a href="practice.html#effects">Practice</a><a href="mock-interview.html#effects">Mock Qs</a></div>
+</article>
+
+</div><!-- /cols -->
+
+<!-- ================= GOTCHAS ================= -->
+<article class="cs-card wide t-gotchas" id="gotchas">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5" stroke-linecap="round"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg></span><h2>Tricky stuff: wrong → right → why</h2><span class="badge">the patterns that trip people up most</span></div>
+  <div class="table-wrap"><table class="mini big"><thead><tr><th>Wrong</th><th>Right</th><th>Why</th></tr></thead><tbody>
+    <tr><td><code class="bad">setMenu(menu =&gt; {...menu, item})</code></td><td><code class="ok">setMenu([...menu, item])</code> or <code class="ok">setMenu((prev) =&gt; [...prev, item])</code></td><td>Braces right after <code>=&gt;</code> start a function body, not an object. And state is an array, so build <code>[...]</code>, not <code>{...}</code>.</td></tr>
+    <tr><td><code class="bad">menu.map((i) =&gt; { &lt;ItemCard item={i} /&gt; })</code></td><td><code class="ok">menu.map((i) =&gt; (&lt;ItemCard key={i.name} item={i} /&gt;))</code></td><td>A block body without <code>return</code> returns <code>undefined</code>, so nothing renders. Drop the braces (parens around the JSX are fine) or add <code>return</code>.</td></tr>
+    <tr><td><code class="bad">onPress={addItem(x)}</code></td><td><code class="ok">onPress={() =&gt; addItem(x)}</code></td><td>The first calls <code>addItem</code> during render. If it sets state, you get "Too many re-renders".</td></tr>
+    <tr><td><code class="bad">menu.push(item); setMenu(menu);</code></td><td><code class="ok">setMenu([...menu, item])</code></td><td>Same array object, so React sees no change and skips the re-render. Never mutate state.</td></tr>
+    <tr><td><code class="bad">&lt;TextInput onChange={setName} /&gt;</code></td><td><code class="ok">&lt;TextInput onChangeText={setName} /&gt;</code></td><td><code>onChange</code> passes an event object. <code>onChangeText</code> passes the string.</td></tr>
+    <tr><td><code class="bad">menu.map((m) =&gt; &lt;ItemCard item={m} /&gt;)</code></td><td><code class="ok">&lt;ItemCard key={m.name} item={m} /&gt;</code></td><td>Every list item needs a unique, stable <code>key</code> so React can track it.</td></tr>
+    <tr><td><code class="bad">{menu.length &amp;&amp; &lt;List /&gt;}</code></td><td><code class="ok">{menu.length &gt; 0 &amp;&amp; &lt;List /&gt;}</code></td><td>When the length is <code>0</code>, React renders <code>0</code> as raw text outside <code>&lt;Text&gt;</code>.</td></tr>
+    <tr><td><code class="bad">useState([])</code></td><td><code class="ok">useState&lt;MenuItem[]&gt;([])</code></td><td>An empty array is inferred as <code>never[]</code>, so nothing can be added to it.</td></tr>
+    <tr><td><code class="bad">() =&gt; { name: "Tea" }</code></td><td><code class="ok">() =&gt; ({ name: "Tea" })</code></td><td>Without parens, the braces are a body and the function returns <code>undefined</code>.</td></tr>
+    <tr><td><code class="bad">setState([...menu, item])</code></td><td><code class="ok">setMenu([...menu, item])</code></td><td>Only the setter you declared exists. A generic <code>setState</code> gives "Cannot find name".</td></tr>
+    <tr><td><code class="bad">setCount(count + 1); console.log(count);</code></td><td><code class="ok">const next = count + 1; setCount(next); console.log(next);</code></td><td>State is a snapshot. The variable updates on the next render, not on the next line.</td></tr>
+    <tr><td><code class="bad">style="color: red"</code></td><td><code class="ok">style={{ color: "red" }}</code> or <code class="ok">style={styles.title}</code></td><td>Styles are JavaScript objects with camelCase keys, not CSS strings.</td></tr>
+    <tr><td><code class="bad">&lt;View&gt;Hello&lt;/View&gt;</code></td><td><code class="ok">&lt;View&gt;&lt;Text&gt;Hello&lt;/Text&gt;&lt;/View&gt;</code></td><td>Every piece of text must be inside <code>&lt;Text&gt;</code>. Same for <code>//</code> comments in JSX: write <code>{/* note */}</code>.</td></tr>
+    <tr><td>Expecting children side by side</td><td>Add <code class="ok">flexDirection: "row"</code></td><td>React Native defaults to <code>"column"</code>. The web defaults to <code>"row"</code>.</td></tr>
+    <tr><td><code class="bad">onAdd(name, popular)</code></td><td><code class="ok">onAdd({ name, popular })</code></td><td>The prop type says <code>onAdd</code> takes one <code>MenuItem</code> object, so build that object.</td></tr>
+  </tbody></table></div>
+</article>
+
+<!-- ================= ERRORS ================= -->
+<article class="cs-card wide t-errors" id="errors">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span><h2>Error decoder: message → meaning → fix</h2><span class="badge">read the first line</span></div>
+  <div class="table-wrap"><table class="mini big"><thead><tr><th>Message (exact text)</th><th>What it means</th><th>Fix</th></tr></thead><tbody>
+    <tr><td><code class="err wrap">Text strings must be rendered within a &lt;Text&gt; component.</code></td><td>A raw string, <code>0</code>, <code>""</code>, or a <code>//</code> comment sits directly inside a <code>&lt;View&gt;</code>.</td><td>Wrap it in <code>&lt;Text&gt;</code>. Use <code>{/* */}</code> for comments. Use <code>count &gt; 0 &amp;&amp;</code>.</td></tr>
+    <tr><td><code class="err wrap">Each child in a list should have a unique "key" prop.</code></td><td>A <code>map</code> result has no <code>key</code>, or two keys repeat.</td><td>Add <code>key={item.id}</code> (or <code>key={item.name}</code> if names are unique) to the outer element returned by <code>map</code>.</td></tr>
+    <tr><td><code class="err wrap">Too many re-renders. React limits the number of renders to prevent an infinite loop.</code></td><td>State is set during render, usually <code>onPress={setCount(count + 1)}</code>.</td><td>Wrap it: <code>onPress={() =&gt; setCount(count + 1)}</code>.</td></tr>
+    <tr><td><code class="err wrap">Property 'nmae' does not exist on type 'MenuItem'.</code></td><td>A typo, or a field missing from your type. With <code>on type 'never'</code>, your state came from <code>useState([])</code>.</td><td>Fix the spelling, add the field to the type, or use <code>useState&lt;MenuItem[]&gt;([])</code>.</td></tr>
+    <tr><td><code class="err wrap">Type 'string' is not assignable to type 'number'.</code></td><td>You gave a string where a number was expected, such as <code>price="5"</code>.</td><td>Pass the right type: <code>price={5}</code>, or <code>Number(text)</code>.</td></tr>
+    <tr><td><code class="err wrap">Type 'MenuItem' is not assignable to type 'never'.</code> · <code class="err wrap">Argument of type 'MenuItem' is not assignable to parameter of type 'never'.</code></td><td>The array state was created with <code>useState([])</code>, so it is <code>never[]</code>. With the updater form it may also mention <code>SetStateAction&lt;never[]&gt;</code>.</td><td><code>useState&lt;MenuItem[]&gt;([])</code>.</td></tr>
+    <tr><td><code class="err wrap">Property 'onAdd' is missing in type '{ item: MenuItem; }' but required in type 'RowProps'.</code></td><td>You rendered a component without a required prop.</td><td>Pass the prop, or mark it optional with <code>onAdd?:</code>.</td></tr>
+    <tr><td><code class="err wrap">Parameter 'item' implicitly has an 'any' type.</code></td><td>A standalone function parameter has no type.</td><td><code>(item: MenuItem) =&gt; ...</code></td></tr>
+    <tr><td><code class="err wrap">View is not defined</code> · <code class="err wrap">Property 'View' doesn't exist</code> · <code class="err wrap">Can't find variable: View</code> · <code class="err wrap">Cannot find name 'View'.</code></td><td>The name was never imported or declared, or it is misspelled.</td><td>Add it to the import from <code>"react-native"</code> or <code>"react"</code>. Check capitals: <code>TextInput</code>, not <code>Textinput</code>.</td></tr>
+    <tr><td><code class="err wrap">Objects are not valid as a React child (found: object with keys {name, popular}).</code></td><td>You put a whole object in JSX, such as <code>&lt;Text&gt;{item}&lt;/Text&gt;</code>.</td><td>Render one field: <code>{item.name}</code>.</td></tr>
+    <tr><td><code class="err wrap">Cannot read property 'map' of undefined</code> · <code class="err wrap">menu.map is not a function</code></td><td>The value is not an array, often after <code>setMenu(menu.push(x))</code> made it a number.</td><td>Start with an array and update with <code>[...menu, x]</code>.</td></tr>
+    <tr><td><code class="err wrap">Adjacent JSX elements must be wrapped in an enclosing tag.</code></td><td>A component returns two siblings with no parent.</td><td>Wrap them in <code>&lt;View&gt;</code> or <code>&lt;&gt;...&lt;/&gt;</code>.</td></tr>
+    <tr><td><code class="err wrap">Maximum update depth exceeded.</code></td><td>An effect sets state on every render, usually with no dependency array.</td><td>Add <code>[]</code> or <code>[dep]</code>, and only set state when needed.</td></tr>
+  </tbody></table></div>
+</article>
+
+<!-- ================= SKELETON / CRAFT / HANDWRITTEN ================= -->
+<div class="cols two">
+
+<article class="cs-card t-app-skeleton" id="app-skeleton">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></span><h2>App skeleton: type it from memory</h2><span class="badge">one-file App.tsx</span></div>
+  <div class="one">This is the 2-minute scaffold: <b>imports, type, child with typed props, App with state, map, callback, StyleSheet.</b> Practice typing it until it feels automatic.</div>
+<pre><code>import { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  ScrollView,
+  Switch,
+  StyleSheet,
+} from "react-native";
+
+<span class="c">// 1. Type + starting data</span>
+type MenuItem = {
+  name: string;
+  popular: boolean;
+};
+
+const menuItems: MenuItem[] = [
+  { name: "Tea", popular: true },
+  { name: "Toast", popular: false },
+];
+
+<span class="c">// 2. Child that displays one item</span>
+type ItemCardProps = { item: MenuItem };
+
+const ItemCard = ({ item }: ItemCardProps) =&gt; {
+  return (
+    &lt;View style={styles.card}&gt;
+      &lt;Text&gt;{item.name}&lt;/Text&gt;
+      {item.popular &amp;&amp; &lt;Text&gt;Popular&lt;/Text&gt;}
+    &lt;/View&gt;
+  );
+};
+
+<span class="c">// 3. Child that reports a new item UP</span>
+type AddItemFormProps = {
+  onAdd: (item: MenuItem) =&gt; void;
+};
+
+const AddItemForm = ({ onAdd }: AddItemFormProps) =&gt; {
+  const [name, setName] = useState("");
+  const [popular, setPopular] = useState(false);
+
+  const handleAdd = () =&gt; {
+    if (name.trim() === "") return;
+    onAdd({ name, popular });
+    setName("");
+    setPopular(false);
+  };
+
+  return (
+    &lt;View style={styles.form}&gt;
+      &lt;TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder="Item name"
+      /&gt;
+      &lt;View style={styles.row}&gt;
+        &lt;Text&gt;Popular?&lt;/Text&gt;
+        &lt;Switch value={popular} onValueChange={setPopular} /&gt;
+      &lt;/View&gt;
+      &lt;Pressable style={styles.button} onPress={handleAdd}&gt;
+        &lt;Text style={styles.buttonText}&gt;Add&lt;/Text&gt;
+      &lt;/Pressable&gt;
+    &lt;/View&gt;
+  );
+};
+
+<span class="c">// 4. App owns the state + the callback</span>
+export default function App() {
+  const [menu, setMenu] = useState(menuItems);
+
+  const addMenuItem = (item: MenuItem) =&gt; {
+    setMenu([...menu, item]);
+  };
+
+  const cards = menu.map((item) =&gt; (
+    &lt;ItemCard key={item.name} item={item} /&gt;
+  ));
+
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;AddItemForm onAdd={addMenuItem} /&gt;
+      &lt;ScrollView&gt;{cards}&lt;/ScrollView&gt;
+    &lt;/View&gt;
+  );
+}
+
+<span class="c">// 5. Styles</span>
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20, paddingTop: 60, gap: 12 },
+  form: { gap: 8 },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  input: { borderWidth: 1, borderColor: "#ccc", borderRadius: 8, padding: 10 },
+  button: {
+    backgroundColor: "#6c5ce7",
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonText: { color: "white", fontWeight: "bold" },
+  card: {
+    padding: 12,
+    marginBottom: 8,
+    borderRadius: 8,
+    backgroundColor: "#f0eeff",
+  },
+});</code></pre>
+  <ul>
+    <li>Build in this order: type and data, static JSX, state and <code>map</code>, then the form and callback.</li>
+    <li>Run it after every step so each error points at a few new lines.</li>
+  </ul>
+</article>
+
+<article class="cs-card t-interview-craft" id="interview-craft">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5" stroke-linecap="round"/></svg></span><h2>Interview craft</h2><span class="badge">25 minutes</span></div>
+  <div class="one">The interviewer is watching your <b>process</b>: a clear plan, small steps, reading errors, and thinking out loud.</div>
+  <table class="mini"><thead><tr><th>Minutes</th><th>Do this</th></tr></thead><tbody>
+    <tr><td>0–3</td><td>Read the whole handout. Sketch the screen in boxes. Name the data type and decide where state lives.</td></tr>
+    <tr><td>3–8</td><td>Type, sample data, static layout with <code>View</code>, <code>Text</code>, <code>StyleSheet</code>.</td></tr>
+    <tr><td>8–14</td><td><code>useState</code> + <code>map</code> so the cards render from state.</td></tr>
+    <tr><td>14–21</td><td>Child form with inputs. Callback from parent. Clear the input after adding.</td></tr>
+    <tr><td>21–25</td><td>Tidy types, test the flow, and say what you would do next.</td></tr>
+  </tbody></table>
+  <h3>Think aloud</h3>
+  <ul>
+    <li>Say what you are about to do and why: "State lives in App because both the list and the form need it."</li>
+    <li>When stuck, say what you expected and what you see. Read the <b>first line</b> of the error and its line number.</li>
+    <li>Sketch on paper if you do not know where to start.</li>
+    <li>If the interviewer says to move on, stub the unfinished part with hard-coded values and come back later.</li>
+  </ul>
+  <h3>Snack notes</h3>
+  <ul>
+    <li>TypeScript red squiggles usually do not stop the app from running. That is why "JavaScript first, types second" works.</li>
+    <li>The web preview can behave differently from a phone. Text outside <code>&lt;Text&gt;</code> or a stray <code>0</code> may only crash on iOS or Android.</li>
+    <li>On the red error screen, read the message and the line number first.</li>
+  </ul>
+  <h3>Searching (open internet + Google AI overview only)</h3>
+  <table class="mini"><thead><tr><th>Good: general knowledge</th><th>Bad: asking for the answer</th></tr></thead><tbody>
+    <tr><td>"what values work for justifyContent?"</td><td>"how do I center the links in a navbar?"</td></tr>
+    <tr><td>"syntax for a self-closing tag in React Native"</td><td>Copying a snippet from notes and tweaking it to fit</td></tr>
+    <tr><td>"difference between justifyContent and alignItems"</td><td>"react native menu app add item code"</td></tr>
+    <tr><td>"react native TextInput onChangeText"</td><td>Any other AI tool</td></tr>
+  </tbody></table>
+  <div class="cardlinks"><a href="concepts.html#interview-craft">Concept</a><a href="practice.html#interview-craft">Practice</a><a href="mock-interview.html#interview-craft">Mock Qs</a></div>
+</article>
+
+<article class="cs-card t-handwritten" id="handwritten">
+  <div class="cs-h"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 7l3 3"/></svg></span><h2>Your one handwritten page</h2><span class="badge">optional</span></div>
+  <div class="one">One page of handwritten notes in English, <b>front and back, pen and paper only</b>, turned in at the end. <b>No homework solutions or solution-like code</b>, even handwritten.</div>
+  <svg class="fig sm-print" viewBox="0 0 400 250" role="img" aria-labelledby="hwT"><title id="hwT">Suggested zones for the handwritten page. Front: state and setters, map forms, spread recipes. Back: props and callbacks, input props, flex axes sketch, error decoder.</title>
+    <rect x="10" y="6" width="180" height="238" rx="10" fill="#fffdf7" stroke="#b7791f" stroke-width="2"/>
+    <text x="100" y="26" text-anchor="middle" font-size="13" font-weight="800" fill="#8a5a12">FRONT</text>
+    <rect x="20" y="34" width="160" height="64" rx="8" fill="#f0eeff" stroke="#6c5ce7"/>
+    <text x="30" y="56" font-size="13" font-weight="800" fill="#1b1f3b">1 · State + setter</text>
+    <text x="30" y="76" font-size="13" fill="#3c4270">direct vs updater</text>
+    <rect x="20" y="104" width="160" height="64" rx="8" fill="#e6faf4" stroke="#00b894"/>
+    <text x="30" y="126" font-size="13" font-weight="800" fill="#1b1f3b">2 · map forms</text>
+    <text x="30" y="146" font-size="13" fill="#3c4270">( ) vs { return }</text>
+    <rect x="20" y="174" width="160" height="62" rx="8" fill="#fff6e6" stroke="#f39c12"/>
+    <text x="30" y="196" font-size="13" font-weight="800" fill="#1b1f3b">3 · Spread recipes</text>
+    <text x="30" y="216" font-size="13" fill="#3c4270">add · remove · toggle</text>
+    <rect x="210" y="6" width="180" height="238" rx="10" fill="#fffdf7" stroke="#b7791f" stroke-width="2"/>
+    <text x="300" y="26" text-anchor="middle" font-size="13" font-weight="800" fill="#8a5a12">BACK</text>
+    <rect x="220" y="34" width="160" height="64" rx="8" fill="#e8f3fd" stroke="#0984e3"/>
+    <text x="230" y="56" font-size="13" font-weight="800" fill="#1b1f3b">4 · Callbacks</text>
+    <text x="230" y="76" font-size="13" fill="#3c4270">down as prop, call up</text>
+    <rect x="220" y="104" width="160" height="40" rx="8" fill="#fdeef6" stroke="#e84393"/>
+    <text x="230" y="129" font-size="13" font-weight="800" fill="#1b1f3b">5 · Input props</text>
+    <rect x="220" y="150" width="160" height="40" rx="8" fill="#f1f8e9" stroke="#7cb342"/>
+    <text x="230" y="175" font-size="13" font-weight="800" fill="#1b1f3b">6 · Flex axes</text>
+    <rect x="220" y="196" width="160" height="40" rx="8" fill="#fdecea" stroke="#c0392b"/>
+    <text x="230" y="221" font-size="13" font-weight="800" fill="#1b1f3b">7 · Error decoder</text>
+  </svg>
+  <h3>Write general templates with placeholder names</h3>
+  <ul>
+    <li>Use <b>generic names</b> (<code>items</code>, <code>setItems</code>, <code>Item</code>, <code>onAdd</code>, <code>ChildProps</code>), not app-specific code like <code>addMenuItem</code> or <code>ItemCard</code>.</li>
+    <li>State: <code>const [items, setItems] = useState&lt;Item[]&gt;([]);</code></li>
+    <li>Arrow rule: <code>=&gt; (value)</code> returns; <code>=&gt; { return value; }</code> needs return; <code>=&gt; ({ obj })</code> for objects.</li>
+    <li>Recipes: <code>[...arr, x]</code>, <code>arr.filter(...)</code>, <code>arr.map((t) =&gt; t.id === id ? { ...t, done: !t.done } : t)</code>.</li>
+    <li>Callback shape: parent <code>onX={handleX}</code>, child <code>onPress={() =&gt; onX(data)}</code>.</li>
+    <li>Input props table, the flex axes sketch, and short error → fix pairs (for example, "Text strings must be rendered…" → wrap in <code>&lt;Text&gt;</code>).</li>
+  </ul>
+  <h3>Leave off</h3>
+  <ul>
+    <li>Whole apps or components that mirror an exercise. Those count as solution-like code.</li>
+    <li>Long prose. Short labels and arrows are faster to scan under pressure.</li>
+  </ul>
+  <p>Writing the page is itself great practice. You do not need notes to do well.</p>
+</article>
+
+</div><!-- /cols two -->
+
+</main>
+</div>
+<footer class="footer">CS 147L Coding Interview 2 Prep Kit · Built from course lectures 1a–5b and official React, React Native, TypeScript, and MDN docs.</footer>
+<script>// ===== CS 147L Interview 2 Prep Kit — shared helpers (inline verbatim, at end of <body>) =====
+// No localStorage/sessionStorage: in-memory only.
+(function () {
+  // 1) Copy buttons on every <pre>
+  document.querySelectorAll("pre").forEach(function (pre) {
+    if (pre.querySelector(".copy")) return;
+    var b = document.createElement("button");
+    b.className = "copy"; b.type = "button"; b.textContent = "Copy";
+    b.addEventListener("click", function () {
+      var code = pre.querySelector("code") || pre;
+      var txt = code.innerText;
+      var done = function () { b.textContent = "Copied!"; setTimeout(function () { b.textContent = "Copy"; }, 1400); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(done, function () { fallback(txt); done(); });
+      } else { fallback(txt); done(); }
+    });
+    pre.appendChild(b);
+  });
+  function fallback(t) { var ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} ta.remove(); }
+
+  // 2) Multiple-choice quizzes: <div class="quiz"><div class="q">..</div><div class="opts">
+  //    <button class="opt" data-correct="true">..</button> ...</div><div class="fb">explanation</div></div>
+  document.querySelectorAll(".quiz").forEach(function (qz) {
+    qz.querySelectorAll("button.opt").forEach(function (btn) {
+      btn.type = "button";
+      btn.addEventListener("click", function () {
+        var ok = btn.dataset.correct === "true";
+        btn.classList.add(ok ? "right" : "wrong");
+        if (ok) qz.querySelectorAll("button.opt").forEach(function (o) { o.disabled = true; });
+        var fb = qz.querySelector(".fb"); if (fb) fb.classList.add("show");
+      });
+    });
+  });
+
+  // 3) "Mark as done" buttons: <button class="btn ghost markdone" data-topic="map">Mark section done</button>
+  //    Adds .done to sidebar links with href="#map". In-memory only.
+  document.querySelectorAll(".markdone").forEach(function (b) {
+    b.type = "button";
+    b.addEventListener("click", function () {
+      var on = !b.classList.contains("is-done");
+      b.classList.toggle("is-done", on);
+      b.textContent = on ? "✓ Done — nice work" : "Mark section done";
+      document.querySelectorAll('.sidebar a[href="#' + b.dataset.topic + '"]').forEach(function (a) { a.classList.toggle("done", on); });
+    });
+  });
+
+  // 4) Sidebar toggle on small screens: <button class="btn ghost small sidebar-toggle" data-target="toc">Contents</button>
+  document.querySelectorAll(".sidebar-toggle").forEach(function (b) {
+    b.addEventListener("click", function () { var s = document.getElementById(b.dataset.target); if (s) s.classList.toggle("open"); });
+  });
+
+  // 5) Countdown timers: <div class="timer" data-seconds="1500"><span class="t">25:00</span></div>
+  //    plus buttons with data-timer-action="start|pause|reset" and data-timer-for="<timer id>"
+  document.querySelectorAll(".timer[data-seconds]").forEach(function (tm) {
+    var total = parseInt(tm.dataset.seconds, 10), left = total, id = null, out = tm.querySelector(".t");
+    function draw() { var m = Math.floor(left / 60), s = left % 60; out.textContent = String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0"); tm.classList.toggle("warn", left <= 300); }
+    function tick() { if (left > 0) { left--; draw(); } else { clearInterval(id); id = null; out.textContent = "Time!"; } }
+    tm._api = {
+      start: function () { if (!id) id = setInterval(tick, 1000); },
+      pause: function () { clearInterval(id); id = null; },
+      reset: function () { clearInterval(id); id = null; left = total; draw(); }
+    };
+    draw();
+  });
+  document.querySelectorAll("[data-timer-action]").forEach(function (b) {
+    b.addEventListener("click", function () { var tm = document.getElementById(b.dataset.timerFor); if (tm && tm._api) tm._api[b.dataset.timerAction](); });
+  });
+
+  // 6) Highlight current section in sidebar while scrolling
+  var links = Array.prototype.slice.call(document.querySelectorAll(".sidebar a[href^='#']"));
+  if ("IntersectionObserver" in window && links.length) {
+    var map = {}; links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting && map[e.target.id]) { links.forEach(function (a) { a.style.background = ""; }); map[e.target.id].style.background = "#fff"; } });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    Object.keys(map).forEach(function (k) { var el = document.getElementById(k); if (el) io.observe(el); });
+  }
+})();
+
+/* ===== cheat-sheet page ===== */
+(function () {
+  var b = document.getElementById("printBtn");
+  if (b) b.addEventListener("click", function () { window.print(); });
+})();
+</script>
+<!-- KIT-FINDER START -->
+<style>
+.kf-open{display:inline-flex;align-items:center;gap:8px;font:700 .95rem var(--font);background:var(--ink);color:#fff;border:0;border-radius:10px;padding:8px 12px;min-height:40px;cursor:pointer;margin-left:6px}
+.kf-open:hover{background:var(--violet)}
+.kf-open:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.kf-open kbd{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35);color:#fff;font-size:.78rem;padding:0 .35em}
+.kf-back{position:fixed;inset:0;z-index:200;background:rgba(27,31,59,.45);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:9vh 16px 16px}
+.kf-back.show{display:flex}
+.kf-box{width:min(680px,100%);background:#fff;border-radius:20px;box-shadow:0 24px 60px rgba(27,31,59,.35);overflow:hidden;display:flex;flex-direction:column;max-height:78vh}
+.kf-in{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.kf-in svg{width:22px;height:22px;flex:0 0 22px;color:var(--violet)}
+.kf-in input{flex:1;border:0;outline:0;font:500 1.15rem var(--font);color:var(--ink);background:transparent;min-height:40px}
+.kf-in .kf-x{font:700 .85rem var(--font);border:1px solid var(--line);background:#f6f7fc;border-radius:8px;padding:6px 12px;min-height:40px;min-width:48px;cursor:pointer;color:var(--ink-2)}
+.kf-in .kf-x:focus-visible,.kf-list li a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.kf-list{list-style:none;margin:0;padding:8px;overflow:auto}
+.kf-list li a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--ink)}
+.kf-list li a .kf-t{font-weight:700;font-size:1rem}
+.kf-list li a .kf-s{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+.kf-list li a .kf-k{margin-left:auto;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#eef0fa;color:var(--ink-2);white-space:nowrap}
+.kf-list li a .kf-d{width:12px;height:12px;border-radius:50%;flex:0 0 12px}
+.kf-list li.sel a,.kf-list li a:hover{background:var(--violet-bg)}
+.kf-empty{padding:18px;color:var(--muted)}
+.kf-foot{padding:10px 18px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+@media (max-width:640px){.kf-open .kf-lbl{display:none}}
+@media print{.kf-open,.kf-back{display:none!important}}
+</style>
+<div class="kf-back" id="kf-back" aria-hidden="true">
+  <div class="kf-box" role="dialog" aria-modal="true" aria-label="Find anything in the kit">
+    <div class="kf-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="kf-q" type="search" placeholder="Try: map, TextInput, spread, never, mock" autocomplete="off" spellcheck="false" aria-label="Search the kit" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="kf-list">
+      <button class="kf-x" type="button" id="kf-close" aria-label="Close search">Esc</button>
+    </div>
+    <ul class="kf-list" id="kf-list" role="listbox" aria-label="Results"></ul>
+    <div class="kf-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>Enter</kbd> open</span><span><kbd>/</kbd> or <kbd>Ctrl</kbd>+<kbd>K</kbd> opens this anywhere</span></div>
+  </div>
+</div>
+<script>
+(function () {
+  var C = { "mental-model": "#6c5ce7", arrows: "#ff6b6b", map: "#00b894", spread: "#f39c12", state: "#6c5ce7", components: "#0984e3", callbacks: "#0984e3",
+    inputs: "#e84393", conditional: "#6c5ce7", typescript: "#3d5afe", layout: "#7cb342", effects: "#ff7f50", "interview-craft": "#00b894" };
+  var TOP = [
+    ["arrows", "Arrow functions", "anonymous function => return implicit body object parentheses pass vs call onPress"],
+    ["map", "map & lists", "map list key array cards scrollview flatlist filter find one-liner block return"],
+    ["state", "State (useState)", "usestate setter snapshot updater prev re-render setstate"],
+    ["spread", "Spread & immutable updates", "spread ... copy add remove filter toggle update push mutate immutable destructuring"],
+    ["components", "Components & props", "component props destructure export import default named itemcard"],
+    ["callbacks", "Props & callbacks", "callback lift state parent child onadd data down events up"],
+    ["inputs", "Inputs", "textinput onchangetext switch onvaluechange pressable button form clear"],
+    ["conditional", "Conditional rendering", "if else ternary && empty state disabled sold out conditional style"],
+    ["typescript", "TypeScript", "types type interface optional union never annotation generic props error"],
+    ["layout", "Layout & Flexbox", "flexbox flexdirection justifycontent alignitems flex gap wrap stylesheet box model margin padding"],
+    ["effects", "Effects, timers & Promises", "useeffect dependency array cleanup setinterval settimeout promise then fetch async"],
+    ["mental-model", "Mental model", "render re-render function ui = f(state) local variable"],
+    ["interview-craft", "Interview craft", "think aloud search handout sketch debug stuck handwritten"]
+  ];
+  var PAGES = [["concepts.html", "Concept", "Learn"], ["practice.html", "Practice", "Practice"], ["mock-interview.html", "Mock questions", "Test"], ["cheat-sheet.html", "Cheat card", "Glance"]];
+  var E = [];
+  TOP.forEach(function (t) { PAGES.forEach(function (p) { E.push({ t: t[1], s: p[1], k: p[2], h: p[0] + "#" + t[0], w: t[2], c: C[t[0]] }); }); });
+  [
+    ["The big picture: one app, eight ideas", "Home", "index.html#overview", "overview start diagram app anatomy"],
+    ["Choose how to study", "Home", "index.html#paths", "path mode where start"],
+    ["Topic explorer and confidence check", "Home", "index.html#topics", "topics confidence focus shaky"],
+    ["The 5 Golden Patterns", "Home", "index.html#golden", "golden patterns memorize recall"],
+    ["Got a few minutes? Short study menus", "Home", "index.html#plan", "time 10 25 45 minutes plan"],
+    ["Interview-day essentials", "Home", "index.html#day-of", "day rules allowed resources format arrive"],
+    ["Downloads: PDF and Word guide", "Home", "index.html#downloads", "download pdf word docx print"],
+    ["Mock 1: Café Menu", "Mock interview", "mock-interview.html#mock1", "mock cafe menu menuitem itemcard additemform timer"],
+    ["Mock 2: Habit Tracker", "Mock interview", "mock-interview.html#mock2", "mock habit toggle remove filter count"],
+    ["Mock 3: Study Timer & Tasks", "Mock interview", "mock-interview.html#mock3", "mock timer useeffect setinterval promise tasks"],
+    ["Quiz me: one random question at a time", "Mock interview", "mock-interview.html#quizmode", "quiz random rapid fire"],
+    ["All rapid-fire questions", "Mock interview", "mock-interview.html#rapid-fire", "rapid fire questions verbal"],
+    ["How the interview works", "Mock interview", "mock-interview.html#how", "format 25 minutes rubric talk aloud game plan"],
+    ["Predict the output drills", "Practice", "practice.html#drills-predict", "predict output drill"],
+    ["Fix the bug drills", "Practice", "practice.html#drills-fix", "fix bug drill debug"],
+    ["Fill the blank drills", "Practice", "practice.html#drills-fill", "fill blank drill"],
+    ["Build A: Café Menu Builder", "Practice", "practice.html#build-a", "build guided cafe menu"],
+    ["Build B: Playlist Maker", "Practice", "practice.html#build-b", "build guided playlist song liked"],
+    ["How to practice", "Practice", "practice.html#how", "how snack layers hints"],
+    ["Tricky stuff: wrong vs right", "Cheat sheet", "cheat-sheet.html#gotchas", "gotchas tricky wrong right mistakes"],
+    ["Error decoder", "Cheat sheet", "cheat-sheet.html#errors", "error message decoder fix"],
+    ["App skeleton to type from memory", "Cheat sheet", "cheat-sheet.html#app-skeleton", "skeleton scaffold template app.tsx"],
+    ["Your one handwritten page", "Cheat sheet", "cheat-sheet.html#handwritten", "handwritten notes page paper allowed"],
+    ["Golden Patterns (cheat card)", "Cheat sheet", "cheat-sheet.html#golden", "golden patterns"],
+    ["Error: Text strings must be rendered within a <Text> component", "Cheat sheet", "cheat-sheet.html#errors", "text strings rendered 0 && error"],
+    ["Error: Each child in a list should have a unique \"key\" prop", "Cheat sheet", "cheat-sheet.html#errors", "key prop warning list"],
+    ["Error: Too many re-renders", "Cheat sheet", "cheat-sheet.html#errors", "too many re-renders infinite loop onpress call"],
+    ["Error: not assignable to type 'never'", "Cheat sheet", "cheat-sheet.html#errors", "never usestate empty array type"],
+    ["TextInput: value + onChangeText", "Concept", "concepts.html#inputs", "textinput onchangetext placeholder"],
+    ["Switch: value + onValueChange", "Concept", "concepts.html#inputs", "switch onvaluechange boolean popular"],
+    ["Pressable and Button", "Concept", "concepts.html#inputs", "pressable button onpress title pressed style"],
+    ["FlatList vs ScrollView", "Concept", "concepts.html#layout", "flatlist scrollview renderitem keyextractor data"],
+    ["Remove an item with filter", "Concept", "concepts.html#spread", "remove delete filter"],
+    ["Toggle a field with map + spread", "Concept", "concepts.html#spread", "toggle update map spread popular done liked"],
+    ["useEffect dependency array & cleanup", "Concept", "concepts.html#effects", "useeffect deps cleanup interval"]
+  ].forEach(function (x) {
+    var k = { "Home": "Home", "Mock interview": "Test", "Practice": "Practice", "Cheat sheet": "Glance", "Concept": "Learn" }[x[1]] || x[1];
+    E.push({ t: x[0], s: x[1], k: k, h: x[2], w: x[3], c: "#8b91c0" });
+  });
+
+  var back = document.getElementById("kf-back"), q = document.getElementById("kf-q"), list = document.getElementById("kf-list");
+  var sel = 0, shown = [], lastFocus = null;
+  function esc(s) { return s.replace(/[&<>"]/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]; }); }
+  function render() {
+    var terms = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (!terms.length) {
+      shown = E.filter(function (e) { return e.s === "Concept" && e.c !== "#8b91c0"; }).concat(E.filter(function (e) { return /Mock [123]|Fix the bug|Golden Patterns \(|Error decoder/.test(e.t); }));
+    } else {
+      shown = E.map(function (e) {
+        var hay = (e.t + " " + e.s + " " + e.w).toLowerCase(), title = e.t.toLowerCase(), score = 0;
+        for (var i = 0; i < terms.length; i++) { if (hay.indexOf(terms[i]) < 0) return null; if (title.indexOf(terms[i]) >= 0) score += 2; else score += 1; }
+        return { e: e, score: score };
+      }).filter(Boolean).sort(function (a, b) { return b.score - a.score; }).map(function (x) { return x.e; }).slice(0, 40);
+    }
+    sel = 0;
+    if (shown.length) q.setAttribute("aria-activedescendant", "kf-o0"); else q.removeAttribute("aria-activedescendant");
+    list.innerHTML = shown.length ? shown.map(function (e, i) {
+      return '<li role="option" id="kf-o' + i + '"' + (i === 0 ? ' class="sel" aria-selected="true"' : ' aria-selected="false"') + '><a href="' + e.h + '"><span class="kf-d" style="background:' + e.c + '"></span><span><span class="kf-t">' + esc(e.t) + '</span><span class="kf-s">' + esc(e.s) + '</span></span><span class="kf-k">' + esc(e.k) + "</span></a></li>";
+    }).join("") : '<li class="kf-empty">No matches. Try a shorter word, like "map" or "input".</li>';
+  }
+  function move(d) {
+    var items = list.querySelectorAll("li[role=option]"); if (!items.length) return;
+    items[sel].classList.remove("sel"); items[sel].setAttribute("aria-selected", "false");
+    sel = (sel + d + items.length) % items.length;
+    items[sel].classList.add("sel"); items[sel].setAttribute("aria-selected", "true");
+    items[sel].scrollIntoView({ block: "nearest" });
+    q.setAttribute("aria-activedescendant", items[sel].id);
+  }
+  function open() { lastFocus = document.activeElement; back.classList.add("show"); back.setAttribute("aria-hidden", "false"); q.value = ""; render(); setTimeout(function () { q.focus(); }, 10); }
+  function close() { back.classList.remove("show"); back.setAttribute("aria-hidden", "true"); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  window.kitFinder = { open: open, close: close };
+  q.addEventListener("input", render);
+  q.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+    else if (e.key === "Enter") { var a = list.querySelector("li.sel a"); if (a) { e.preventDefault(); close(); location.href = a.getAttribute("href"); } }
+    else if (e.key === "Escape") { close(); }
+  });
+  // Keep Tab inside the dialog while it is open.
+  back.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab") return;
+    var f = Array.prototype.slice.call(back.querySelectorAll("input, button, a[href]"));
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  list.addEventListener("click", function (e) { if (e.target.closest("a")) close(); });
+  document.getElementById("kf-close").addEventListener("click", close);
+  back.addEventListener("click", function (e) { if (e.target === back) close(); });
+  document.addEventListener("keydown", function (e) {
+    var tag = (document.activeElement && document.activeElement.tagName) || "";
+    var ae = document.activeElement, itype = ae && ae.type ? String(ae.type).toLowerCase() : "";
+    var typing = /^(TEXTAREA|SELECT)$/.test(tag) || (tag === "INPUT" && !/^(checkbox|radio|button|submit|reset|range|color|file)$/.test(itype)) || (ae && ae.isContentEditable);
+    if ((e.key === "k" || e.key === "K") && (e.ctrlKey || e.metaKey)) { e.preventDefault(); back.classList.contains("show") ? close() : open(); }
+    else if (e.key === "/" && !typing && !back.classList.contains("show")) { e.preventDefault(); open(); }
+    else if (e.key === "Escape" && back.classList.contains("show")) { close(); }
+  });
+  var nav = document.querySelector(".navlinks");
+  if (nav && !nav.querySelector(".kf-open")) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "kf-open"; b.setAttribute("aria-label", "Find anything (press slash)");
+    b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="kf-lbl">Find</span><kbd>/</kbd>';
+    b.addEventListener("click", open); nav.appendChild(b);
+  }
+})();
+</script>
+<!-- KIT-FINDER END -->
+
+</body></html>
